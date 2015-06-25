@@ -19,7 +19,10 @@ bower install
 ## Lancement
 
 ### Développement
-[WIP]
+1. Installer Browsersync globalement `npm install -g browser-sync`
+2. Mettre à jour `parameters.yml`
+3. Lancer la tâche Gulp : `gulp dev`
+4. Lancer le serveur : `php app/console server:run`
 
 ### Production
 1. Générer le CSS : `gulp`

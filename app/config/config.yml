@@ -35,6 +35,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        browser_sync:     "%browser_sync%"
 
 # Assetic Configuration
 assetic:
