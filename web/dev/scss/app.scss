@@ -1,2 +1,4 @@
-@import "../vendors/normalize-scss/_normalize.scss";
-@import "../vendors/materialize/sass/materialize.scss";
+@import "settings/vars";
+
+@import "../vendors/normalize-scss/normalize";
+@import "../vendors/materialize/sass/materialize";
