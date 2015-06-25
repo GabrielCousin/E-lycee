@@ -1,7 +1,15 @@
+dashboard:
+    resource: "@DashboardBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 public:
     resource: "@PublicBundle/Controller/"
     type:     annotation
     prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
 app:
     resource: "@AppBundle/Controller/"
