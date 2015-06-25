@@ -1,0 +1,9 @@
+{
+  "name": "E-lycee",
+  "dependencies": {
+    "normalize-scss": "~3.0.3",
+    "materialize": "~0.97.0"
+  },
+  "devDependencies": {
+  }
+}
