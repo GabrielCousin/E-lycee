@@ -35,3 +35,9 @@
 
 # Composer PHAR
 /composer.phar
+
+# Mac
+**/.DS_Store
+
+# Node
+node_modules/
