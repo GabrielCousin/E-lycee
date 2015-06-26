@@ -5,6 +5,7 @@
 
 ### Requirements
 - Node.js
+- MySQL
 - Gulp installé globalement `npm install -g gulp`
 - Bower `npm install-g bower`
 
@@ -27,6 +28,10 @@ bower install
 ### Production
 1. Générer le CSS : `gulp`
 2. Lancer le serveur : `php app/console server:run`
+
+### Base de données
+1. Créer une base de données `e-lycee`
+2. Importer `elycee.sql` : `mysql -u root -p e-lycee < elycee.sql`
 
 
 ## Crédits
