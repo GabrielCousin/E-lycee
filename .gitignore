@@ -36,6 +36,14 @@
 # Composer PHAR
 /composer.phar
 
-
 # PhpStorm
 /.idea
+
+# Mac
+**/.DS_Store
+
+# Node
+node_modules/
+
+# Vendors
+web/dev/vendors

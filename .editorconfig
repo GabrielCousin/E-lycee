@@ -1,0 +1,25 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+
+[Makefile]
+indent_style = space
+
+[*.{js, scss, css, json}]
+indent_style = space
+indent_size = 2
+
+[*.{php, twig}]
+indent_style = space
+indent_size = 4
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.yml]
+indent_style = space
