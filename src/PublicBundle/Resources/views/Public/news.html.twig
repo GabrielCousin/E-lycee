@@ -1,3 +1,7 @@
 {% for post in results %}
     {{ dump(post) }}
+    <b>auteur du post : {{ post.auteur.username }}</b><br /><br /><br />
+    {% for commentaire in post.commentaires %}
+       <b>{{ commentaire.user }}</b> : {{ commentaire.contenu }} - {{ commentaire.createAt.date }}<br /><br /><br />
+    {% endfor %}
 {% endfor %}

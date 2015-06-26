@@ -43,7 +43,6 @@ class PublicController extends Controller
         $doctrine   = $this->getDoctrine();
         $rc         = $doctrine->getRepository('PublicBundle:Post') ;
         $article    = $rc->findOneById($id);
-
         return array('article' => $article );
     }
 

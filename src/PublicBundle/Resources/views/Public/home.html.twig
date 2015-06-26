@@ -1,9 +1,11 @@
 {% extends "PublicBundle::base.html.twig" %}
 
 {% block body %}
-Hello !
+
     {% for post in results %}
-        {{ dump(post) }}
+        {{ post.createAt.date }}
+        {{ post.commentaires | length }}
     {% endfor %}
+
 {% endblock %}
 

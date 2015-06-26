@@ -129,27 +129,4 @@ class Commentaire
     {
         return $this->user;
     }
-
-    /**
-     * Set createAt
-     *
-     * @param \DateTime $createAt
-     * @return Commentaire
-     */
-    public function setCreateAt($createAt)
-    {
-        $this->createAt = $createAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createAt
-     *
-     * @return \DateTime 
-     */
-    public function getCreateAt()
-    {
-        return $this->createAt;
-    }
 }
