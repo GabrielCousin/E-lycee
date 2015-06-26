@@ -8606,11 +8606,11 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
   overflow: hidden;
-  background-size: 80%;
+  background-size: auto 100%;
   background-position: center center;
   transition: all 0.5s ease-in-out; }
   .news-itemThumb:hover {
-    background-size: 125%; }
+    background-size: auto 125%; }
 
 .news-itemDetails {
   width: 75%;

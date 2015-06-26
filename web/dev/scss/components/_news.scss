@@ -18,12 +18,12 @@
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
   overflow: hidden;
-  background-size: 80%;
+  background-size: auto 100%;
   background-position: center center;
   transition: all .5s ease-in-out;
 
   &:hover {
-    background-size: 125%;
+    background-size: auto 125%;
   }
 }
 

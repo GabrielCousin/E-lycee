@@ -1,9 +1,13 @@
+{% set route = app.request.attributes.get('_route') %}
+{% set home = 'public.home.index' %}
+{% set news = 'public.news.index' %}
+
 <div class="container">
   <nav>
     <div class="nav-wrapper">
       <ul class="hide-on-med-and-down">
-        <li><a href="{{ url('public.home.index')}}">Home</a></li>
-        <li><a href="{{ url('public.news.index')}}">Actus</a></li>
+        <li {% if route == home %}class="active"{% endif %}><a href="{{ url(home)}}">Home</a></li>
+        <li {% if route == news %}class="active"{% endif %}><a href="{{ url(news)}}">Actus</a></li>
         <li><a href="#">Le lycée</a></li>
       </ul>
       <form class="search-form">
