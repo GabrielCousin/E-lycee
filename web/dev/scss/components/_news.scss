@@ -4,19 +4,32 @@
 
 .news-item {
   @extend .z-depth-1;
-  padding: .5rem;
-  margin: .5rem 0;
+  padding: 1rem;
+  margin: .5rem 0 1rem;
+  position: relative;
 }
 
 .news-itemThumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
   width: 25%;
-  display: inline-block;
-  vertical-align: top;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  overflow: hidden;
+  background-size: 80%;
+  background-position: center center;
+  transition: all .5s ease-in-out;
+
+  &:hover {
+    background-size: 125%;
+  }
 }
 
 .news-itemDetails {
-  vertical-align: top;
-  display: inline-block;
+  width: 75%;
+  margin-left: 25%;
 }
 
 .news-itemTitle {
@@ -24,7 +37,7 @@
 }
 
 .news-itemDetails {
-  padding-left: 1.5rem;
+  padding-left: 1rem;
 }
 
 .singleNews-wrapper {

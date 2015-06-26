@@ -1,7 +1,21 @@
-{% for post in results %}
-    {{ dump(post) }}
-    <b>auteur du post : {{ post.auteur.username }}</b><br /><br /><br />
-    {% for commentaire in post.commentaires %}
-       <b>{{ commentaire.user }}</b> : {{ commentaire.contenu }} - {{ commentaire.createAt.date }}<br /><br /><br />
+{% extends "PublicBundle::base.html.twig" %}
+
+{% block mainContent %}
+
+
+  <div class="news-wrapper">
+
+    {% for post in results %}
+      <div class="news-item">
+        <a href="{{ url('public.news.article', {'id': post.id}) }}" class="news-itemThumb" style="background-image: url('{{ post.urlThumbnail }}');"></a>
+        <div class="news-itemDetails">
+          <h3 class="news-itemTitle">{{ post.title }}</h3>
+          <p class="news-itemInfo">Posté le <strong>{{ post.createAt.date | date('d M Y')}}</strong> par <strong>{{ post.auteur }}</strong>
+          <p>{{ post.extract }} | <a href="{{ url('public.news.article', {'id': post.id}) }}">Lire la suite</a></p>
+        </div>
+      </div>
     {% endfor %}
-{% endfor %}
+
+  </div>
+
+{% endblock %}
