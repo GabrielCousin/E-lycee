@@ -5,6 +5,8 @@ var rename        = require('gulp-rename');
 var sass          = require('gulp-sass');
 var autoprefixer  = require('gulp-autoprefixer');
 var minifyCSS     = require('gulp-minify-css');
+var concat        = require('gulp-concat');
+
 
 gulp.task('bs', ['css:dev'], function() {
   browserSync.init({
@@ -14,11 +16,15 @@ gulp.task('bs', ['css:dev'], function() {
   });
 });
 
+
+
 // Build
 gulp.task('css:build', function(){
   return gulp.src('web/dev/scss/app.scss')
     .pipe(plumber())
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({
+      errLogToConsole: true
+    }))
     .pipe(autoprefixer({
       browsers: ['last 2 versions']
     }))
@@ -30,11 +36,13 @@ gulp.task('css:build', function(){
     .pipe(gulp.dest('web/css'));
 });
 
+
+
 // Dev
 gulp.task('css:dev', function(){
   return gulp.src('web/dev/scss/app.scss')
     .pipe(plumber())
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass(sass.sync().on('error', sass.logError)))
     .pipe(autoprefixer({
       browsers: ['last 2 versions']
     }))
@@ -43,8 +51,14 @@ gulp.task('css:dev', function(){
     .pipe(browserSync.stream());
 });
 
+gulp.task('js', function() {
+  return gulp.src(['web/dev/vendors/jquery/dist/jquery.js', 'web/dev/vendors/materialize/dist/js/materialize.js'])
+    .pipe(concat('scripts.js'))
+    .pipe(gulp.dest('web/js'));
+});
+
 // Tasks
-gulp.task('default', ['css:build']);
+gulp.task('default', ['css:build', 'js']);
 gulp.task('dev', ['css:dev', 'bs'], function(){
   gulp.watch(["web/dev/scss/**/*.scss"], ['css:dev'])
 });
