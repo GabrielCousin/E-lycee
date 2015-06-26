@@ -22,10 +22,45 @@ class PublicController extends Controller
     }
 
     /**
-     * @Route("/actus/{page}", name="public.membres.index", defaults = { "page" = 1 } )
+     * @Route("/news", name="public.news.index" )
      * @Template("PublicBundle:Public:news.html.twig")
      */
-    public function actuAction($id)
+    public function newsAction()
+    {
+        $doctrine   = $this->getDoctrine();
+        $rc         = $doctrine->getRepository('PublicBundle:Post') ;
+        $results    = $rc->getPostByPage(1);
+
+        return array('results' => $results );
+    }
+
+    /**
+     * @Route("/news/{id}", name="public.news.article")
+     * @Template("PublicBundle:Public:article.html.twig")
+     */
+    public function showPostAction($id)
+    {
+        $doctrine   = $this->getDoctrine();
+        $rc         = $doctrine->getRepository('PublicBundle:Post') ;
+        $article    = $rc->findOneById($id);
+
+        return array('article' => $article );
+    }
+
+    /**
+     * @Route("/mentions", name="public.mentions" )
+     * @Template("PublicBundle:Public:mentions.html.twig")
+     */
+    public function mentionsAction()
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/mentions", name="public.contacts" )
+     * @Template("PublicBundle:Public:contacts.html.twig")
+     */
+    public function contactsAction()
     {
         return array();
     }

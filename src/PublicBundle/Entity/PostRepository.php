@@ -20,4 +20,16 @@ class PostRepository extends EntityRepository
             ->getResult();
         return $results;
     }
+
+    public function getPostByPage($page){
+        $nbParPage = 2;
+        $offset = $page * $nbParPage - 1 ;
+        $results = $this
+            ->createQueryBuilder('p')
+            ->setFirstResult($offset)
+            ->setMaxResults($nbParPage)
+            ->getQuery()
+            ->getResult();
+        return $results;
+    }
 }
