@@ -1,0 +1,19 @@
+.home-content-wrapper {
+  display: flex;
+  padding-top: 1rem;
+}
+
+.primary-news {
+  max-width: 50%;
+}
+
+.secondary-news {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+}
+
+.sidebar {
+  min-width: 20%;
+  margin: .5em 0 1rem 1rem;
+}
