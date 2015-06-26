@@ -1,9 +1,70 @@
 {% extends "PublicBundle::base.html.twig" %}
 
-{% block body %}
-Hello !
+{% block mainContent %}
     {% for post in results %}
         {{ dump(post) }}
     {% endfor %}
+
+    <div class="primary-news">
+      <div class="card">
+        <div class="card-image">
+          <img src="http://lorempixel.com/600/500/people/5">
+        </div>
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4">Card Titlemore_vert</span>
+          <p class="card-author">Auteur : <strong>Alain</strong></p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porttitor urna id nisl volutpat tincidunt. Proin ullamcorper a libero mollis aliquam. Nullam convallis ac quam vel aliquam. Pellentesque dapibus justo lectus, in tempor massa egestas vel. Aliquam cursus mattis magna, quis lacinia velit pulvinar vel. Nulla sodales gravida tincidunt. <a href="#">Lire la suite</a></p>
+          <div class="card-comments">
+            <p><i class="small material-icons">chat_bubble</i>277 commentaires. <a href="#">Réagissez !</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="secondary-news">
+      <div class="card small">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="http://lorempixel.com/400/380/nightlife/1">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">Card Titlemore_vert</span>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porttitor urna id nisl volutpat tincidunt. Proin ullamcorper a libero mollis aliquam. Nullam convallis ac quam vel aliquam. Pellentesque dapibus justo lectus, in tempor massa egestas vel. Aliquam cursus mattis magna, quis lacinia velit pulvinar vel. Nulla sodales gravida tincidunt. Nunc id egestas nulla, id pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent blandit odio pulvinar mauris pretium varius vitae eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur lacinia rutrum lorem a rhoncus. In augue turpis, consequat eget elit sit amet, facilisis viverra neque. Fusce id erat. <a href="#">This is a link</a></p>
+        </div>
+      </div>
+
+      <div class="card small">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="http://lorempixel.com/400/380/nature/1">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">Card Titlemore_vert</span>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porttitor urna id nisl volutpat tincidunt. Proin ullamcorper a libero mollis aliquam. Nullam convallis ac quam vel aliquam. Pellentesque dapibus justo lectus, in tempor massa egestas vel. Aliquam cursus mattis magna, quis lacinia velit pulvinar vel. Nulla sodales gravida tincidunt. Nunc id egestas nulla, id pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent blandit odio pulvinar mauris pretium varius vitae eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur lacinia rutrum lorem a rhoncus. In augue turpis, consequat eget elit sit amet, facilisis viverra neque. Fusce id erat. <a href="#">This is a link</a></p>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <h3 class="sidebar-title">A lire aussi</h3>
+      <div class="collection">
+        <a href="#!" class="collection-item">Lien 1</a>
+        <a href="#!" class="collection-item">Lien 2</a>
+        <a href="#!" class="collection-item">Lien 3</a>
+      </div>
+
+      <h3 class="sidebar-title">Derniers tweets</h3>
+    </aside>
+  </div>
 {% endblock %}
 

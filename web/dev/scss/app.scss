@@ -2,3 +2,9 @@
 
 @import "../vendors/normalize-scss/normalize";
 @import "../vendors/materialize/sass/materialize";
+
+@import "components/card";
+@import "components/nav";
+@import "components/sidebar";
+
+@import "layout/home";
