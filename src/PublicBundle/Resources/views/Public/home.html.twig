@@ -2,14 +2,14 @@
 
 {% block mainContent %}
 
-  <div class="primary-news">
+  <div class="news--primary">
     <div class="card">
       <div class="card-image">
         <img src="{{ results[0].urlThumbnail }}">
         <span class="card-title">{{ results[0].title }}</span>
       </div>
       <div class="card-content">
-        <p class="card-author">Posté le <strong>{{ results[0].createAt.date | date('d.m.Y') }}</strong> par <strong>Alain</strong></p>
+        <p class="card-info">Posté le <strong>{{ results[0].createAt.date | date('d.m.Y') }}</strong> par <strong>Alain</strong></p>
         <p>{{ results[0].extract }} <a href="{{ url('public.news.article', {'id': results[0].id}) }}">Lire la suite</a></p>
         <div class="card-comments">
           <p><i class="small material-icons">chat_bubble</i>{{ results[0].commentaires | length }} commentaires. <a href="{{ url('public.news.article', {'id': results[0].id}) }}">Réagissez !</a></p>
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="secondary-news">
+  <div class="news--secondary">
     {% for post in results[1:] %}
       <div class="card small">
         <div class="card-image waves-effect waves-block waves-light">

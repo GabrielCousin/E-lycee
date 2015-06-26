@@ -1,1 +1,24 @@
-{{ dump(article) }}
+{% extends "PublicBundle::base.html.twig" %}
+
+{% block mainContent %}
+
+  <div class="singleNews-wrapper">
+    <div class="singleNews-thumb" style="background-image: url('{{ article.urlThumbnail }}');"></div>
+    <div class="singleNews-content">
+      <h3 class="singleNews-title">{{ article.title }}</h3>
+      <p class="singleNews-infos">Posté le <strong>{{ article.createAt.date | date('d M Y')}}</strong> par <strong>{{ article.auteur }}</strong>
+      <p>{{ article.content }}</p>
+    </div>
+
+    <div class="comments">
+      <h4>Commentaires</h4>
+      {% for commentaire in article.commentaires %}
+        <div class="comment">
+          <h6 class="comment-author">{{ commentaire.user }} <span class="comment-info">- Envoyé le {{ commentaire.createAt.date | date('d M Y') }}</span></h6>
+          <blockquote>{{ commentaire.contenu }}</blockquote>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

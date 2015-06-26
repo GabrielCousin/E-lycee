@@ -1,13 +1,13 @@
-.home-content-wrapper {
+.home-contentWrapper {
   display: flex;
   padding-top: 1rem;
 }
 
-.primary-news {
+.news--primary {
   max-width: 50%;
 }
 
-.secondary-news {
+.news--secondary {
   display: flex;
   flex-direction: column;
   padding-left: 1rem;
