@@ -14,11 +14,10 @@
 
         <div class="container home-content-wrapper">
             {% block mainContent %}{% endblock %}
+            {% include "PublicBundle::includes/sidebar.html.twig" %}
         </div>
 
-        {% include "PublicBundle::includes/sidebar.html.twig" %}
         {% include "PublicBundle::includes/footer.html.twig" %}
-
         {% block javascripts %}{% endblock %}
         <script type='text/javascript' src="{{ asset('js/scripts.js') }}"></script>
         {% if browser_sync == true %}

@@ -1,59 +1,41 @@
 {% extends "PublicBundle::base.html.twig" %}
 
-   {#
-    {% for post in results %}
-        {{ post.createAt.date }}
-        {{ post.commentaires | length }}
-    {% endfor %}
-    #}
-
 {% block mainContent %}
 
-    <div class="primary-news">
-      <div class="card">
-        <div class="card-image">
-          <img src="{{ results[0].urlThumbnail }}">
-          <span class="card-title">{{ results[0].title }}</span>
+  <div class="primary-news">
+    <div class="card">
+      <div class="card-image">
+        <img src="{{ results[0].urlThumbnail }}">
+        <span class="card-title">{{ results[0].title }}</span>
+      </div>
+      <div class="card-content">
+        <p class="card-author">Posté le <strong>{{ results[0].createAt.date | date('d.m.Y') }}</strong> par <strong>Alain</strong></p>
+        <p>{{ results[0].extract }} <a href="{{ url('public.news.article', {'id': results[0].id}) }}">Lire la suite</a></p>
+        <div class="card-comments">
+          <p><i class="small material-icons">chat_bubble</i>{{ results[0].commentaires | length }} commentaires. <a href="{{ url('public.news.article', {'id': results[0].id}) }}">Réagissez !</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="secondary-news">
+    {% for post in results[1:] %}
+      <div class="card small">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="{{ post.urlThumbnail }}">
         </div>
         <div class="card-content">
-          <p class="card-author">Auteur : <strong>Alain</strong></p>
-          <p>{{ results[0].extract }} <a href="{# url('public.news.article', {'id': results[0].id}) #}">Lire la suite</a></p>
-          <div class="card-comments">
-            <p><i class="small material-icons">chat_bubble</i>277 commentaires. <a href="#">Réagissez !</a></p>
-          </div>
+          <span class="card-title activator grey-text text-darken-4">{{ post.title }}</span>
+        </div>
+        <div class="card-action">
+          <a href="{{ url('public.news.article', {'id': post.id}) }}">Lire la suite</a>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+          <p>{{ post.extract }} <a href="{{ url('public.news.article', {'id': post.id}) }}">Lire la suite</a></p>
         </div>
       </div>
-    </div>
-
-    <div class="secondary-news">
-      {% for post in results[1:] %}
-        <div class="card small">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="{{ post.urlThumbnail }}">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">{{ post.title }}</span>
-          </div>
-          <div class="card-action">
-            <a href="#">Lire la suite</a>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
-            <p>{{ post.extract }} <a href="{# url('public.news.article', {'id': post.id}) #}">Lire la suite</a></p>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-
-    <aside class="sidebar">
-      <h3 class="sidebar-title">A lire aussi</h3>
-      <div class="collection">
-        <a href="#!" class="collection-item">Lien 1</a>
-        <a href="#!" class="collection-item">Lien 2</a>
-        <a href="#!" class="collection-item">Lien 3</a>
-      </div>
-
-      <h3 class="sidebar-title">Derniers tweets</h3>
-    </aside>
+    {% endfor %}
   </div>
+
 {% endblock %}
