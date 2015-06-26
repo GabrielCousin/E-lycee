@@ -14,7 +14,11 @@ class PublicController extends Controller
      */
     public function indexAction()
     {
-        return array();
+        $doctrine   = $this->getDoctrine();
+        $rc         = $doctrine->getRepository('PublicBundle:Post') ;
+        $results    = $rc->getThreeLastPost();
+
+        return array('results' => $results );
     }
 
     /**
