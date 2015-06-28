@@ -3,7 +3,7 @@
 namespace PublicBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-
+use Doctrine\Common\Util\Debug as Debug;
 /**
  * UserRepository
  *
@@ -15,6 +15,8 @@ class PostRepository extends EntityRepository
     public function getThreeLastPost(){
         $results = $this
             ->createQueryBuilder('p')
+            ->orderBy('p.createAt','DESC')
+            ->where('p.status = 1')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult();
@@ -26,10 +28,25 @@ class PostRepository extends EntityRepository
         $offset = $page * $nbParPage - 1 ;
         $results = $this
             ->createQueryBuilder('p')
+            ->orderBy('p.createAt','DESC')
+            ->where('p.status = 1')
             ->setFirstResult($offset)
             ->setMaxResults($nbParPage)
             ->getQuery()
             ->getResult();
+        return $results;
+    }
+
+    public function getPostTitle($max){
+        $results = $this
+            ->createQueryBuilder('p')
+            ->orderBy('p.createAt','DESC')
+            ->where('p.status = 1')
+            ->setFirstResult(4)
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult();
+
         return $results;
     }
 }

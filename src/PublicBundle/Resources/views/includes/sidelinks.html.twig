@@ -1,0 +1,4 @@
+
+{% for article in results %}
+    <a href="{{ path("public.news.article",{'id':article.id}) }}" class="collection-item">{{ article.title }}</a>
+{% endfor %}

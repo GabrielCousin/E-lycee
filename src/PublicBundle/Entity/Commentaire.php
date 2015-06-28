@@ -36,14 +36,14 @@ class Commentaire
     private $createAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Post", inversedBy="commentaire")
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="commentaires")
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      *
      */
     private $post;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="commentaire")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="commentaires")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *
      */

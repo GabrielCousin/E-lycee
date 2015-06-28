@@ -18,7 +18,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="auteur")
      */
     protected $post;
 

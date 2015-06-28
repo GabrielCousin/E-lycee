@@ -5,7 +5,7 @@ namespace PublicBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
+use Doctrine\Common\Util\Debug as Debug ;
 class PublicController extends Controller
 {
     /**
@@ -56,12 +56,25 @@ class PublicController extends Controller
     }
 
     /**
-     * @Route("/mentions", name="public.contacts" )
+     * @Route("/contacts", name="public.contacts" )
      * @Template("PublicBundle:Public:contacts.html.twig")
      */
     public function contactsAction()
     {
         return array();
+    }
+    /**
+     *
+     * @Template("PublicBundle:includes:sidelinks.html.twig")
+     */
+    public function recentArticlesAction($max = 5){
+        $doctrine   = $this->getDoctrine();
+        $rc         = $doctrine->getRepository('PublicBundle:Post') ;
+        $results    = $rc->getPostTitle($max);
+/*        echo '<pre>';
+        Debug::dump($results);
+        echo '</pre>';*/
+        return array('results' => $results);
     }
 
 }
