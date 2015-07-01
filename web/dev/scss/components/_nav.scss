@@ -1,13 +1,19 @@
-.primary-nav {
+.main-nav {
   margin-bottom: 30px;
 }
 
-.brand-logo {
-  margin-left: 1rem;
+.nav-homeLink {
+  font-size: 2rem;
 }
 
 .search-form {
-  width: 150px;
-  position: absolute;
-  right: 0;
+  float: right;
+
+  #search {
+    width: 0px;
+    &:focus {
+      width: 120px;
+    }
+  }
+
 }

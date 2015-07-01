@@ -2,20 +2,31 @@
 {% set home = 'public.home.index' %}
 {% set news = 'public.news.index' %}
 
-<div class="container">
-  <nav>
-    <div class="nav-wrapper">
-      <ul class="hide-on-med-and-down">
-        <li {% if route == home %}class="active"{% endif %}><a href="{{ url(home)}}">Home</a></li>
-        <li {% if route == news %}class="active"{% endif %}><a href="{{ url(news)}}">Actus</a></li>
-        <li><a href="#">Le lycée</a></li>
-      </ul>
-      <form class="search-form">
-        <div class="input-field">
-          <input id="search" type="search" required>
-          <label for="search"><i class="material-icons">search</i></label>
-        </div>
-      </form>
-    </div>
-  </nav>
-</div>
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="#!">Dashboard</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">Fiches</a></li>
+  <li><a href="#!">Articles</a></li>
+  <li class="divider"></li>
+  <li><a href="#">Déconnexion</a></li>
+</ul>
+
+<nav class="main-nav">
+  <div class="nav-wrapper">
+    <ul class="hide-on-med-and-down">
+      <li {% if route == home %}class="active"{% endif %}><a class="nav-homeLink" href="{{ url(home)}}">E-lycée</a></li>
+      <li {% if route == news %}class="active"{% endif %}><a href="{{ url(news)}}">Actus</a></li>
+      <li><a href="#">Le lycée</a></li>
+    </ul>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="#">Connexion</a></li>
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Bonjour {user}<i class="material-icons right">arrow_drop_down</i></a></li>
+    </ul>
+    <form class="search-form">
+      <div class="input-field">
+        <input id="search" type="search" required>
+        <label for="search"><i class="material-icons">search</i></label>
+      </div>
+    </form>
+  </div>
+</nav>
