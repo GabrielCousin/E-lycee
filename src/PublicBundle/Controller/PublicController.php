@@ -22,6 +22,24 @@ class PublicController extends Controller
     }
 
     /**
+     * @Route("/contact",name="public.contact.index")
+     * @Template("PublicBundle:Public:contact.html.twig")
+     */
+    public function contactAction()
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/legal",name="public.legal.index")
+     * @Template("PublicBundle:Public:legal.html.twig")
+     */
+    public function legalAction()
+    {
+        return array();
+    }
+
+    /**
      * @Route("/news", name="public.news.index" )
      * @Template("PublicBundle:Public:news.html.twig")
      */
