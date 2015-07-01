@@ -1,10 +1,15 @@
 .comments {
   padding: 1rem;
+
+  h4, p {
+    text-align: center;
+  }
 }
 
 .comment {
   margin-bottom: 3rem;
   padding: 0 2rem;
+
 }
 
 .comment-author {
@@ -21,6 +26,7 @@
 
 .comment-form {
   text-align: right;
+  padding: 2rem;
 }
 
 .comment-formIcon {

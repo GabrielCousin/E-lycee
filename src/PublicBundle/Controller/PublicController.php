@@ -22,7 +22,7 @@ class PublicController extends Controller
     }
 
     /**
-     * @Route("/contact",name="public.contact.index")
+     * @Route("/contact",name="public.contact")
      * @Template("PublicBundle:Public:contact.html.twig")
      */
     public function contactAction()
@@ -31,10 +31,19 @@ class PublicController extends Controller
     }
 
     /**
-     * @Route("/legal",name="public.legal.index")
+     * @Route("/legal",name="public.legal")
      * @Template("PublicBundle:Public:legal.html.twig")
      */
     public function legalAction()
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/lycee",name="public.lycee")
+     * @Template("PublicBundle:Public:lycee.html.twig")
+     */
+    public function lyceeAction()
     {
         return array();
     }
@@ -64,23 +73,6 @@ class PublicController extends Controller
         return array('article' => $article );
     }
 
-    /**
-     * @Route("/mentions", name="public.mentions" )
-     * @Template("PublicBundle:Public:mentions.html.twig")
-     */
-    public function mentionsAction()
-    {
-        return array();
-    }
-
-    /**
-     * @Route("/contacts", name="public.contacts" )
-     * @Template("PublicBundle:Public:contacts.html.twig")
-     */
-    public function contactsAction()
-    {
-        return array();
-    }
     /**
      *
      * @Template("PublicBundle:includes:sidelinks.html.twig")
