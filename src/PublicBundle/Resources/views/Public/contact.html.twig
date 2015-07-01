@@ -1,6 +1,44 @@
 {% extends "PublicBundle::base.html.twig" %}
 {% block mainContent %}
 
-Contact
+  <main class="page-content">
+
+    <h1 class="page-title">Contact</h1>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id quam quis nibh suscipit volutpat ac cursus quam. Aliquam ultrices.</p>
+
+    <div class="row">
+      <form class="col s12" class="message-form" action="#" method="post">
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="firstname" type="text" class="validate">
+            <label for="firstname">Prénom</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="lastname" type="text" class="validate">
+            <label for="lastname">Nom</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="email" type="email" class="validate">
+            <label for="email" data-error="Incorrect">E-mail</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="message" class="materialize-textarea" length="550"></textarea>
+            <label for="message">Votre message</label>
+          </div>
+        </div>
+        <button class="waves-effect waves-light btn-large comment-submit right" type="submit" name="action">
+          Envoyer
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
+    </div>
+
+
+  </main>
 
 {% endblock %}
