@@ -12,6 +12,25 @@
 
     <div class="comments">
       <h4>Commentaires</h4>
+      {% if article.commentaires is empty %}
+        <p>Pas de commentaires pour le moment.</p>
+      {% endif %}
+
+      <a href="#">Connectez-vous pour commenter</a>
+      <form class="comment-form" action="#" method="post">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix comment-formIcon">mode_edit</i>
+            <textarea id="comment" class="materialize-textarea"></textarea>
+            <label for="comment">Réagissez !</label>
+          </div>
+        </div>
+        <button class="waves-effect waves-light btn-large comment-submit" type="submit" name="action">
+          Envoyer
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
+
       {% for commentaire in article.commentaires %}
         <div class="comment">
           <h6 class="comment-author">{{ commentaire.user }} <span class="comment-info">- Envoyé le {{ commentaire.createAt.date | date('d M Y') }}</span></h6>
