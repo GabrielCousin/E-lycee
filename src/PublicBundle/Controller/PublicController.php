@@ -5,7 +5,13 @@ namespace PublicBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use PublicBundle\Entity\Commentaire ;
+use PublicBundle\Form\CommentaireType;
+use Symfony\Component\HttpFoundation\Request as Request;
+
 use Doctrine\Common\Util\Debug as Debug ;
+
+
 class PublicController extends Controller
 {
     /**
@@ -65,12 +71,28 @@ class PublicController extends Controller
      * @Route("/news/{id}", name="public.news.article")
      * @Template("PublicBundle:Public:article.html.twig")
      */
-    public function showPostAction($id)
+    public function showPostAction(Request $request, $id)
     {
         $doctrine   = $this->getDoctrine();
         $rc         = $doctrine->getRepository('PublicBundle:Post') ;
         $article    = $rc->findOneById($id);
-        return array('article' => $article );
+
+        $commentaire = new Commentaire() ;
+        $commentairetype = new CommentaireType();
+        $formCommentaire =  $this->createForm($commentairetype, $commentaire);
+        $formCommentaire->handleRequest($request);
+
+        if ($formCommentaire->isValid()){
+            $commentaire->setCreateAt(new \DateTime());
+            $commentaire->setPost($article);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commentaire);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('public.news.article', array('id' => $id)));
+        }
+
+        return array('form' => $formCommentaire->createView(),'article' => $article );
     }
 
     /**

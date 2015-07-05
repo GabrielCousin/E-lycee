@@ -15,8 +15,9 @@
       {% if article.commentaires is empty %}
         <p>Pas de commentaires pour le moment.</p>
       {% endif %}
-      <p><a href="#">Connectez-vous pour commenter</a></p>
+      {#<p><a href="#">Connectez-vous pour commenter</a></p>#}
 
+        {{ form(form) }}
       <form class="comment-form" action="#" method="post">
         <div class="row">
           <div class="input-field col s12">
@@ -33,7 +34,7 @@
 
       {% for commentaire in article.commentaires %}
         <div class="comment">
-          <h6 class="comment-author">{{ commentaire.user }} <span class="comment-info">- Envoyé le {{ commentaire.createAt.date | date('d M Y') }}</span></h6>
+          <h6 class="comment-author">{{ commentaire.username }} <span class="comment-info">- Envoyé le {{ commentaire.createAt.date | date('d M Y') }}</span> </h6>
           <blockquote>{{ commentaire.contenu }}</blockquote>
         </div>
       {% endfor %}

@@ -22,11 +22,6 @@ class User extends BaseUser
      */
     protected $post;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="user")
-     */
-    protected $commentaires;
-
     public function __construct()
     {
         parent::__construct();
@@ -77,36 +72,4 @@ class User extends BaseUser
         return $this->post;
     }
 
-    /**
-     * Add commentaires
-     *
-     * @param \PublicBundle\Entity\Commentaire $commentaires
-     * @return User
-     */
-    public function addCommentaire(\PublicBundle\Entity\Commentaire $commentaires)
-    {
-        $this->commentaires[] = $commentaires;
-
-        return $this;
-    }
-
-    /**
-     * Remove commentaires
-     *
-     * @param \PublicBundle\Entity\Commentaire $commentaires
-     */
-    public function removeCommentaire(\PublicBundle\Entity\Commentaire $commentaires)
-    {
-        $this->commentaires->removeElement($commentaires);
-    }
-
-    /**
-     * Get commentaires
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCommentaires()
-    {
-        return $this->commentaires;
-    }
 }

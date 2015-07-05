@@ -43,19 +43,21 @@ class Commentaire
     private $post;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="commentaires")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @var string
      *
+     * @ORM\Column(name="username", type="string", length=150)
      */
-    private $user;
-
-
-
+    private $username;
+    
     /**
      * Get id
      *
      * @return integer 
      */
+
+    public function __construct(){
+        $this->createAt = new \Datetime();
+    }
     public function getId()
     {
         return $this->id;
@@ -107,30 +109,7 @@ class Commentaire
         return $this->post;
     }
 
-    /**
-     * Set user
-     *
-     * @param \PublicBundle\Entity\User $user
-     * @return Commentaire
-     */
-    public function setUser(\PublicBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \PublicBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
+     /**
      * Set createAt
      *
      * @param \DateTime $createAt
@@ -151,5 +130,28 @@ class Commentaire
     public function getCreateAt()
     {
         return $this->createAt;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return Commentaire
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string 
+     */
+    public function getUsername()
+    {
+        return $this->username;
     }
 }
