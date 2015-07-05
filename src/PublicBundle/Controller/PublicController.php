@@ -6,6 +6,8 @@ use PublicBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
 use PublicBundle\Entity\Commentaire ;
 use PublicBundle\Form\CommentaireType;
 use PublicBundle\Entity\ContactEmail;
@@ -33,6 +35,7 @@ class PublicController extends Controller
     /**
      * @Route("/contact",name="public.contact")
      * @Template("PublicBundle:Public:contact.html.twig")
+     * @Method({"POST","GET"})
      */
     public function contactAction(Request $request)
     {
@@ -41,6 +44,19 @@ class PublicController extends Controller
         $form = $this->createForm($contactType,$contact);
         $form->handleRequest($request);
 
+        if ($form->isValid()){
+//            echo '<pre>';
+//            Debug::dump($form->getData());
+//            echo '</pre>';
+//            exit();
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Test d\'envoie email')
+                ->setFrom('elycee.dev@gmail.com')
+                ->setTo(array('elycee.dev@gmail.com', $form->getData()->getEmail()))
+                ->setBody($this->renderView('PublicBundle:Public:contactEmail.txt.twig', array('contact' => $contact)));
+            $this->get('mailer')->send($message);
+            return $this->redirect($this->generateUrl('public.home.index'));
+        }
         return array('form' => $form->createView());
     }
 
