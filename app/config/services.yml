@@ -15,3 +15,7 @@ services:
 #          class: PublicBundle\Service\Commentaires
 #          arguments: ["@request"]
 #          scope: request
+
+    redirect.after.login:
+        class: UserBundle\Service\AfterLoginRedirection
+        arguments: [@router]

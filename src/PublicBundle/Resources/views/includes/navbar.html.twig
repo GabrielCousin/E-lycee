@@ -2,14 +2,24 @@
 {% set home = 'public.home.index' %}
 {% set news = 'public.news.index' %}
 {% set lycee = 'public.lycee' %}
+{% set login = 'fos_user_security_login' %}
+{% set logout = 'fos_user_security_logout' %}
+{% set teacher = 'teacher.home' %}
 
 <ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">Dashboard</a></li>
+  <li><a href="{{ url(teacher) }}">Dashboard</a></li>
   <li class="divider"></li>
-  <li><a href="#!">Fiches</a></li>
   <li><a href="#!">Articles</a></li>
   <li class="divider"></li>
-  <li><a href="#">Déconnexion</a></li>
+  <li><a href="{{ url(logout) }}">Déconnexion</a></li>
+</ul>
+
+<ul id="dropdown2" class="dropdown-content">
+    <li><a href="#!">Fiches</a></li>
+    <li class="divider"></li>
+    <li><a href="#!">Articles</a></li>
+    <li class="divider"></li>
+    <li><a href="{{ url(logout) }}">Déconnexion</a></li>
 </ul>
 
 <nav class="main-nav">
@@ -25,9 +35,16 @@
         <label for="search"><i class="material-icons">search</i></label>
       </div>
     </form>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="#">Connexion</a></li>
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Bonjour {user}<i class="material-icons right">arrow_drop_down</i></a></li>
-    </ul>
+
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          {% if is_granted('ROLE_STUDENT') %}
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Bonjour {{ app.user }}<i class="material-icons right">arrow_drop_down</i></a></li>
+          {% elseif is_granted('ROLE_TEACHER') %}
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Bonjour {{ app.user }}<i class="material-icons right">arrow_drop_down</i></a></li>
+          {% else %}
+          <li><a href="{{ url(login) }}">Connexion</a></li>
+          {% endif %}
+      </ul>
+
   </div>
 </nav>
