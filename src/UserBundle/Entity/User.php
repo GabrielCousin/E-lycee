@@ -1,6 +1,6 @@
 <?php
 
-namespace PublicBundle\Entity;
+namespace UserBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
  
@@ -18,7 +18,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="auteur")
+     * @ORM\OneToMany(targetEntity="\PublicBundle\Entity\Post", mappedBy="auteur")
      */
     protected $post;
 

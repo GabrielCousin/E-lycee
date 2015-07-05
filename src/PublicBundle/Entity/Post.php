@@ -4,6 +4,7 @@ namespace PublicBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert ;
+use UserBundle\Entity\User;
 
 
 /**
@@ -68,7 +69,7 @@ class Post
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="post")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="post")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *
      */
