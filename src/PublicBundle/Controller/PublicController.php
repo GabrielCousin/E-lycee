@@ -2,11 +2,14 @@
 
 namespace PublicBundle\Controller;
 
+use PublicBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use PublicBundle\Entity\Commentaire ;
 use PublicBundle\Form\CommentaireType;
+use PublicBundle\Entity\ContactEmail;
+use PublicBundle\Form\ContactEmailType;
 use Symfony\Component\HttpFoundation\Request as Request;
 
 use Doctrine\Common\Util\Debug as Debug ;
@@ -31,9 +34,14 @@ class PublicController extends Controller
      * @Route("/contact",name="public.contact")
      * @Template("PublicBundle:Public:contact.html.twig")
      */
-    public function contactAction()
+    public function contactAction(Request $request)
     {
-        return array();
+        $contact = new ContactEmail();
+        $contactType = new ContactEmailType();
+        $form = $this->createForm($contactType,$contact);
+        $form->handleRequest($request);
+
+        return array('form' => $form->createView());
     }
 
     /**
