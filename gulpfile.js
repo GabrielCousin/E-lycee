@@ -21,7 +21,7 @@ gulp.task('bs', ['css:dev'], function() {
 
 // Build
 gulp.task('css:build', function(){
-  return gulp.src('web/dev/scss/app.scss')
+  return gulp.src('web/dev/scss2/app.scss')
     .pipe(plumber())
     .pipe(sass({
       errLogToConsole: true
@@ -46,7 +46,7 @@ gulp.task('js', function() {
 
 // Dev
 gulp.task('css:dev', function() {
-  return gulp.src('web/dev/scss/app.scss')
+  return gulp.src('web/dev/scss2/app.scss')
 		.pipe(plumber(function(error) {
 				gutil.log(gutil.colors.red(error.message));
 				this.emit('end');
@@ -61,7 +61,7 @@ gulp.task('css:dev', function() {
 });
 
 gulp.task('css:watch', function() {
-	return gulp.watch(['web/dev/scss/**/*.scss'], ['css:dev', 'bs:reload']);
+	return gulp.watch(['web/dev/scss2/**/*.scss'], ['css:dev', 'bs:reload']);
 });
 
 gulp.task('bs:serve', function () {
