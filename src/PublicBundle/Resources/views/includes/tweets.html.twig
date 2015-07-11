@@ -1,0 +1,8 @@
+{% for tweet in tweets.statuses %}
+
+<a href="http://twitter.com/{{ tweet.user.screen_name}}/status/{{ tweet.id }}" class="collection-item">
+  <small>Tweeté le {{ tweet.created_at | date('d/m/Y') }}</small>
+  <p>{{ tweet.text }}</p>
+</a>
+
+{% endfor %}

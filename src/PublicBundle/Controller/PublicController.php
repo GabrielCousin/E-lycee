@@ -127,10 +127,29 @@ class PublicController extends Controller
         $doctrine   = $this->getDoctrine();
         $rc         = $doctrine->getRepository('PublicBundle:Post') ;
         $results    = $rc->getPostTitle($max);
-/*        echo '<pre>';
+        /* echo '<pre>';
         Debug::dump($results);
         echo '</pre>';*/
-        return array('results' => $results);
+
+        $twitter = $this->get('endroid.twitter');
+
+        $response = $twitter->query('search/tweets', 'GET', 'json', array('q' => 'LLG75005', 'count' => '3'));
+        $tweets = json_decode($response->getContent());
+
+        return array('results' => $results, 'tweets' => $tweets);
+    }
+
+    /**
+     *
+     * @Template("PublicBundle:includes:tweets.html.twig")
+     */
+    public function latestTweetsAction(){
+        $twitter = $this->get('endroid.twitter');
+
+        $response = $twitter->query('search/tweets', 'GET', 'json', array('q' => 'LLG75005', 'count' => '3'));
+        $tweets = json_decode($response->getContent());
+
+        return array('tweets' => $tweets );
     }
 
 }

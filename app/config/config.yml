@@ -95,3 +95,9 @@ swiftmailer:
     username:  elycee.dev@gmail.com
     password:  elyceedev
     spool:     { type: memory }
+
+endroid_twitter:
+    consumer_key: "dqj73sdZlcDylKqj7JwyqzQqf"
+    consumer_secret: "lLhj3voWq8koTL7uToQ6W182PplQUZ8mbjV3XgtZhuLhclYJ5Y"
+    access_token: "20164712-I7p9VdZ4Ttgux3BEwvXTXV9jwRLmo0x9qXhcuCwne"
+    access_token_secret: "nsGCYOxD9TjjfagkTfXBmMEIJMbpyhnB3jBjNGTCpIJeL"

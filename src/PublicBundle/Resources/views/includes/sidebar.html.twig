@@ -1,11 +1,11 @@
 <aside class="sidebar">
   <h3 class="sidebar-title">A lire aussi</h3>
   <div class="collection">
-      {{ render(controller('PublicBundle:Public:recentArticles', { 'max': 5 })) }}
-{#    <a href="#!" class="collection-item">Lien 1</a>
-    <a href="#!" class="collection-item">Lien 2</a>
-    <a href="#!" class="collection-item">Lien 3</a>#}
+    {{ render(controller('PublicBundle:Public:recentArticles', { 'max': 5 })) }}
   </div>
 
   <h3 class="sidebar-title">Derniers tweets</h3>
+  <div class="collection">
+    {{ render(controller('PublicBundle:Public:latestTweets')) }}
+  </div>
 </aside>

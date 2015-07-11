@@ -8684,8 +8684,11 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
           flex-grow: 1; }
 
 .sidebar {
-  min-width: 20%;
-  margin: 0.5em 0 1rem 1rem; }
+  width: 25%;
+  margin: 0.5em 0 1rem 1rem;
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0; }
 
 .page-content {
   padding: 1rem;
