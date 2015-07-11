@@ -15,22 +15,6 @@
       {% if article.commentaires is empty %}
         <p>Pas de commentaires pour le moment.</p>
       {% endif %}
-      {#<p><a href="#">Connectez-vous pour commenter</a></p>#}
-
-        {{ form(form) }}
-      <form class="comment-form" action="#" method="post">
-        <div class="row">
-          <div class="input-field col s12">
-            <i class="material-icons prefix comment-formIcon">mode_edit</i>
-            <textarea id="comment" class="materialize-textarea"></textarea>
-            <label for="comment">Réagissez !</label>
-          </div>
-        </div>
-        <button class="waves-effect waves-light btn-large comment-submit" type="submit" name="action">
-          Envoyer
-          <i class="material-icons right">send</i>
-        </button>
-      </form>
 
       {% for commentaire in article.commentaires %}
         <div class="comment">
@@ -38,6 +22,31 @@
           <blockquote>{{ commentaire.contenu }}</blockquote>
         </div>
       {% endfor %}
+
+      {#<p><a href="#">Connectez-vous pour commenter</a></p>#}
+      <div class="row">
+
+        {{ form_start(form, {'method': 'POST', 'attr': {'class': 'col s12 message-form'}}) }}
+          <div class="row">
+            <div class="input-field col s12">
+              {{ form_errors(form.username) }}
+              {{ form_widget(form.username, { 'attr': {'class': 'validate'} }) }}
+              {{ form_label(form.username, 'Utilisateur') }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              {{ form_errors(form.contenu) }}
+              {{ form_widget(form.contenu, { 'attr': {'class': 'materialize-textarea', 'length' : '550'} }) }}
+              {{ form_label(form.contenu, 'Votre message') }}
+            </div>
+          </div>
+          {{ form_widget(form.envoyer, {'label': 'Envoyer', 'attr': {'class': 'waves-effect waves-light btn-large comment-submit right'}}) }}
+        {{ form_end(form) }}
+
+      </div>
+
+
     </div>
   </div>
 
