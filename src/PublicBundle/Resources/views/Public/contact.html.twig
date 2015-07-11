@@ -7,42 +7,39 @@
 
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id quam quis nibh suscipit volutpat ac cursus quam. Aliquam ultrices.</p>
 
-      {# TO REMOVE #}
-      {{ form(form) }}
-      {# --------- #}
+    <div class="row">
 
-{#    <div class="row">
-      <form class="col s12" class="message-form" action="#" method="post">
+      {{ form_start(form, {'method': 'POST', 'attr': {'class': 'col s12 message-form'}}) }}
         <div class="row">
           <div class="input-field col s6">
-            <input id="firstname" type="text" class="validate">
-            <label for="firstname">Prénom</label>
+            {{ form_errors(form.prenom) }}
+            {{ form_widget(form.prenom, { 'attr': {'class': 'validate'} }) }}
+            {{ form_label(form.prenom, 'Prénom') }}
           </div>
           <div class="input-field col s6">
-            <input id="lastname" type="text" class="validate">
-            <label for="lastname">Nom</label>
+            {{ form_errors(form.nom) }}
+            {{ form_widget(form.nom, { 'attr': {'class': 'validate'} }) }}
+            {{ form_label(form.nom, 'Nom') }}
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="email" type="email" class="validate">
-            <label for="email" data-error="Incorrect">E-mail</label>
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email, {'type': 'email', 'attr': {'class': 'validate'} }) }}
+            {{ form_label(form.email, 'E-mail', { 'label_attr': {'data-error': 'Incorrect'} }) }}
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <textarea id="message" class="materialize-textarea" length="550"></textarea>
-            <label for="message">Votre message</label>
+            {{ form_errors(form.message) }}
+            {{ form_widget(form.message, { 'attr': {'class': 'materialize-textarea', 'length' : '550'} }) }}
+            {{ form_label(form.message, 'Votre message') }}
           </div>
         </div>
-        <button class="waves-effect waves-light btn-large comment-submit right" type="submit" name="action">
-          Envoyer
-          <i class="material-icons right">send</i>
-        </button>
-      </form>
-    </div>#}
+        {{ form_widget(form.envoyer, {'label': 'Envoyer', 'attr': {'class': 'waves-effect waves-light btn-large comment-submit right'}}) }}
+      {{ form_end(form) }}
 
-
+    </div>
   </main>
 
 {% endblock %}
