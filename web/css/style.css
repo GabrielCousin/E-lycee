@@ -9679,7 +9679,8 @@ html, body {
 .page-content {
   padding: 20px;
   max-width: calc(880px - 400px);
-  margin-right: 10px; }
+  margin-right: 10px;
+  background: #fff; }
   .page-content h1 {
     margin-top: 0; }
 
