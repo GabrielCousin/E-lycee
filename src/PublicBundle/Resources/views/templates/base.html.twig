@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{% block title %}Welcome!{% endblock %}</title>
+  {% block stylesheets %}{% endblock %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+</head>
+<body>
+  {% include "PublicBundle::includes/navbar.html.twig" %}
+
+  <main class="mdl-layout__content">
+    <div class="base-wrapper">
+      <div class="cards-container">
+        {% block mainContent %}{% endblock %}
+      </div>
+      <aside class="sidebar mdl-shadow--2dp">
+        {% include "PublicBundle::includes/sidebar.html.twig" %}
+      </aside>
+    </div>
+    {% include "PublicBundle::includes/footer.html.twig" %}
+  </main>
+
+  {% block javascripts %}{% endblock %}
+    <script type='text/javascript' src="{{ asset('dev/js/material.js') }}"></script>
+  {% if browser_sync == true %}
+    <script type='text/javascript' id="__bs_script__">//<![CDATA[
+      document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.7.13.js'><\/script>".replace("HOST", location.hostname));
+      //]]>
+    </script>
+  {% endif %}
+
+</body>
+
+</html>

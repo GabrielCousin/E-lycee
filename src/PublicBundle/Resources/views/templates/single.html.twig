@@ -17,14 +17,7 @@
   {% include "PublicBundle::includes/navbar.html.twig" %}
 
   <main class="mdl-layout__content">
-    <div class="base-wrapper">
-      <div class="posts">
-        {% block mainContent %}{% endblock %}
-      </div>
-      <aside class="sidebar mdl-shadow--2dp">
-        {% include "PublicBundle::includes/sidebar.html.twig" %}
-      </aside>
-    </div>
+    {% block mainContent %}{% endblock %}
     {% include "PublicBundle::includes/footer.html.twig" %}
   </main>
 

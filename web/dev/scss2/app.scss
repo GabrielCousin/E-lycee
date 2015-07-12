@@ -1,53 +1,13 @@
 @import "../vendors/normalize-scss/normalize";
 @import "mdl-core/material-design-lite";
 @import "mdl-tpl/text-only";
+@import "mdl-tpl/article";
 
-@import "nav";
-@import "card";
+@import "components/buttons";
 
-.u-push {
-  float: right;
-}
+@import "layout/card";
+@import "layout/nav";
+@import "layout/page";
+@import "layout/sidebar";
 
-.prelabel__icon {
-  vertical-align: middle;
-  padding-right: 15px;
-}
-
-.base-wrapper {
-  max-width: 840px;
-  margin: 48px auto;
-  display: flex;
-}
-
-.sidebar {
-  @extend .mdl-card;
-  margin-left: 30px;
-  padding: 24px;
-}
-
-
-.sidebar__list {
-  border-left: solid 3px #C0EbF1;
-  padding-left: 20px;
-  line-height: 28px;
-
-  li {
-    font-size: 16px;
-    list-style: none;
-  }
-
-  a {
-    color: #00BCD4;
-    text-decoration: none;
-  }
-}
-
-.sidebar__tweet {
-  border-left: solid 3px rgba(#757575, .3);
-  padding-left: 20px;
-  line-height: 28px;
-  margin: 10px 0;
-  color: #757575;
-  text-decoration: none;
-}
+@import "utils";

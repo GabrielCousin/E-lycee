@@ -1,34 +1,34 @@
-{% extends "PublicBundle::base.html.twig" %}
+{% extends "PublicBundle::templates/base.html.twig" %}
 {% block mainContent %}
 
-  <main class="page-content">
+  <main class="page-content mdl-shadow--2dp clearfix">
 
-    <h1 class="page-title">Contact</h1>
+    <h1 class="mdl-typography--display-1">Contact</h1>
 
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id quam quis nibh suscipit volutpat ac cursus quam. Aliquam ultrices.</p>
 
       {{ form_start(form, {'method': 'POST', 'attr': {'class': ''}}) }}
-        <div class="mdl-grid">
-          <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--6-col">
+        <div class="mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
             {{ form_errors(form.prenom) }}
             {{ form_widget(form.prenom, { 'attr': {'class': 'mdl-textfield__input'} }) }}
             {{ form_label(form.prenom, 'Prénom', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--6-col">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
             {{ form_errors(form.nom) }}
             {{ form_widget(form.nom, { 'attr': {'class': 'mdl-textfield__input'} }) }}
             {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
           </div>
         </div>
-        <div class="mdl-grid">
-          <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
+        <div class="mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
             {{ form_errors(form.email) }}
             {{ form_widget(form.email, {'type': 'email', 'attr': {'class': 'mdl-textfield__input', 'pattern': '[\._+a-z0-9]+[@][\._+a-z0-9]+'} }) }}
             {{ form_label(form.email, 'E-mail', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
           </div>
         </div>
-        <div class="mdl-grid">
-          <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
+        <div class="mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
             {{ form_errors(form.message) }}
             {{ form_widget(form.message, { 'attr': {'class': 'mdl-textfield__input', 'rows': '3'} }) }}
             {{ form_label(form.message, 'Votre message', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
