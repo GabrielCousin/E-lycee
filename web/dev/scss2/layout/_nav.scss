@@ -1,8 +1,10 @@
-.mdl-navigation__link {
-  opacity: .5;
+.main-navbar {
+  .mdl-navigation__link {
+    opacity: .5;
 
-  &.is-active {
-    opacity: 1;
+    &.is-active {
+      opacity: 1;
+    }
   }
 }
 
