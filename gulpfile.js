@@ -21,7 +21,7 @@ gulp.task('bs', ['css:dev'], function() {
 
 // Build
 gulp.task('css:build', function(){
-  return gulp.src('web/dev/scss2/app.scss')
+  return gulp.src('web/dev/scss/app.scss')
     .pipe(plumber())
     .pipe(sass({
       errLogToConsole: true
@@ -38,7 +38,7 @@ gulp.task('css:build', function(){
 });
 
 gulp.task('js', function() {
-  return gulp.src(['web/dev/vendors/jquery/dist/jquery.js', 'web/dev/vendors/materialize/dist/js/materialize.js'])
+  return gulp.src(['web/dev/js/material.js'])
     .pipe(concat('scripts.js'))
     .pipe(gulp.dest('web/js'));
 });
@@ -46,7 +46,7 @@ gulp.task('js', function() {
 
 // Dev
 gulp.task('css:dev', function() {
-  return gulp.src('web/dev/scss2/app.scss')
+  return gulp.src('web/dev/scss/app.scss')
 		.pipe(plumber(function(error) {
 				gutil.log(gutil.colors.red(error.message));
 				this.emit('end');

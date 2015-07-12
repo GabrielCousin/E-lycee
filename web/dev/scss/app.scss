@@ -1,14 +1,15 @@
-@import "settings/vars";
+@import "normalize";
+@import "mdl-core/material-design-lite";
+@import "mdl-tpl/article";
+@import "mdl-tpl/dashboard";
+@import "mdl-tpl/text-only";
 
-@import "../vendors/normalize-scss/normalize";
-@import "../vendors/materialize/sass/materialize";
+@import "components/buttons";
 
-@import "components/card";
-@import "components/comments";
-@import "components/helpers";
-@import "components/nav";
-@import "components/news";
-@import "components/sidebar";
-
-@import "layout/home";
+@import "layout/card";
+@import "layout/dashboard";
+@import "layout/nav";
 @import "layout/page";
+@import "layout/sidebar";
+
+@import "utils";
