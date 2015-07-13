@@ -1,0 +1,32 @@
+{% set title = "Dashboard | Prof" %}
+
+{% extends "DashboardBundle::templates/base.html.twig" %}
+
+{% block mainContent %}
+   {{  dump(posts) }}
+    <table>
+        <thead>
+            <tr>
+                <td>titre de l'article</td>
+                <td>extrait</td>
+                <td>créé le</td>
+                <td>status</td>
+                <td>edition</td>
+                <td>suppression</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts  %}
+            <tr>
+                <td><a href="{{ url('public.news.article', {'id': post.id}) }}" target="_blank">{{ post.title }}</a></td>
+                <td>{{ post.extract }}</td>
+                <td>{{ post.createAt | date('d M Y')  }}</td>
+                <td><a href="#">{{ post.label }}</a></td>
+                <td><a href="#">edit</a></td>
+                <td><a href="#">delete</a></td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

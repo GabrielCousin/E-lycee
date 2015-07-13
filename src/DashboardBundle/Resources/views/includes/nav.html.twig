@@ -1,3 +1,6 @@
+{% set articles = 'teacher.article.view' %}
+
+
 <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
   <header class="demo-drawer-header">
     <div class="demo-avatar-dropdown">
@@ -15,8 +18,10 @@
   <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
     <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">dashboard</i>Dashboard</a>
     <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">folder_open</i>Fiches</a>
-    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">format_align_left</i>Articles</a>
-    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Élèves</a>
+    {% if is_granted('ROLE_TEACHER') %}
+      <a class="mdl-navigation__link" href="{{ url(articles, {'id': app.user.id })  }}"><i class="mdl-color-text--blue-grey-400 material-icons">format_align_left</i>Articles</a>
+    {% endif %}
+      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Élèves</a>
     <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">sms</i>Commentaires</a>
     <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">label_outline</i>Pages</a>
     <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">check</i>QCM</a>

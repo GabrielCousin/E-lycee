@@ -37,6 +37,20 @@ class PostRepository extends EntityRepository
         return $results;
     }
 
+    public function getPostByAuteur($id){
+        $results = $this
+            ->createQueryBuilder('p')
+            ->select('p.title, p.id, p.extract, p.createAt','s.label,s.name','a.username')
+            ->join('p.auteur','a')
+            ->join('p.status','s')
+            ->where('a.id = :id')
+            ->setParameter(':id',$id)
+            ->getQuery()
+            ->getResult();
+        return $results ;
+    }
+
+
     public function getPostTitle($max){
         $results = $this
             ->createQueryBuilder('p')
