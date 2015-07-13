@@ -55,10 +55,6 @@ class Fiche
      */
     protected $choices;
 
-    /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="fiche")
-     */
-    private $students;
 
     public function __construct()
     {
@@ -120,4 +116,84 @@ class Fiche
     {
         return $this->content;
     }
+
+    /**
+     * Set teacher
+     *
+     * @param \UserBundle\Entity\User $teacher
+     * @return Fiche
+     */
+    public function setTeacher(\UserBundle\Entity\User $teacher = null)
+    {
+        $this->teacher = $teacher;
+
+        return $this;
+    }
+
+    /**
+     * Get teacher
+     *
+     * @return \UserBundle\Entity\User 
+     */
+    public function getTeacher()
+    {
+        return $this->teacher;
+    }
+
+    /**
+     * Set niveau
+     *
+     * @param \DashboardBundle\Entity\Niveau $niveau
+     * @return Fiche
+     */
+    public function setNiveau(\DashboardBundle\Entity\Niveau $niveau = null)
+    {
+        $this->niveau = $niveau;
+
+        return $this;
+    }
+
+    /**
+     * Get niveau
+     *
+     * @return \DashboardBundle\Entity\Niveau 
+     */
+    public function getNiveau()
+    {
+        return $this->niveau;
+    }
+
+    /**
+     * Add choices
+     *
+     * @param \DashboardBundle\Entity\Choix $choices
+     * @return Fiche
+     */
+    public function addChoice(\DashboardBundle\Entity\Choix $choices)
+    {
+        $this->choices[] = $choices;
+
+        return $this;
+    }
+
+    /**
+     * Remove choices
+     *
+     * @param \DashboardBundle\Entity\Choix $choices
+     */
+    public function removeChoice(\DashboardBundle\Entity\Choix $choices)
+    {
+        $this->choices->removeElement($choices);
+    }
+
+    /**
+     * Get choices
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getChoices()
+    {
+        return $this->choices;
+    }
+
 }

@@ -22,6 +22,13 @@ class Choix
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="note", type="integer")
+     */
+
+    private $note;
+    /**
      * @var string
      *
      * @ORM\Column(name="content", type="string", length=255)
@@ -90,5 +97,28 @@ class Choix
     public function getFiche()
     {
         return $this->fiche;
+    }
+
+    /**
+     * Set note
+     *
+     * @param integer $note
+     * @return Choix
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get note
+     *
+     * @return integer 
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 }

@@ -86,4 +86,70 @@ class User extends BaseUser
         return $this->post;
     }
 
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * Add fiches
+     *
+     * @param \DashboardBundle\Entity\Fiche $fiches
+     * @return User
+     */
+    public function addFich(\DashboardBundle\Entity\Fiche $fiches)
+    {
+        $this->fiches[] = $fiches;
+
+        return $this;
+    }
+
+    /**
+     * Remove fiches
+     *
+     * @param \DashboardBundle\Entity\Fiche $fiches
+     */
+    public function removeFich(\DashboardBundle\Entity\Fiche $fiches)
+    {
+        $this->fiches->removeElement($fiches);
+    }
+
+    /**
+     * Get fiches
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFiches()
+    {
+        return $this->fiches;
+    }
+
+    /**
+     * Set niveau
+     *
+     * @param \DashboardBundle\Entity\Niveau $niveau
+     * @return User
+     */
+    public function setNiveau(\DashboardBundle\Entity\Niveau $niveau = null)
+    {
+        $this->niveau = $niveau;
+
+        return $this;
+    }
+
+    /**
+     * Get niveau
+     *
+     * @return \DashboardBundle\Entity\Niveau 
+     */
+    public function getNiveau()
+    {
+        return $this->niveau;
+    }
 }

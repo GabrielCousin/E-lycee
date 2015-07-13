@@ -28,8 +28,6 @@ class Score
      */
     private $note;
 
-
-
     /**
      * Get id
      *

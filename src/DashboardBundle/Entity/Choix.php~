@@ -22,6 +22,13 @@ class Choix
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="note", type="integer")
+     */
+
+    private $note;
+    /**
      * @var string
      *
      * @ORM\Column(name="content", type="string", length=255)
@@ -67,5 +74,28 @@ class Choix
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Set fiche
+     *
+     * @param \DashboardBundle\Entity\Fiche $fiche
+     * @return Choix
+     */
+    public function setFiche(\DashboardBundle\Entity\Fiche $fiche = null)
+    {
+        $this->fiche = $fiche;
+
+        return $this;
+    }
+
+    /**
+     * Get fiche
+     *
+     * @return \DashboardBundle\Entity\Fiche 
+     */
+    public function getFiche()
+    {
+        return $this->fiche;
     }
 }

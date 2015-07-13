@@ -38,7 +38,7 @@ class Fiche
 
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="fiches")
-     * @ORM\JoinColumn(name="teacher_if", referencedColumnName="id")
+     * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id")
      *
      */
     private $teacher;
@@ -51,14 +51,10 @@ class Fiche
     private $niveau;
 
     /**
-     * @ORM\OneToMany(targetEntity="DashboardBundle\Entity\Choix", mappedBy="fiche")
+     * @ORM\OneToMany(targetEntity="DashboardBundle\Entity\Choix", mappedBy="fiche", cascade={"persist"})
      */
     protected $choices;
 
-    /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="fiche")
-     */
-    private $students;
 
     public function __construct()
     {
@@ -200,36 +196,13 @@ class Fiche
         return $this->choices;
     }
 
-    /**
-     * Add students
-     *
-     * @param \UserBundle\Entity\User $students
-     * @return Fiche
-     */
-    public function addStudent(\UserBundle\Entity\User $students)
+    public function setChoices(ArrayCollection $choices)
     {
-        $this->students[] = $students;
+        foreach ($choices as $choice) {
+            $choice->setFiche($this);
+        }
 
-        return $this;
+        $this->choices = $choices;
     }
 
-    /**
-     * Remove students
-     *
-     * @param \UserBundle\Entity\User $students
-     */
-    public function removeStudent(\UserBundle\Entity\User $students)
-    {
-        $this->students->removeElement($students);
-    }
-
-    /**
-     * Get students
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getStudents()
-    {
-        return $this->students;
-    }
 }
