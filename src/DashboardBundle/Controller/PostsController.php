@@ -45,7 +45,7 @@ class PostsController extends Controller
     {
         $token = $this->get('security.context')->getToken();
         $doctrine   = $this->getDoctrine();
-
+        $user = $token->getUser();
         $em = $doctrine->getManager();
 
         if (!$id){ //route de création d'article
@@ -56,8 +56,8 @@ class PostsController extends Controller
             $repository = $doctrine->getRepository('PublicBundle:Post');
             $post    = $repository->find($id);
             $message   = "L'article a été mis à jour";
-
-            if ($post->getAuteur()->getId() != $token->getUser()->getId()) {
+            $auteurId = $post->getAuteur()->getId();
+            if ($auteurId != $user->getId() ) {
                 // MESSAGE D'ERREUR
                 $message = "Vous n'êtes pas autorisé à modifier cet article";
                 $request->getSession()->getFlashBag()->set('notice', $message);
@@ -71,6 +71,7 @@ class PostsController extends Controller
 
         if ($form->isValid() && $form->isSubmitted()){
             $data = $form->getData();
+            $data->setAuteur($user);
             $em->persist($data);
             $em->flush();
             $request->getSession()->getFlashBag()->set('notice',$message);
@@ -105,5 +106,21 @@ class PostsController extends Controller
         $response = array('status'=>'OK','message'=>$message);
         return new JsonResponse($response);
     }
+    /**
+     * @Route("/professeur/article/delete/{id}", name="teacher.article.delete", options={"expose"=true})
+     */
+    public function deleteAction($id){
+        $doctrine   = $this->getDoctrine();
+        $em         = $doctrine->getManager();
+        $repository = $doctrine->getRepository('PublicBundle:Post');
+        $post       = $repository->find($id);
+//                echo '<pre>';Debug::dump($post->getStatus()->getId());echo '</pre>';exit();
+//        $status = $repository->find($id);
 
+        $em->remove($post);
+        $em->flush();
+        $message = "L'article a bien été supprimé";
+        $urlRedirect = $this->generateUrl('teacher.articles.view');
+        return $this->redirect($urlRedirect);
+    }
 }

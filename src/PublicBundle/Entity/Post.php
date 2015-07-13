@@ -5,6 +5,7 @@ namespace PublicBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert ;
 use UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection ;
 
 
 /**
@@ -246,10 +247,10 @@ class Post
     /**
      * Set auteur
      *
-     * @param \PublicBundle\Entity\User $auteur
+     * @param \UserBundle\Entity\User $auteur
      * @return Post
      */
-    public function setAuteur(\PublicBundle\Entity\User $auteur = null)
+    public function setAuteur(\UserBundle\Entity\User $auteur = null)
     {
         $this->auteur = $auteur;
 
@@ -259,7 +260,7 @@ class Post
     /**
      * Get auteur
      *
-     * @return \PublicBundle\Entity\User 
+     * @return \UserBundle\Entity\User
      */
     public function getAuteur()
     {

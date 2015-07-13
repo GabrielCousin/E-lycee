@@ -214,6 +214,15 @@ limitations under the License
                // Message d'erreur à afficher
            })
        });
+        $('a.deletePost').on('click',function(e){
+            e.preventDefault();
+            var idPost = $(this).data('id');
+            var valid = confirm('êtes vous sur de vouloir supprimer cet article ? ');
+            if (valid) {
+                // redirection et non appel ajax comme précédemment
+                document.location.href = Routing.generate('teacher.article.delete',{'id':idPost});
+            }
+        });
     </script>
   </body>
 </html>

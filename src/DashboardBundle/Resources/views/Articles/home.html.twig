@@ -1,9 +1,11 @@
 {% set title = "Dashboard | Prof" %}
-{% set editArticle = "teacher.article.edit" %}
+{% set editArticle  = "teacher.article.edit" %}
+{% set newArticle   = "teacher.article.new" %}
 
 {% extends "DashboardBundle::templates/base.html.twig" %}
 
 {% block mainContent %}
+    <a href="{{  url(newArticle) }}">Créer un nouvel article</a>
    {{  dump(posts) }}
     <table>
         <thead>
@@ -24,7 +26,7 @@
                 <td>{{ post.createAt | date('d M Y')  }}</td>
                 <td><a href="#" class="editPublish" data-id="{{ post.id }}">{{ post.label }}</a></td>
                 <td><a href="{{ url(editArticle, {'id':post.id}) }}">edit</a></td>
-                <td><a href="#">delete</a></td>
+                <td><a href="#" class="deletePost" data-id="{{ post.id }}">delete</a></td>
             </tr>
             {% endfor %}
 
