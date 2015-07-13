@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new DashboardBundle\DashboardBundle(),
             new UserBundle\UserBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Endroid\Bundle\TwitterBundle\EndroidTwitterBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
