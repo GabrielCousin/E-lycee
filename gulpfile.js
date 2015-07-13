@@ -21,7 +21,7 @@ gulp.task('bs', ['css:dev'], function() {
 
 // Build
 gulp.task('css:build', function(){
-  return gulp.src('web/dev/scss/app.scss')
+  return gulp.src('web/dev/scss/*.scss')
     .pipe(plumber())
     .pipe(sass({
       errLogToConsole: true
@@ -33,7 +33,6 @@ gulp.task('css:build', function(){
         aggressiveMerging: false,
         keepSpecialComments: 0
     }))
-    .pipe(rename('style.css'))
     .pipe(gulp.dest('web/css'));
 });
 
@@ -45,8 +44,8 @@ gulp.task('js', function() {
 
 
 // Dev
-gulp.task('css:dev', function() {
-  return gulp.src('web/dev/scss/app.scss')
+gulp.task('css:home', function() {
+  return gulp.src('web/dev/scss/app-home.scss')
 		.pipe(plumber(function(error) {
 				gutil.log(gutil.colors.red(error.message));
 				this.emit('end');
@@ -55,13 +54,30 @@ gulp.task('css:dev', function() {
     .pipe(autoprefixer({
       browsers: ['last 2 versions']
     }))
-    .pipe(rename('style.css'))
     .pipe(gulp.dest('web/css'))
     .pipe(browserSync.stream());
 });
 
-gulp.task('css:watch', function() {
-	return gulp.watch(['web/dev/scss2/**/*.scss'], ['css:dev', 'bs:reload']);
+gulp.task('css:watch_home', function() {
+	return gulp.watch(['web/dev/scss/**/*.scss'], ['css:home', 'bs:reload']);
+});
+
+gulp.task('css:dashboard', function() {
+  return gulp.src('web/dev/scss/app-dashboard.scss')
+		.pipe(plumber(function(error) {
+				gutil.log(gutil.colors.red(error.message));
+				this.emit('end');
+		}))
+		.pipe(sass())
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions']
+    }))
+    .pipe(gulp.dest('web/css'))
+    .pipe(browserSync.stream());
+});
+
+gulp.task('css:watch_dashboard', function() {
+	return gulp.watch(['web/dev/scss/**/*.scss'], ['css:dashboard', 'bs:reload']);
 });
 
 gulp.task('bs:serve', function () {
@@ -78,7 +94,7 @@ gulp.task('bs:reload', function () {
 	});
 });
 
-
 // Tasks
 gulp.task('default', ['css:build', 'js']);
-gulp.task('dev', ['css:dev', 'css:watch', 'bs:serve']);
+gulp.task('home', ['css:home', 'css:watch_home', 'bs:serve']);
+gulp.task('dashboard', ['css:dashboard', 'css:watch_dashboard', 'bs:serve']);
