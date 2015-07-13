@@ -1,3 +1,56 @@
 .demo-drawer-header {
   height: auto;
 }
+
+.article-list {
+  display: table;
+  white-space: normal;
+
+  th, td {
+    padding-bottom: 12px;
+  }
+
+  .cell--xs {
+    min-width: 80px;
+    padding-left: 0;
+  }
+
+  .cell--s {
+    min-width: 150px;
+  }
+
+  a.material-icons {
+    text-decoration: none;
+  }
+}
+
+.article-adder {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 10;
+}
+
+.dashboard-section {
+  padding: 20px;
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
+  background-color: #00BCD4;
+  color: #37474F;
+}
+
+select {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 5px;
+  margin: 0 5px 10px 0;
+  border: 1px solid #f2f2f2;
+  border-radius: 2px;
+  height: 3rem;
+  width: auto;
+}
+
+.select-label {
+  display: block;
+  padding-bottom: 15px;
+}

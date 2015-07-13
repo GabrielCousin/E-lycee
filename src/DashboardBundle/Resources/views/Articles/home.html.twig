@@ -5,32 +5,33 @@
 {% extends "DashboardBundle::templates/base.html.twig" %}
 
 {% block mainContent %}
-    <a href="{{  url(newArticle) }}">Créer un nouvel article</a>
-   {{  dump(posts) }}
-    <table>
-        <thead>
-            <tr>
-                <td>titre de l'article</td>
-                <td>extrait</td>
-                <td>créé le</td>
-                <td>status</td>
-                <td>edition</td>
-                <td>suppression</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for post in posts  %}
-            <tr>
-                <td><a href="{{ url('public.news.article', {'id': post.id}) }}" target="_blank">{{ post.title }}</a></td>
-                <td>{{ post.extract }}</td>
-                <td>{{ post.createAt | date('d M Y')  }}</td>
-                <td><a href="#" class="editPublish" data-type="post" data-id="{{ post.id }}">{{ post.label }}</a></td>
-                <td><a href="{{ url(editArticle, {'id':post.id}) }}">edit</a></td>
-                <td><a href="#" class="deleteItem"  data-type="post"  data-id="{{ post.id }}">delete</a></td>
-            </tr>
-            {% endfor %}
 
-        </tbody>
-    </table>
+  <a id="add-article" class="article-adder mdl-button mdl-js-button mdl-button--fab mdl-button--colored" href="{{ url(newArticle) }}"><i class="material-icons">add</i></a>
+  <div class="mdl-tooltip" for="add-article">Ajouter un article</div>
 
+  <table class="article-list mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+    <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
+        <th class="mdl-data-table__cell--non-numeric">Extrait</th>
+        <th class="mdl-data-table__cell--non-numeric cell--s">Créé le</th>
+        <th class="mdl-data-table__cell--non-numeric cell--xs">Status</th>
+        <th class="cell--xs">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+        <tr>
+          <td class="mdl-data-table__cell--non-numeric  cell--s"><a href="{{ url('public.news.article', {'id': post.id}) }}" target="_blank">{{ post.title }}</a></td>
+          <td class="mdl-data-table__cell--non-numeric">{{ post.extract }}</td>
+          <td class="mdl-data-table__cell--non-numeric cell--s">{{ post.createAt | date('d M Y')  }}</td>
+          <td class="mdl-data-table__cell--non-numeric cell--xs"><a href="#" class="editPublish" data-type="post" data-id="{{ post.id }}">{{ post.label }}</a></td>
+          <td class="cell--xs">
+            <a class="material-icons" href="{{ url(editArticle, {'id':post.id}) }}">mode_edit</a>
+            <a class="material-icons" href="#" class="deleteItem" data-type="post" data-id="{{ post.id }}">delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
