@@ -29,13 +29,20 @@
       </div>
 
       <section class="comment-section clearfix">
-        {% if comment == false %}
-          <p><a href="{{ url('fos_user_security_login')}}">Connectez-vous pour commenter</a></p>
-        {% else %}
-          <p><small>Vous êtes connecté(e) en tant que : <strong>{{ app.user.username | title }}</strong> | <a href="{{ url('fos_user_security_logout')}}">Se déconnecter</a></small></p>
 
           {{ form_start(form, {'method': 'POST', 'attr': {'class': ''}}) }}
-            {{ form_widget(form.username, {'type': 'hidden', 'value': app.user.username} ) }}
+            {% if userConnect == true %}
+                <p><small>Vous êtes connecté(e) en tant que : <strong>{{ app.user.username | title }}</strong> | <a href="{{ url('fos_user_security_logout')}}">Se déconnecter</a></small></p>
+                {{ form_widget(form.username, {'type': 'hidden', 'value': app.user.username} ) }}
+            {% else %}
+            <div class="mdl-grid mdl-grid--no-spacing">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                {{ form_errors(form.username) }}
+                {{ form_widget(form.username, { 'attr': {'class': 'mdl-textfield__input', 'rows': '3'} }) }}
+                {{ form_label(form.username, 'Votre nom', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+              </div>
+            </div>
+            {% endif %}
             <div class="mdl-grid mdl-grid--no-spacing">
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
                 {{ form_errors(form.contenu) }}
@@ -45,8 +52,6 @@
             </div>
             {{ form_widget(form.envoyer, {'label': 'Envoyer', 'attr': {'class': 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push'}}) }}
           {{ form_end(form) }}
-
-        {% endif %}
     </div>
   </div>
 
