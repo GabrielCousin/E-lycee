@@ -88,7 +88,7 @@ class PublicController extends Controller
         $rc         = $doctrine->getRepository('PublicBundle:Post') ;
         $results    = $rc->getPostByPage(1);
 
-        return array('results' => $results );
+        return array('results' => $results);
     }
 
     /**
@@ -100,6 +100,15 @@ class PublicController extends Controller
         $doctrine   = $this->getDoctrine();
         $rc         = $doctrine->getRepository('PublicBundle:Post') ;
         $article    = $rc->findOneById($id);
+
+        $user       = $this->getUser();
+        $comment    = false;
+
+        if (true === $this->get('security.context')->isGranted(
+            'IS_AUTHENTICATED_FULLY'
+        )) {
+            $comment = true;
+        }
 
         $commentaire = new Commentaire() ;
         $commentairetype = new CommentaireType();
@@ -116,7 +125,7 @@ class PublicController extends Controller
             return $this->redirect($this->generateUrl('public.news.article', array('id' => $id)));
         }
 
-        return array('form' => $formCommentaire->createView(),'article' => $article );
+        return array('form' => $formCommentaire->createView(), 'article' => $article, 'comment' => $comment, 'user' => $user);
     }
 
     /**

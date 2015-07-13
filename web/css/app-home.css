@@ -9662,9 +9662,10 @@ html, body {
 .news-content-wrapper {
   padding: 80px 56px; }
 
-.comment-form {
+.comment-section {
   padding: 40px 56px;
-  background: #EEE; }
+  background: #EEE;
+  margin-bottom: 0; }
 
 .section__text:not(:last-child) {
   border-bottom: 1px solid rgba(0, 0, 0, 0.13); }
