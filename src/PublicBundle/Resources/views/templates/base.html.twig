@@ -26,8 +26,24 @@
     {% include "PublicBundle::includes/footer.html.twig" %}
   </main>
 
+  <div class="modal" id="modal">
+    <button class="modal-closeBtn js-modalSwitch mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="material-icons">close</i></button>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
   {% block javascripts %}{% endblock %}
     <script type='text/javascript' src="{{ asset('dev/js/material.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+    <script src="{{ asset('dev/js/signin.js') }}"></script>
+    <script>
+      var signin = SignIn;
+      signin.init();
+    </script>
+
   {% if browser_sync == true %}
     <script type='text/javascript' id="__bs_script__">//<![CDATA[
       document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.7.13.js'><\/script>".replace("HOST", location.hostname));

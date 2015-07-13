@@ -37,6 +37,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         browser_sync:     "%browser_sync%"
+        fos_csrf_provider: "@form.csrf_provider"
 
 # Assetic Configuration
 assetic:

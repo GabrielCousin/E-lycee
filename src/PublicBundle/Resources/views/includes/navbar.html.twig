@@ -46,6 +46,7 @@
         <a class="mdl-navigation__link" href="#!">Articles</a>
         <a class="mdl-navigation__link" href="{{ url(logout) }}">Déconnexion</a>
       {% else %}
+        <a class="mdl-navigation__link js-modalSwitch" href="#">Connexion</a>
         <a class="mdl-navigation__link" href="{{ url(login) }}">Connexion</a>
       {% endif %}
     </nav>
@@ -64,6 +65,7 @@
     <li><a class="mdl-menu__item" href="#!">Articles</a></li>
     <li><a class="mdl-menu__item" href="{{ url(logout) }}">Déconnexion</a></li>
   {% else %}
+    <li><a class="mdl-menu__item js-modalSwitch" href="#">Connexion</a></li>
     <li><a class="mdl-menu__item" href="{{ url(login) }}">Connexion</a></li>
   {% endif %}
 </ul>
