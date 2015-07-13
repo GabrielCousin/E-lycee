@@ -8,9 +8,24 @@
   background-size: cover;
 }
 
+.demo-content--no-spacing {
+  padding: 0;
+}
+
+.news-content-wrapper {
+  padding: 80px 56px;
+}
+
+.comment-form {
+  padding: 40px 56px;
+  background: #EEE;
+}
+
 // Used in comments
-.section__text:not(:last-child) {
-  border-bottom: 1px solid rgba(0,0,0,.13);
+.section__text {
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(0,0,0,.13);
+  }
 
   p, h5 {
     font-size: 13px;
