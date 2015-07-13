@@ -203,7 +203,7 @@ limitations under the License
            e.preventDefault();
            var idPost = $(this).data('id');
            $.ajax({
-               url: Routing.generate('teacher.article.editStatus',{'id':idPost}),
+               url: Routing.generate('teacher.article.editStatus',{'id':idPost})
            }).done(function(response,status){
                console.log("OK - status : "+status);
                console.log(response);

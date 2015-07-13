@@ -70,7 +70,7 @@ class Post
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="post")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="posts")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *
      */

@@ -1,0 +1,123 @@
+<?php
+
+namespace DashboardBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * Fiche
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="DashboardBundle\Entity\FicheRepository")
+ */
+class Fiche
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=100)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="string", length=255)
+     */
+    private $content;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="fiches")
+     * @ORM\JoinColumn(name="teacher_if", referencedColumnName="id")
+     *
+     */
+    private $teacher;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="DashboardBundle\Entity\Niveau", inversedBy="fiches")
+     * @ORM\JoinColumn(name="lvl_id", referencedColumnName="id")
+     *
+     */
+    private $niveau;
+
+    /**
+     * @ORM\OneToMany(targetEntity="DashboardBundle\Entity\Choix", mappedBy="fiche")
+     */
+    protected $choices;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="fiche")
+     */
+    private $students;
+
+    public function __construct()
+    {
+        $this->choices = new ArrayCollection();
+        $this->students = new ArrayCollection();
+    }
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Fiche
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     * @return Fiche
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string 
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+}
