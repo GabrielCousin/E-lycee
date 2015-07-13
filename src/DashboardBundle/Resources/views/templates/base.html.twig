@@ -201,9 +201,14 @@ limitations under the License
     <script>
        $('a.editPublish').on('click',function(e){
            e.preventDefault();
-           var idPost = $(this).data('id');
+           var id = $(this).data('id');
+           if ($(this).data('type')=== 'post')
+                var urlAjax = ( Routing.generate('teacher.article.editStatus',{'id':id}) );
+           else if($(this).data('type')=== 'fiche')
+                var urlAjax = ( Routing.generate('teacher.fiche.editStatus',{'id':id}) );
+
            $.ajax({
-               url: Routing.generate('teacher.article.editStatus',{'id':idPost})
+               url: urlAjax
            }).done(function(response,status){
                console.log("OK - status : "+status);
                console.log(response);
@@ -214,13 +219,18 @@ limitations under the License
                // Message d'erreur à afficher
            })
        });
-        $('a.deletePost').on('click',function(e){
+        $('a.deleteItem').on('click',function(e){
             e.preventDefault();
-            var idPost = $(this).data('id');
+            var id = $(this).data('id');
+            var type = $(this).data('type');
             var valid = confirm('êtes vous sur de vouloir supprimer cet article ? ');
             if (valid) {
                 // redirection et non appel ajax comme précédemment
-                document.location.href = Routing.generate('teacher.article.delete',{'id':idPost});
+                if (type=="post")
+                    document.location.href = Routing.generate('teacher.article.delete',{'id':id});
+                else if (type==="fiche")
+                    document.location.href = Routing.generate('teacher.fiche.delete',{'id':id});
+
             }
         });
     </script>

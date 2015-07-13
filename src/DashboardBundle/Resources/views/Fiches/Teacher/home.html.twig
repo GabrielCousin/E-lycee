@@ -1,1 +1,40 @@
-<a href="{{ url('teacher.fiches.new') }}">Créer une fiche</a>
+{% set title = "Dashboard | Prof" %}
+{% extends "DashboardBundle::templates/base.html.twig" %}
+
+{% block mainContent %}
+    <a href="{{ url('teacher.fiches.new') }}">Créer une fiche</a>
+
+    {#{{ dump(fiches) }}#}
+    <table>
+        <thead>
+            <tr>
+                <td>titre</td>
+                <td>question</td>
+                <td>nombre de choix</td>
+                <td>niveau</td>
+                <td>répondus/total</td>
+                <td>status</td>
+                <td>editer</td>
+                <td>supprimer</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fiche in fiches %}
+            <tr>
+                <td><a href="#">{{ fiche.title }}</a></td>
+                <td>{{ fiche.content }}</td>
+                <td>
+                    {{ fiche.choices | length }}
+                </td>
+                <td>{{ fiche.niveau.name }}</td>
+                <td>répondus/total</td>
+                <td><a href="#" class="editPublish" data-type="fiche" data-id="{{ fiche.id }}">{{ fiche.status.label }}</a></td>
+                <td><a href="{{ url('teacher.fiches.update',{'id':fiche.id}) }}">editer</a></td>
+                <td><a href="#" class="deleteItem" data-type="fiche" data-id="{{ fiche.id }}">supprimer</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+{% endblock %}

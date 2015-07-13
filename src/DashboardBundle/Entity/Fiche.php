@@ -51,6 +51,12 @@ class Fiche
     private $niveau;
 
     /**
+     * @ORM\ManyToOne(targetEntity="PublicBundle\Entity\Status", inversedBy="fiches")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     *
+     */
+    private $status;
+    /**
      * @ORM\OneToMany(targetEntity="DashboardBundle\Entity\Choix", mappedBy="fiche", cascade={"persist"})
      */
     protected $choices;
@@ -205,4 +211,27 @@ class Fiche
         $this->choices = $choices;
     }
 
+
+    /**
+     * Set status
+     *
+     * @param \PublicBundle\Entity\Status $status
+     * @return Fiche
+     */
+    public function setStatus(\PublicBundle\Entity\Status $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \PublicBundle\Entity\Status 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
 }

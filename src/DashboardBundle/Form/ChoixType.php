@@ -16,6 +16,10 @@ class ChoixType extends AbstractType
     {
         $builder
             ->add('content')
+            ->add('reponse','choice',array(
+                'choices' => array('1' => 'oui', '0' => 'non'),
+                'required' => true
+            ))
             ->add('note')
         ;
     }

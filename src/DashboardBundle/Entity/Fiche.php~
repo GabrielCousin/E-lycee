@@ -38,7 +38,7 @@ class Fiche
 
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="fiches")
-     * @ORM\JoinColumn(name="teacher_if", referencedColumnName="id")
+     * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id")
      *
      */
     private $teacher;
@@ -51,7 +51,13 @@ class Fiche
     private $niveau;
 
     /**
-     * @ORM\OneToMany(targetEntity="DashboardBundle\Entity\Choix", mappedBy="fiche")
+     * @ORM\ManyToOne(targetEntity="PublicBundle\Entity\Status", inversedBy="fiches")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     *
+     */
+    private $status;
+    /**
+     * @ORM\OneToMany(targetEntity="DashboardBundle\Entity\Choix", mappedBy="fiche", cascade={"persist"})
      */
     protected $choices;
 
@@ -194,6 +200,15 @@ class Fiche
     public function getChoices()
     {
         return $this->choices;
+    }
+
+    public function setChoices(ArrayCollection $choices)
+    {
+        foreach ($choices as $choice) {
+            $choice->setFiche($this);
+        }
+
+        $this->choices = $choices;
     }
 
 }

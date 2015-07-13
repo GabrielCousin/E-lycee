@@ -24,9 +24,9 @@
                 <td><a href="{{ url('public.news.article', {'id': post.id}) }}" target="_blank">{{ post.title }}</a></td>
                 <td>{{ post.extract }}</td>
                 <td>{{ post.createAt | date('d M Y')  }}</td>
-                <td><a href="#" class="editPublish" data-id="{{ post.id }}">{{ post.label }}</a></td>
+                <td><a href="#" class="editPublish" data-type="post" data-id="{{ post.id }}">{{ post.label }}</a></td>
                 <td><a href="{{ url(editArticle, {'id':post.id}) }}">edit</a></td>
-                <td><a href="#" class="deletePost" data-id="{{ post.id }}">delete</a></td>
+                <td><a href="#" class="deleteItem"  data-type="post"  data-id="{{ post.id }}">delete</a></td>
             </tr>
             {% endfor %}
 

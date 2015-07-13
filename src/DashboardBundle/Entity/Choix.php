@@ -28,6 +28,16 @@ class Choix
      */
 
     private $note;
+
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="reponse", type="boolean")
+     */
+
+    private $reponse;
+    
     /**
      * @var string
      *
@@ -120,5 +130,28 @@ class Choix
     public function getNote()
     {
         return $this->note;
+    }
+
+    /**
+     * Set reponse
+     *
+     * @param boolean $reponse
+     * @return Choix
+     */
+    public function setReponse($reponse)
+    {
+        $this->reponse = $reponse;
+
+        return $this;
+    }
+
+    /**
+     * Get reponse
+     *
+     * @return boolean 
+     */
+    public function getReponse()
+    {
+        return $this->reponse;
     }
 }

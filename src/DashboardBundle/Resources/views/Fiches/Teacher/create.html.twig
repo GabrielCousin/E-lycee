@@ -1,7 +1,8 @@
-</form>
+<form method="post">
 {{ form_widget(form.title) }}
 {{ form_widget(form.niveau) }}
 {{ form_widget(form.content) }}
+    {{ form_errors(form) }}
 <ul class="choices" data-prototype="{{ form_widget(form.choices.vars.prototype)|e }}">
 </ul>
 

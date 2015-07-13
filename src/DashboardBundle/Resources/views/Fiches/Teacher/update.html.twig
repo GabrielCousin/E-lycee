@@ -1,0 +1,24 @@
+{% set title = "Dashboard | Prof" %}
+
+{% extends "DashboardBundle::templates/base.html.twig" %}
+
+{% block mainContent %}
+    <form method="post">
+        {{ form_widget(form.title) }}
+        {{ form_widget(form.niveau) }}
+        {{ form_widget(form.content) }}
+        {{ form_widget(form.status) }}
+        <ul>
+            {% for choice in form.choices %}
+                <li>
+                    {{ form_errors(choice) }}
+                    {{ form_widget(choice) }}
+                </li>
+            {% endfor %}
+        </ul>
+        {{ form_errors(form) }}
+
+        <input type="submit" value="modifier"/>
+        {{  form_widget(form._token) }}
+    </form>
+{% endblock %}

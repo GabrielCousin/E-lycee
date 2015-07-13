@@ -89,7 +89,6 @@ class PostsController extends Controller
         $repository = $doctrine->getRepository('PublicBundle:Post');
         $repositoryStatus = $doctrine->getRepository('PublicBundle:Status');
         $post    = $repository->find($id);
-//                echo '<pre>';Debug::dump($post->getStatus()->getId());echo '</pre>';exit();
 //        $status = $repository->find($id);
         if ($post->getStatus()->getId() == 1 ){
             $status = $repositoryStatus->find(2);
@@ -109,7 +108,7 @@ class PostsController extends Controller
     /**
      * @Route("/professeur/article/delete/{id}", name="teacher.article.delete", options={"expose"=true})
      */
-    public function deleteAction($id){
+    public function deleteAction($id,Request $request){
         $doctrine   = $this->getDoctrine();
         $em         = $doctrine->getManager();
         $repository = $doctrine->getRepository('PublicBundle:Post');
@@ -120,6 +119,7 @@ class PostsController extends Controller
         $em->remove($post);
         $em->flush();
         $message = "L'article a bien été supprimé";
+        $request->getSession()->getFlashBag()->set('notice', $message);
         $urlRedirect = $this->generateUrl('teacher.articles.view');
         return $this->redirect($urlRedirect);
     }
