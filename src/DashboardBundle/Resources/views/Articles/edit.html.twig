@@ -1,0 +1,38 @@
+
+<form method="POST" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+    <p class="form-group">
+        {{ form_label(form.title, 'Titre : ') }}
+        {{ form_widget(form.title,{'attr' : {'class':'form-control'}}) }}
+        {{ form_errors(form.title) }}
+    </p>
+    <p class="form-group">
+        {{ form_label(form.extract, 'Extrait : ') }}
+        {{ form_widget(form.extract,{'attr' : {'class':'form-control'}}) }}
+        {{ form_errors(form.extract) }}
+    </p>
+    <p class="form-group">
+        {{ form_label(form.content, 'Contenu : ') }}
+        {{ form_widget(form.content,{'attr' : {'class':'form-control'}}) }}
+        {{ form_errors(form.content) }}
+    </p>
+    <p class="form-group">
+        {{ form_label(form.urlThumbnail, 'image : ') }}
+        {{ form_widget(form.urlThumbnail,{'attr' : {'class':'form-control'}}) }}
+        {{ form_errors(form.urlThumbnail) }}
+    </p>
+    <p class="form-group">
+        {{ form_label(form.createAt, 'créé le  : ') }}
+        {{ form_widget(form.createAt,{'attr' : {'class':'form-control'}}) }}
+        {{ form_errors(form.createAt) }}
+    </p>
+    <p class="form-group">
+        {{ form_label(form.status, 'status  : ') }}
+        {{ form_widget(form.status,{'attr' : {'class':'form-control'}}) }}
+        {{ form_errors(form.status) }}
+    </p>
+    {{ form_widget(form._token) }}
+    <p>
+        <input type="submit" value="Modifier" class="btn"/>
+    </p>
+</form>
+{#{{  dump(form) }}#}

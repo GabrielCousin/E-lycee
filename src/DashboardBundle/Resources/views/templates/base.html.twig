@@ -33,6 +33,7 @@ limitations under the License
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">{% if title is not null %}{{ title }}{% else %}Dashboard{% endif %}</span>
           <div class="mdl-layout-spacer"></div>
+
           <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
             <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
               <i class="material-icons">search</i>
@@ -53,6 +54,9 @@ limitations under the License
         </div>
       </header>
       {% include "DashboardBundle::includes/nav.html.twig" %}
+      {% include "PublicBundle::includes/messages.html.twig" %}
+
+
       <main class="mdl-layout__content mdl-color--grey-100">
         {% block mainContent %}{% endblock %}
         <div class="mdl-grid demo-content">
@@ -190,5 +194,26 @@ limitations under the License
       //]]>
       </script>
     {% endif %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+       $('a.editPublish').on('click',function(e){
+           e.preventDefault();
+           var idPost = $(this).data('id');
+           $.ajax({
+               url: Routing.generate('teacher.article.editStatus',{'id':idPost}),
+           }).done(function(response,status){
+               console.log("OK - status : "+status);
+               console.log(response);
+               //TODO: MODIFIER publié en non publié et réciproquement de la ligne concernée.
+
+           }).fail(function(error,status){
+               console.alert("erreur : "+error,status);
+               // Message d'erreur à afficher
+           })
+       });
+    </script>
   </body>
 </html>

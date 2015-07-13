@@ -46,4 +46,10 @@ class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface
             $redirection = new RedirectResponse($this->router->generate('public.home.index'));
         return $redirection;
     }
+
+///*    public function getUserData(TokenInterface $token)
+//    {
+//        $user = $token->getUser();
+//        return $user;
+//    }*/
 }

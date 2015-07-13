@@ -9,19 +9,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
-     * @Route("professeur/{id}", name="teacher.home")
+     * @Route("professeur", name="teacher.home")
      * @Template("DashboardBundle:Default:teacher.html.twig")
      */
-    public function teacherAction($id)
+    public function teacherAction()
     {
         return array();
     }
 
     /**
-     * @Route("eleve/{id}", name="student.home")
+     * @Route("eleve", name="student.home")
      * @Template("DashboardBundle:Default:student.html.twig")
      */
-    public function studentAction($id)
+    public function studentAction()
     {
         return array();
     }

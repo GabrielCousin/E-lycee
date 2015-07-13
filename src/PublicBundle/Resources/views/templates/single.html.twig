@@ -11,7 +11,10 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+
+
   {% include "PublicBundle::includes/navbar.html.twig" %}
+  {% include "PublicBundle::includes/messages.html.twig" %}
 
   <main class="mdl-layout__content mdl-color--grey-100">
     {% block mainContent %}{% endblock %}
@@ -26,7 +29,8 @@
       //]]>
     </script>
   {% endif %}
-
+  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+  <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 </body>
 
 </html>

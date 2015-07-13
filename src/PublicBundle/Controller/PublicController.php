@@ -140,6 +140,8 @@ class PublicController extends Controller
         Debug::dump($results);
         echo '</pre>';*/
 
+
+
         return array('results' => $results);
     }
 
@@ -149,7 +151,6 @@ class PublicController extends Controller
      */
     public function latestTweetsAction(){
         $twitter = $this->get('endroid.twitter');
-
         $response = $twitter->query('search/tweets', 'GET', 'json', array('q' => 'LLG75005', 'count' => '3'));
         $tweets = json_decode($response->getContent());
 
