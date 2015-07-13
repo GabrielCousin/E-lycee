@@ -1,21 +1,22 @@
-{% extends "PublicBundle::base.html.twig" %}
-
+{% extends "PublicBundle::templates/base.html.twig" %}
 {% block mainContent %}
 
+  {% for post in results %}
 
-  <div class="news-wrapper">
-
-    {% for post in results %}
-      <div class="news-item">
-        <a href="{{ url('public.news.article', {'id': post.id}) }}" class="news-itemThumb" style="background-image: url('{{ post.urlThumbnail }}');"></a>
-        <div class="news-itemDetails">
-          <h3 class="news-itemTitle">{{ post.title }}</h3>
-          <p class="news-itemInfo">Posté le <strong>{{ post.createAt.date | date('d M Y')}}</strong> par <strong>{{ post.auteur }}</strong>
-          <p>{{ post.extract }} | <a href="{{ url('public.news.article', {'id': post.id}) }}">Lire la suite</a></p>
-        </div>
+    <section class="mdl-card mdl-shadow--2dp demo-card-wide">
+      <div class="mdl-card__title" style="background: url('{{ post.urlThumbnail }}');">
+        <h2 class="mdl-card__title-text">{{ post.title}}</h2>
       </div>
-    {% endfor %}
+      <div class="mdl-card__supporting-text">
+        <p>Posté le <strong>{{ post.createAt.date | date('d.m.Y') }}</strong> par <strong>{{ post.auteur }}</strong></p>
+        <p>{{ post.extract }}</p>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ url('public.news.article', {'id': post.id}) }}">Lire la suite</a>
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect u-push" href="{{ url('public.news.article', {'id': post.id}) }}"><i class=" material-icons prelabel__icon">chat_bubble</i>{{ post.commentaires | length }} commentaires. Réagissez !</a>
+      </div>
+    </section>
 
-  </div>
+  {% endfor %}
 
 {% endblock %}

@@ -1,40 +1,22 @@
-{% extends "PublicBundle::base.html.twig" %}
+{% extends "PublicBundle::templates/base.html.twig" %}
 {% block mainContent %}
 
-  <div class="news--primary">
-    <div class="card">
-      <div class="card-image">
-        <img src="{{ results[0].urlThumbnail }}">
-        <span class="card-title">{{ results[0].title }}</span>
-      </div>
-      <div class="card-content">
-        <p class="card-info">Posté le <strong>{{ results[0].createAt.date | date('d.m.Y') }}</strong> par <strong>Alain</strong></p>
-        <p>{{ results[0].extract }} <a href="{{ url('public.news.article', {'id': results[0].id}) }}">Lire la suite</a></p>
-        <div class="card-comments">
-          <p><i class="small material-icons">chat_bubble</i>{{ results[0].commentaires | length }} commentaires. <a href="{{ url('public.news.article', {'id': results[0].id}) }}">Réagissez !</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
+  {% for post in results %}
 
-  <div class="news--secondary">
-    {% for post in results[1:] %}
-      <div class="card small">
-        <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src="{{ post.urlThumbnail }}">
-        </div>
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">{{ post.title }}</span>
-        </div>
-        <div class="card-action">
-          <a href="{{ url('public.news.article', {'id': post.id}) }}">Lire la suite</a>
-        </div>
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
-          <p>{{ post.extract }} <a href="{{ url('public.news.article', {'id': post.id}) }}">Lire la suite</a></p>
-        </div>
+    <section class="mdl-card mdl-shadow--2dp demo-card-wide">
+      <div class="mdl-card__title" style="background: url('{{ post.urlThumbnail }}');">
+        <h2 class="mdl-card__title-text">{{ post.title}}</h2>
       </div>
-    {% endfor %}
-  </div>
+      <div class="mdl-card__supporting-text">
+        <p>Posté le <strong>{{ post.createAt.date | date('d.m.Y') }}</strong> par <strong>{{ post.auteur }}</strong></p>
+        <p>{{ post.extract }}</p>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ url('public.news.article', {'id': post.id}) }}">Lire la suite</a>
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect u-push" href="{{ url('public.news.article', {'id': post.id}) }}"><i class=" material-icons prelabel__icon">chat_bubble</i>{{ post.commentaires | length }} commentaires. Réagissez !</a>
+      </div>
+    </section>
+
+  {% endfor %}
 
 {% endblock %}

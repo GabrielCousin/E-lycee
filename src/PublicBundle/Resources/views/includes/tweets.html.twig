@@ -1,6 +1,6 @@
 {% for tweet in tweets.statuses %}
 
-<a href="http://twitter.com/{{ tweet.user.screen_name}}/status/{{ tweet.id }}" class="collection-item">
+<a href="http://twitter.com/{{ tweet.user.screen_name}}/status/{{ tweet.id }}" class="sidebar__tweet">
   <small>Tweeté le {{ tweet.created_at | date('d/m/Y') }}</small>
   <p>{{ tweet.text }}</p>
 </a>

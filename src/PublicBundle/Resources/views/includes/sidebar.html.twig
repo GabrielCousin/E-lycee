@@ -1,11 +1,7 @@
-<aside class="sidebar">
-  <h3 class="sidebar-title">A lire aussi</h3>
-  <div class="collection">
-    {{ render(controller('PublicBundle:Public:recentArticles', { 'max': 5 })) }}
-  </div>
+<h3 class="mdl-typography--headline">A lire aussi</h3>
+<ul class="sidebar__list">
+  {{ render(controller('PublicBundle:Public:recentArticles', { 'max': 5 })) }}
+</ul>
 
-  <h3 class="sidebar-title">Derniers tweets</h3>
-  <div class="collection">
-    {{ render(controller('PublicBundle:Public:latestTweets')) }}
-  </div>
-</aside>
+<h3 class="mdl-typography--headline">Derniers tweets</h3>
+{{ render(controller('PublicBundle:Public:latestTweets')) }}

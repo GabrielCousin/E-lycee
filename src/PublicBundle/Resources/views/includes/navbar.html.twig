@@ -6,45 +6,71 @@
 {% set logout = 'fos_user_security_logout' %}
 {% set teacher = 'teacher.home' %}
 
-<ul id="dropdown1" class="dropdown-content">
-  <li><a href="{{ url(teacher) }}">Dashboard</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">Articles</a></li>
-  <li class="divider"></li>
-  <li><a href="{{ url(logout) }}">Déconnexion</a></li>
-</ul>
 
-<ul id="dropdown2" class="dropdown-content">
-    <li><a href="#!">Fiches</a></li>
-    <li class="divider"></li>
-    <li><a href="#!">Articles</a></li>
-    <li class="divider"></li>
-    <li><a href="{{ url(logout) }}">Déconnexion</a></li>
-</ul>
 
-<nav class="main-nav">
-  <div class="nav-wrapper">
-    <ul class="hide-on-med-and-down">
-      <li {% if route == home %}class="active"{% endif %}><a class="nav-homeLink" href="{{ url(home)}}">E-lycée</a></li>
-      <li {% if route == news %}class="active"{% endif %}><a href="{{ url(news)}}">Actus</a></li>
-      <li {% if route == lycee %}class="active"{% endif %}><a href="{{ url(lycee)}}">Le lycee</a></li>
-    </ul>
-    <form class="search-form">
-      <div class="input-field">
-        <input id="search" type="search" required>
-        <label for="search"><i class="material-icons">search</i></label>
-      </div>
-    </form>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">E-lycée</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav class="mdl-navigation mdl-layout--large-screen-only main-navbar">
+        <a class="mdl-navigation__link {% if route == home %}is-active{% endif %}" href="{{ url(home)}}">Accueil</a>
+        <a class="mdl-navigation__link {% if route == news %}is-active{% endif %}" href="{{ url(news)}}">Actus</a>
+        <a class="mdl-navigation__link {% if route == lycee %}is-active{% endif %}" href="{{ url(lycee)}}">Le lycée</a>
+      </nav>
+      <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">more_vert</i>
+      </button>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">E-lycée</span>
+    {% if app.user is not null %}
+      <h3 class="mdl-layout__drawerSubtitle">Bonjour {{ app.user | title }}</h3>
+    {% endif %}
 
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-          {% if is_granted('ROLE_STUDENT') %}
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Bonjour {{ app.user }}<i class="material-icons right">arrow_drop_down</i></a></li>
-          {% elseif is_granted('ROLE_TEACHER') %}
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Bonjour {{ app.user }}<i class="material-icons right">arrow_drop_down</i></a></li>
-          {% else %}
-          <li><a href="{{ url(login) }}">Connexion</a></li>
-          {% endif %}
-      </ul>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="{{ url(home)}}">Accueil</a>
+      <a class="mdl-navigation__link" href="{{ url(news)}}">Actus</a>
+      <a class="mdl-navigation__link" href="{{ url(lycee)}}">Le lycée</a>
+      {% if is_granted('ROLE_STUDENT') %}
+        <a class="mdl-navigation__link" href="#!">Fiches</a>
+        <a class="mdl-navigation__link" href="#!">Articles</a>
+        <a class="mdl-navigation__link" href="{{ url(logout) }}">Déconnexion</a>
+      {% elseif is_granted('ROLE_TEACHER') %}
+        <a class="mdl-navigation__link" href="{{ url(teacher) }}">Dashboard</a>
+        <a class="mdl-navigation__link" href="#!">Articles</a>
+        <a class="mdl-navigation__link" href="{{ url(logout) }}">Déconnexion</a>
+      {% else %}
+        <a class="mdl-navigation__link" href="{{ url(login) }}">Connexion</a>
+      {% endif %}
+    </nav
 
   </div>
-</nav>
+  <main class="mdl-layout__content">
+    <div class="page-content"><!-- Your content goes here --></div>
+  </main>
+</div>
+
+
+
+
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+  {% if app.user is not null %}
+    <li disabled class="mdl-menu__item">Bonjour {{ app.user | title }}</li>
+  {% endif %}
+  {% if is_granted('ROLE_STUDENT') %}
+    <li><a class="mdl-menu__item" href="#!">Fiches</a></li>
+    <li><a class="mdl-menu__item" href="#!">Articles</a></li>
+    <li><a class="mdl-menu__item" href="{{ url(logout) }}">Déconnexion</a></li>
+  {% elseif is_granted('ROLE_TEACHER') %}
+    <li><a class="mdl-menu__item" href="{{ url(teacher) }}">Dashboard</a></li>
+    <li><a class="mdl-menu__item" href="#!">Articles</a></li>
+    <li><a class="mdl-menu__item" href="{{ url(logout) }}">Déconnexion</a></li>
+  {% else %}
+    <li><a class="mdl-menu__item" href="{{ url(login) }}">Connexion</a></li>
+  {% endif %}
+</ul>

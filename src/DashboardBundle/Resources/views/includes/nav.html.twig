@@ -1,0 +1,24 @@
+<div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+  <header class="demo-drawer-header">
+    <div class="demo-avatar-dropdown">
+      <span>{{ app.user | title }}</span>
+      <div class="mdl-layout-spacer"></div>
+      <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons">arrow_drop_down</i>
+      </button>
+      <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+        <li><a href="{{ url('public.home.index') }}" class="mdl-menu__item">Retour au site</a></li>
+        <li><a href="{{ url('fos_user_security_logout') }}" class="mdl-menu__item">Déconnexion</a></li>
+      </ul>
+    </div>
+  </header>
+  <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">dashboard</i>Dashboard</a>
+    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">folder_open</i>Fiches</a>
+    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">format_align_left</i>Articles</a>
+    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Élèves</a>
+    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">sms</i>Commentaires</a>
+    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">label_outline</i>Pages</a>
+    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">check</i>QCM</a>
+  </nav>
+</div>

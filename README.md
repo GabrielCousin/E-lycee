@@ -7,13 +7,11 @@
 - Node.js
 - MySQL
 - Gulp installé globalement `npm install -g gulp`
-- Bower `npm install-g bower`
 
 ### Installation des Vendors
 ```
 composer install
 npm install
-bower install
 ```
 
 

@@ -1,51 +1,49 @@
-{% extends "PublicBundle::base.html.twig" %}
+{% extends "PublicBundle::templates/single.html.twig" %}
 
 {% block mainContent %}
 
-  <div class="singleNews-wrapper">
-    <div class="singleNews-thumb" style="background-image: url('{{ article.urlThumbnail }}');"></div>
-    <div class="singleNews-content">
-      <h3 class="singleNews-title">{{ article.title }}</h3>
-      <p class="singleNews-info">Posté le <strong>{{ article.createAt.date | date('d M Y')}}</strong> par <strong>{{ article.auteur }}</strong>
-      <p>{{ article.content }}</p>
-    </div>
 
-    <div class="comments">
+<div class="demo-ribbon" style="background-image: url('{{ article.urlThumbnail }}');"></div>
+<main class="demo-main mdl-layout__content">
+  <div class="demo-container mdl-grid">
+    <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+    <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+      <!-- <div class="demo-crumbs mdl-color-text--grey-500"></div> -->
+      <h3>{{ article.title }}</h3>
+      <p>Posté le <strong>{{ article.createAt.date | date('d M Y')}}</strong> par <strong>{{ article.auteur }}</strong>
+      <p>{{ article.content }}</p>
+
       <h4>Commentaires</h4>
       {% if article.commentaires is empty %}
         <p>Pas de commentaires pour le moment.</p>
       {% endif %}
 
       {% for commentaire in article.commentaires %}
-        <div class="comment">
-          <h6 class="comment-author">{{ commentaire.username }} <span class="comment-info">- Envoyé le {{ commentaire.createAt.date | date('d M Y') }}</span> </h6>
-          <blockquote>{{ commentaire.contenu }}</blockquote>
+        <div class="section__text">
+          <h5>{{ commentaire.username }} <span class="comment-info">- Envoyé le {{ commentaire.createAt.date | date('d M Y') }}</span></h5>
+          <p>{{ commentaire.contenu }}</p>
         </div>
       {% endfor %}
 
       {#<p><a href="#">Connectez-vous pour commenter</a></p>#}
-      <div class="row">
 
-        {{ form_start(form, {'method': 'POST', 'attr': {'class': 'col s12 message-form'}}) }}
-          <div class="row">
-            <div class="input-field col s12">
-              {{ form_errors(form.username) }}
-              {{ form_widget(form.username, { 'attr': {'class': 'validate'} }) }}
-              {{ form_label(form.username, 'Utilisateur') }}
-            </div>
+      {{ form_start(form, {'method': 'POST', 'attr': {'class': ''}}) }}
+        <div class="mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+            {{ form_errors(form.username) }}
+            {{ form_widget(form.username, { 'attr': {'class': 'mdl-textfield__input'} }) }}
+            {{ form_label(form.username, 'Utilisateur', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              {{ form_errors(form.contenu) }}
-              {{ form_widget(form.contenu, { 'attr': {'class': 'materialize-textarea', 'length' : '550'} }) }}
-              {{ form_label(form.contenu, 'Votre message') }}
-            </div>
+        </div>
+        <div class="mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+            {{ form_errors(form.contenu) }}
+            {{ form_widget(form.contenu, { 'attr': {'class': 'mdl-textfield__input', 'rows': '3'} }) }}
+            {{ form_label(form.contenu, 'Votre commentaire', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
           </div>
-          {{ form_widget(form.envoyer, {'label': 'Envoyer', 'attr': {'class': 'waves-effect waves-light btn-large comment-submit right'}}) }}
-        {{ form_end(form) }}
-
-      </div>
-
+        </div>
+        {{ form_widget(form.envoyer, {'label': 'Envoyer', 'attr': {'class': 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push'}}) }}
+      {{ form_end(form) }}
 
     </div>
   </div>
