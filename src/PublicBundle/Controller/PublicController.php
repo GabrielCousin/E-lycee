@@ -29,7 +29,7 @@ class PublicController extends Controller
         $rc         = $doctrine->getRepository('PublicBundle:Post') ;
         $results    = $rc->getThreeLastPost();
 
-        return array('results' => $results );
+        return array('results' => $results);
     }
 
     /**
@@ -140,12 +140,7 @@ class PublicController extends Controller
         Debug::dump($results);
         echo '</pre>';*/
 
-        $twitter = $this->get('endroid.twitter');
-
-        $response = $twitter->query('search/tweets', 'GET', 'json', array('q' => 'LLG75005', 'count' => '3'));
-        $tweets = json_decode($response->getContent());
-
-        return array('results' => $results, 'tweets' => $tweets);
+        return array('results' => $results);
     }
 
     /**
@@ -158,7 +153,7 @@ class PublicController extends Controller
         $response = $twitter->query('search/tweets', 'GET', 'json', array('q' => 'LLG75005', 'count' => '3'));
         $tweets = json_decode($response->getContent());
 
-        return array('tweets' => $tweets );
+        return array('tweets' => $tweets);
     }
 
 }
