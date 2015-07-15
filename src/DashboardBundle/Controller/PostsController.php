@@ -93,12 +93,12 @@ class PostsController extends Controller
         if ($post->getStatus()->getId() == 1 ){
             $status = $repositoryStatus->find(2);
             $post->setStatus($status);
-            $message = "Votre Article n'est plus publié";
+            $message = "non publié";
         }
-        else{
+        else {
             $status = $repositoryStatus->find(1);
             $post->setStatus($status);
-            $message = "Votre Article est désormais publié";
+            $message = "publié";
         }
         $em->persist($post);
         $em->flush();

@@ -190,12 +190,12 @@ class FichesController extends Controller
         if ($fiche->getStatus()->getId() == 1 ){
             $status = $repositoryStatus->find(2);
             $fiche->setStatus($status);
-            $message = "Votre Fiche n'est plus publiée";
+            $message = "non publié";
         }
         else{
             $status = $repositoryStatus->find(1);
             $fiche->setStatus($status);
-            $message = "Votre Fiche est désormais publiée";
+            $message = "publié";
         }
         $em->persist($fiche);
         $em->flush();
