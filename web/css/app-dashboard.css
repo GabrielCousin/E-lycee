@@ -9513,6 +9513,10 @@ _:-ms-input-placeholder, :root .demo-graph {
   vertical-align: middle;
   padding-right: 15px; }
 
+a[disabled] {
+  color: rgba(0, 0, 0, 0.26);
+  pointer-events: none; }
+
 .form-choices {
   padding: 0; }
   .form-choices li {
@@ -9598,6 +9602,9 @@ select {
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link.is-active {
   background-color: #00BCD4;
   color: #37474F; }
+
+.mdl-data-table__select {
+  width: 100%; }
 
 .u-push {
   float: right; }
