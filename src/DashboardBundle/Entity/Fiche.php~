@@ -51,7 +51,7 @@ class Fiche
     private $niveau;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PublicBundle\Entity\Status", inversedBy="fiches")
+     * @ORM\ManyToOne(targetEntity="PublicBundle\Entity\Status")
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
      *
      */
@@ -61,11 +61,17 @@ class Fiche
      */
     protected $choices;
 
+    /**
+     * @ORM\OneToMany(targetEntity="DashboardBundle\Entity\Score", mappedBy="fiche")
+     */
+    protected $scores;
+
 
     public function __construct()
     {
         $this->choices = new ArrayCollection();
         $this->students = new ArrayCollection();
+        $this->scores = new ArrayCollection();
     }
     /**
      * Get id
@@ -211,4 +217,27 @@ class Fiche
         $this->choices = $choices;
     }
 
+
+    /**
+     * Set status
+     *
+     * @param \PublicBundle\Entity\Status $status
+     * @return Fiche
+     */
+    public function setStatus(\PublicBundle\Entity\Status $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \PublicBundle\Entity\Status 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
 }

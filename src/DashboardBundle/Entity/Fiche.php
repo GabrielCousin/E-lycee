@@ -51,21 +51,27 @@ class Fiche
     private $niveau;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PublicBundle\Entity\Status", inversedBy="fiches")
+     * @ORM\ManyToOne(targetEntity="PublicBundle\Entity\Status")
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
      *
      */
     private $status;
     /**
-     * @ORM\OneToMany(targetEntity="DashboardBundle\Entity\Choix", mappedBy="fiche", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="DashboardBundle\Entity\Choix", mappedBy="fiche", cascade={"persist","remove"})
      */
     protected $choices;
+
+    /**
+     * @ORM\OneToMany(targetEntity="DashboardBundle\Entity\Score", mappedBy="fiche", cascade={"persist","remove"})
+     */
+    protected $scores;
 
 
     public function __construct()
     {
         $this->choices = new ArrayCollection();
         $this->students = new ArrayCollection();
+        $this->scores = new ArrayCollection();
     }
     /**
      * Get id
@@ -233,5 +239,46 @@ class Fiche
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Add scores
+     *
+     * @param \DashboardBundle\Entity\Score $scores
+     * @return Fiche
+     */
+    public function addScore(\DashboardBundle\Entity\Score $scores)
+    {
+        $this->scores[] = $scores;
+        return $this;
+    }
+
+    /**
+     * Remove scores
+     *
+     * @param \DashboardBundle\Entity\Score $scores
+     */
+    public function removeScore(\DashboardBundle\Entity\Score $scores)
+    {
+        $this->scores->removeElement($scores);
+    }
+
+    /**
+     * Get scores
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getScores()
+    {
+        return $this->scores;
+    }
+
+    public function setScores(ArrayCollection $scores)
+    {
+        foreach ($scores as $score) {
+            $scores->setFiche($this);
+        }
+
+        $this->choices = $choices;
     }
 }

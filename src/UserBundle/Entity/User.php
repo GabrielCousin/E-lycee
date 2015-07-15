@@ -29,6 +29,11 @@ class User extends BaseUser
     protected $fiches; // correspond a la liaison teacher_id de celui qui a créé la fiche
 
     /**
+     * @ORM\OneToMany(targetEntity="\DashboardBundle\Entity\Score", mappedBy="student")
+     */
+    protected $scores; // correspond a la liason avec les scores d'un utilisateur étudiant
+
+    /**
      * @ORM\ManyToOne(targetEntity="DashboardBundle\Entity\Niveau", inversedBy="students")
      * @ORM\JoinColumn(name="lvl_id", referencedColumnName="id")
      *
@@ -41,6 +46,7 @@ class User extends BaseUser
         $this->commentaires = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->fiches = new ArrayCollection();
+        $this->scores = new ArrayCollection();
     }
 
     /**
@@ -151,5 +157,38 @@ class User extends BaseUser
     public function getNiveau()
     {
         return $this->niveau;
+    }
+
+    /**
+     * Add scores
+     *
+     * @param \DashboardBundle\Entity\Score $scores
+     * @return User
+     */
+    public function addScore(\DashboardBundle\Entity\Score $scores)
+    {
+        $this->scores[] = $scores;
+
+        return $this;
+    }
+
+    /**
+     * Remove scores
+     *
+     * @param \DashboardBundle\Entity\Score $scores
+     */
+    public function removeScore(\DashboardBundle\Entity\Score $scores)
+    {
+        $this->scores->removeElement($scores);
+    }
+
+    /**
+     * Get scores
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getScores()
+    {
+        return $this->scores;
     }
 }
