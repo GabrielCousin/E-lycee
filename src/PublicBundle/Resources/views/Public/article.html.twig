@@ -12,8 +12,16 @@
       <div class="news-content-wrapper">
         <!-- <div class="demo-crumbs mdl-color-text--grey-500"></div> -->
         <h3>{{ article.title }}</h3>
-        <p>Posté le <strong>{{ article.createAt.date | date('d M Y')}}</strong> par <strong>{{ article.auteur }}</strong>
+
+        {% if is_granted('ROLE_TEACHER') %}
+          {% if app.user.id == article.auteur.id %}
+            <small><a href="{{ url('teacher.article.edit', {id: article.id})}}">Editer l'article</a></small>
+          {% endif %}
+        {% endif %}
+
+        <p>Posté le <strong>{{ article.createAt.date | date('d M Y')}}</strong> par <strong>{{ article.auteur }}</strong></p>
         <p>{{ article.content }}</p>
+
 
         <h4>Commentaires</h4>
         {% if article.commentaires is empty %}
