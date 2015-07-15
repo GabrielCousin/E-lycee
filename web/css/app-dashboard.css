@@ -9594,7 +9594,8 @@ select {
 .dashboard-section {
   padding: 20px; }
 
-.mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover,
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link.is-active {
   background-color: #00BCD4;
   color: #37474F; }
 

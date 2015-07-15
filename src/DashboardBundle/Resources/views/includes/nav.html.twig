@@ -1,5 +1,13 @@
+{% set route = app.request.attributes.get('_route') %}
+
 {% set articles = 'teacher.articles.view' %}
+{% set homeT = 'teacher.home' %}
 {% set fichesT = 'teacher.fiches.home' %}
+
+{% set homeS = 'student.home' %}
+{% set fichesS = 'student.fiches.home' %}
+
+
 
 {% if is_granted('ROLE_STUDENT') %}
   {% set role = 'student' %}
@@ -25,11 +33,11 @@
   </header>
   <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
     {% if is_granted('ROLE_TEACHER') or is_granted('ROLE_STUDENT') %}
-      <a class="mdl-navigation__link" href="{{ url(role ~ '.home')}}"><i class="mdl-color-text--blue-grey-400 material-icons">dashboard</i>Dashboard</a>
-      <a class="mdl-navigation__link" href="{{ url(role ~ '.fiches.home') }}"><i class="mdl-color-text--blue-grey-400 material-icons">folder_open</i>Fiches</a>
+      <a class="mdl-navigation__link {% if route == homeT or route == homeS %}is-active{% endif %}" href="{{ url(role ~ '.home')}}"><i class="mdl-color-text--blue-grey-400 material-icons">dashboard</i>Dashboard</a>
+      <a class="mdl-navigation__link  {% if route == fichesT or route == fichesS %}is-active{% endif %}" href="{{ url(role ~ '.fiches.home') }}"><i class="mdl-color-text--blue-grey-400 material-icons">folder_open</i>Fiches</a>
     {% endif %}
     {% if is_granted('ROLE_TEACHER') %}
-      <a class="mdl-navigation__link" href="{{ url(articles, {'id': app.user.id }) }}"><i class="mdl-color-text--blue-grey-400 material-icons">format_align_left</i>Articles</a>
+      <a class="mdl-navigation__link {% if route == articles %}is-active{% endif %}" href="{{ url(articles, {'id': app.user.id }) }}"><i class="mdl-color-text--blue-grey-400 material-icons">format_align_left</i>Articles</a>
     {% endif %}
     <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">check</i>QCM</a>
   </nav>
