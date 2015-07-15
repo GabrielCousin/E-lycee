@@ -39,6 +39,5 @@
     {% if is_granted('ROLE_TEACHER') %}
       <a class="mdl-navigation__link {% if route == articles %}is-active{% endif %}" href="{{ url(articles, {'id': app.user.id }) }}"><i class="mdl-color-text--blue-grey-400 material-icons">format_align_left</i>Articles</a>
     {% endif %}
-    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">check</i>QCM</a>
   </nav>
 </div>
