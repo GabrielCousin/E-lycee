@@ -18,7 +18,7 @@ use PublicBundle\Entity\Status;
 
 class FichesController extends Controller
 {
-    /**
+ /**
  * @Route("professeur/fiches/list", name="teacher.fiches.home")
  * @Template("DashboardBundle:Fiches:Teacher/home.html.twig")
  */

@@ -1,0 +1,39 @@
+{% set title = "Dashboard | Prof" %}
+{% extends "DashboardBundle::templates/base.html.twig" %}
+
+{% block mainContent %}
+    <pre>
+    pour conditions sur les liens à activer ou non pour pouvoir répondre :
+    - Fiche A faire / ou faite : QCM.status.name = "DONE" ou "UNDONE"
+    </pre>
+    <a id="add-article" class="article-adder mdl-button mdl-js-button mdl-button--fab mdl-button--colored" href="{{ url('teacher.fiches.new') }}"><i class="material-icons">add</i></a>
+    <div class="mdl-tooltip" for="add-article">Ajouter une fiche</div>
+
+    <table class="article-list mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+      <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
+          <th class="mdl-data-table__cell--non-numeric">Question</th>
+          <th class="cell--xs">Note</th>
+          <th class="cell--s">Fait/pas Fait</th>
+          <th class="cell--xs">Répondre (disabled si fermé ou déjàfait)</th>
+        </tr>
+      </thead>
+      <tbody>
+{#{{ dump(scores) }}#}
+        {% for QCM in scores %}
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric cell--s">{{ QCM.fiche.title }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{  QCM.fiche.content }}</td>
+                <td class="cell--xs">{% if (QCM.status.name == "UNDONE") %}-{% else %}{{  QCM.note  }}{% endif %}</td>
+                <td class="cell--s">{{ QCM.status.label }}</td>
+                <td class="mdl-data-table__cell--non-numeric cell--xs">
+                  <a href="#" data-id="{{ QCM.id }}">Répondre</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+{% endblock %}

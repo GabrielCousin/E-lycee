@@ -14,9 +14,21 @@ use DashboardBundle\Form\FicheType;
 use DashboardBundle\Form\ChoixType;
 use DashboardBundle\Form\Choix;
 use DashboardBundle\Entity\Score;
+use DashboardBundle\Entity\ScoreRepository;
 use PublicBundle\Entity\Status;
 
 class  ScoresController extends Controller
 {
-
+    /**
+     * @Route("etudiant/fiches/list", name="student.fiches.home")
+     * @Template("DashboardBundle:Fiches:Student/home.html.twig")
+     */
+    public function homeAction()
+    {
+        $token = $this->get('security.context')->getToken();
+        $doctrine   = $this->getDoctrine();
+        $scoreRp = $doctrine->getRepository('DashboardBundle:Score');
+        $scores = $scoreRp->getScoreSeenStudent($token->getUser()->getId());
+        return array('scores' => $scores);
+    }
 }
