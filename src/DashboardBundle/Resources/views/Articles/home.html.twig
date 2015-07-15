@@ -22,7 +22,7 @@
     <tbody>
       {% for post in posts %}
         <tr>
-          <td class="mdl-data-table__cell--non-numeric  cell--s"><a href="{{ url('public.news.article', {'id': post.id}) }}" target="_blank">{{ post.title }}</a></td>
+          <td class="mdl-data-table__cell--non-numeric cell--s"><a href="{{ url('public.news.article', {'id': post.id}) }}" target="_blank">{{ post.title }}</a></td>
           <td class="mdl-data-table__cell--non-numeric">{{ post.extract }}</td>
           <td class="mdl-data-table__cell--non-numeric cell--s">{{ post.createAt | date('d M Y')  }}</td>
           <td class="mdl-data-table__cell--non-numeric cell--xs"><a href="#" class="editPublish" data-type="post" data-id="{{ post.id }}">{{ post.label }}</a></td>

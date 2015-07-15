@@ -1,0 +1,16 @@
+.form-choices {
+
+  padding: 0;
+
+  li {
+    list-style: none;
+    border-top: 3px double #CCC;
+    display: block;
+    margin-top: 10px;
+    padding-top: 10px;
+
+    &:first-child {
+      border-top: 0;
+    }
+  }
+}

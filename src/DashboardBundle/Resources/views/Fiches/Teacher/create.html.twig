@@ -1,22 +1,49 @@
-<form method="post">
-{{ form_widget(form.title) }}
-{{ form_widget(form.niveau) }}
-{{ form_widget(form.content) }}
-    {{ form_errors(form) }}
-<ul class="choices" data-prototype="{{ form_widget(form.choices.vars.prototype)|e }}">
-</ul>
+{% set title = "Nouvelle fiche" %}
+{% extends "DashboardBundle::templates/base.html.twig" %}
 
-<input type="submit" value="créer"/>
-{{  form_widget(form._token) }}
-</form>
+{% block mainContent %}
 
+  {{ form_start(form, {'method': 'POST', 'attr': {'class': 'mdl-grid u-fgrow'}}) }}
 
+    <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col dashboard-section clearfix">
+      <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+          {{ form_errors(form.title) }}
+          {{ form_widget(form.title,{'attr' : {'class':'mdl-textfield__input'}}) }}
+          {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+        </div>
+        <div class="mdl-cell mdl-cell--12-col">
+          {{ form_errors(form.niveau) }}
+          {{ form_widget(form.niveau,{'attr' : {'class':'u-push'}}) }}
+          {{ form_label(form.niveau, 'Niveau', {'label_attr': {'class': 'select-label select-label--inline'} }) }}
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+          {{ form_errors(form.content) }}
+          {{ form_widget(form.content, {'attr' : {'class':'mdl-textfield__input'}}) }}
+          {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+        </div>
+
+        {{ form_errors(form) }}
+
+        <ul class="mdl-cell mdl-cell--12-col form-choices" data-prototype="
+          {% filter escape %}
+            {{ include('DashboardBundle:includes:choices-prototype.html.twig', { 'form': form.choices.vars.prototype }) }}
+          {% endfilter %}
+        "></ul>
+
+      </div>
+      <input type="submit" value="Créer la fiche" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push"/>
+      {{ form_widget(form._token) }}
+      {{ form_widget(form.choices) }}
+    </section>
+
+  {{ form_end(form) }}
 
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script>
     // Récupère le div qui contient la collection de tags
-    var collectionHolder = $('ul.choices');
-    var $addTagLink = $('<a href="#" class="add_tag_link">Ajouter un choix</a>');
+    var collectionHolder = $('.form-choices');
+    var $addTagLink = $('<button class="add_tag_link mdl-button mdl-js-button mdl-js-ripple-effect">Ajouter une question</button>');
     var $newLinkLi = $('<li></li>').append($addTagLink);
     $(document).ready(function() {
         // ajoute l'ancre « ajouter un tag » et li à la balise ul
@@ -40,10 +67,11 @@
         $newLinkLi.before($newFormLi);
         // ajoute un lien de suppression au nouveau formulaire
         addTagFormDeleteLink($newFormLi);
+        componentHandler.upgradeDom();
     }
 
     function addTagFormDeleteLink($tagFormLi) {
-        var $removeFormA = $('<a href="#">Supprimer ce choix</a>');
+        var $removeFormA = $('<button class="add_tag_link mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">Supprimer</button>');
         $tagFormLi.append($removeFormA);
 
         $removeFormA.on('click', function(e) {
@@ -52,6 +80,8 @@
 
             // supprime l'élément li pour le formulaire de tag
             $tagFormLi.remove();
+            componentHandler.upgradeDom();
         });
     }
 </script>
+{% endblock %}

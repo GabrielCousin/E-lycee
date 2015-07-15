@@ -1,0 +1,21 @@
+<div class="mdl-grid mdl-grid--no-spacing">
+
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col is-upgraded">
+    {{ form_errors(form.content) }}
+    {{ form_widget(form.content,{'attr' : {'class':'mdl-textfield__input'}}) }}
+    {{ form_label(form.content, 'Content', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+  </div>
+
+  <div class="mdl-cell mdl-cell--12-col">
+    {{ form_errors(form.reponse) }}
+    {{ form_label(form.reponse, 'Réponse', {'label_attr': {'class': 'select-label--inline'} }) }}
+    {{ form_widget(form.reponse,{'attr' : {'class':'u-push'}}) }}
+  </div>
+
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col is-upgraded">
+    {{ form_errors(form.note) }}
+    {{ form_widget(form.note,{'attr' : {'class':'mdl-textfield__input'}}) }}
+    {{ form_label(form.note, 'Note', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+  </div>
+
+</div>

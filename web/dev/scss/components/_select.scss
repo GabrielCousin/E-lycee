@@ -1,0 +1,18 @@
+select {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 5px;
+  margin: 0 5px 10px 0;
+  border: 1px solid #f2f2f2;
+  border-radius: 2px;
+  height: 3rem;
+  width: auto;
+}
+
+.select-label {
+  display: block;
+  padding-bottom: 15px;
+}
+
+.select-label--inline {
+  line-height: 42px;
+}

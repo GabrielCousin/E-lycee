@@ -2,35 +2,38 @@
 {% extends "DashboardBundle::templates/base.html.twig" %}
 
 {% block mainContent %}
-    <a href="{{ url('teacher.fiches.new') }}">Créer une fiche</a>
+
+    <a id="add-article" class="article-adder mdl-button mdl-js-button mdl-button--fab mdl-button--colored" href="{{ url('teacher.fiches.new') }}"><i class="material-icons">add</i></a>
+    <div class="mdl-tooltip" for="add-article">Ajouter une fiche</div>
 
     {#{{ dump(fiches) }}#}
-    <table>
-        <thead>
-            <tr>
-                <td>titre</td>
-                <td>question</td>
-                <td>nombre de choix</td>
-                <td>niveau</td>
-                <td>répondus/total</td>
-                <td>status</td>
-                <td>editer</td>
-                <td>supprimer</td>
-            </tr>
-        </thead>
-        <tbody>
+    <table class="article-list mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+      <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
+          <th class="mdl-data-table__cell--non-numeric">Question</th>
+          <th class="cell--xs">Nb. de choix</th>
+          <th class="cell--xs">Niveau</th>
+          <th class="cell--s">Réponses</th>
+          <th class="mdl-data-table__cell--non-numeric cell--xs">Status</th>
+          <th class="cell--xs">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
         {% for fiche in fiches %}
             <tr>
-                <td><a href="#">{{ fiche.title }}</a></td>
-                <td>{{ fiche.content }}</td>
-                <td>
-                    {{ fiche.choices | length }}
+                <td class="mdl-data-table__cell--non-numeric cell--s"><a href="#">{{ fiche.title }}</a></td>
+                <td class="mdl-data-table__cell--non-numeric">{{ fiche.content }}</td>
+                <td class="cell--xs">{{ fiche.choices | length }}</td>
+                <td class="cell--xs">{{ fiche.niveau.name }}</td>
+                <td class="cell--s">répondus/total</td>
+                <td class="mdl-data-table__cell--non-numeric cell--xs">
+                  <a href="#" class="editPublish" data-type="fiche" data-id="{{ fiche.id }}">{{ fiche.status.label }}</a>
                 </td>
-                <td>{{ fiche.niveau.name }}</td>
-                <td>répondus/total</td>
-                <td><a href="#" class="editPublish" data-type="fiche" data-id="{{ fiche.id }}">{{ fiche.status.label }}</a></td>
-                <td><a href="{{ url('teacher.fiches.update',{'id':fiche.id}) }}">editer</a></td>
-                <td><a href="#" class="deleteItem" data-type="fiche" data-id="{{ fiche.id }}">supprimer</a></td>
+                <td class="cell--xs">
+                  <a class="material-icons" href="{{ url('teacher.fiches.update',{'id':fiche.id}) }}">mode_edit</a>
+                  <a class="material-icons" href="#" class="deleteItem" data-type="fiche" data-id="{{ fiche.id }}">delete</a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
