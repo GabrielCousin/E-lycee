@@ -1,6 +1,14 @@
 {% set articles = 'teacher.articles.view' %}
 {% set fichesT = 'teacher.fiches.home' %}
 
+{% if is_granted('ROLE_STUDENT') %}
+  {% set role = 'student' %}
+{% elseif is_granted('ROLE_TEACHER') %}
+  {% set role = 'teacher' %}
+{% else %}
+  {% set role = '' %}
+{% endif %}
+
 <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
   <header class="demo-drawer-header">
     <div class="demo-avatar-dropdown">
@@ -16,16 +24,13 @@
     </div>
   </header>
   <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">dashboard</i>Dashboard</a>
     {% if is_granted('ROLE_TEACHER') or is_granted('ROLE_STUDENT') %}
+      <a class="mdl-navigation__link" href="{{ url(role ~ '.home')}}"><i class="mdl-color-text--blue-grey-400 material-icons">dashboard</i>Dashboard</a>
       <a class="mdl-navigation__link" href="{{ url(fichesT) }}"><i class="mdl-color-text--blue-grey-400 material-icons">folder_open</i>Fiches</a>
     {% endif %}
     {% if is_granted('ROLE_TEACHER') %}
       <a class="mdl-navigation__link" href="{{ url(articles, {'id': app.user.id }) }}"><i class="mdl-color-text--blue-grey-400 material-icons">format_align_left</i>Articles</a>
     {% endif %}
-    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Élèves</a>
-    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">sms</i>Commentaires</a>
-    <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">label_outline</i>Pages</a>
     <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">check</i>QCM</a>
   </nav>
 </div>
