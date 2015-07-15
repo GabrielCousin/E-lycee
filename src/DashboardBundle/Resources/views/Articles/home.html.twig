@@ -1,4 +1,4 @@
-{% set title = "Dashboard | Prof" %}
+{% set title = "Liste des articles" %}
 {% set editArticle  = "teacher.article.edit" %}
 {% set newArticle   = "teacher.article.new" %}
 
@@ -9,7 +9,7 @@
   <a id="add-article" class="article-adder mdl-button mdl-js-button mdl-button--fab mdl-button--colored" href="{{ url(newArticle) }}"><i class="material-icons">add</i></a>
   <div class="mdl-tooltip" for="add-article">Ajouter un article</div>
 
-  <table class="article-list mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+  <table class="article-list mdl-data-table mdl-data-table--selectable mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
     <thead>
       <tr>
         <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>

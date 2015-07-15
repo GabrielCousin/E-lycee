@@ -1,4 +1,4 @@
-{% set title = "Dashboard | Prof" %}
+{% set title = "Liste des fiches" %}
 {% extends "DashboardBundle::templates/base.html.twig" %}
 
 {% block mainContent %}
@@ -7,7 +7,7 @@
     <div class="mdl-tooltip" for="add-article">Ajouter une fiche</div>
 
     {#{{ dump(fiches) }}#}
-    <table class="article-list mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+    <table class="article-list mdl-data-table mdl-data-table--selectable mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
       <thead>
         <tr>
           <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
