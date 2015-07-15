@@ -1,3 +1,19 @@
-{% for notice in app.session.flashBag.get('notice') %}
-    <div role="alert">{{ notice }}</div>
-{% endfor %}
+<div class="notification" id="notification">
+  <button class="notification-closeBtn js-notificationCloseBtn mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+    <i class="material-icons">close</i>
+  </button>
+
+{#{ dump(app.session.flashBag.get('notice'))}#}
+
+  <div id="notification-content">
+    {% for notice in app.session.flashBag.get('notice') %}
+      <p class="notification-text js-isNotice mdl-typography--title" role="alert">{{ notice }}</p>
+    {% endfor %}
+
+    {% if error is defined %}
+      {% if error is not empty %}
+        <p class="notification-text js-isNotice">{{ error }}</p>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>

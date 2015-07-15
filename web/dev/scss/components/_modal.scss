@@ -3,8 +3,9 @@
   @extend .mdl-shadow--2dp;
   z-index: 11;
   top: 50%;
-  left: -100%;
-  transform: translate(-50%, -50%);
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: 50% 50%;
   position: absolute;
   opacity: 0;
   visibility: hidden;
@@ -13,7 +14,7 @@
   &.js-isShown {
     opacity: 1;
     visibility: visible;
-    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
 
     + .overlay {
       opacity: 1;

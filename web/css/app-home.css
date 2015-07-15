@@ -3495,7 +3495,7 @@ ul, ol {
 .mdl-shadow--8dp {
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2); }
 
-.mdl-shadow--16dp {
+.mdl-shadow--16dp, .notification {
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2); }
 
 /**
@@ -9624,9 +9624,11 @@ html, body {
 .modal {
   z-index: 11;
   top: 50%;
-  left: -100%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%) scale(0);
+          transform: translate(-50%, -50%) scale(0);
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
   position: absolute;
   opacity: 0;
   visibility: hidden;
@@ -9634,7 +9636,8 @@ html, body {
   .modal.js-isShown {
     opacity: 1;
     visibility: visible;
-    left: 50%; }
+    -webkit-transform: translate(-50%, -50%) scale(1);
+            transform: translate(-50%, -50%) scale(1); }
     .modal.js-isShown + .overlay {
       opacity: 1;
       visibility: visible; }
@@ -9647,6 +9650,35 @@ html, body {
   top: 10px;
   right: 10px;
   z-index: 20; }
+
+.notification {
+  width: 250px;
+  min-height: 20px;
+  padding: 20px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  position: fixed;
+  z-index: 10;
+  top: 75px;
+  right: 12px;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  transition: all 0.4s ease-in-out; }
+  .notification.js-isShown {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: scale(1);
+            transform: scale(1); }
+
+.notification-closeBtn {
+  position: absolute;
+  right: 16px;
+  top: 12px; }
+
+.notification-text {
+  margin-bottom: 0; }
 
 .overlay {
   position: fixed;
@@ -9750,3 +9782,8 @@ html, body {
 
 .u-push {
   float: right; }
+
+.u-fgrow {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }

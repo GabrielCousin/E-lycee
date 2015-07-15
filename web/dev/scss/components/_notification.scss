@@ -1,0 +1,32 @@
+.notification {
+  @extend .mdl-shadow--16dp;
+  width: 250px;
+  min-height: 20px;
+  padding: 20px;
+  border-radius: 4px;
+  background: rgba(#fff, .7);
+  position: fixed;
+  z-index: 10;
+  top: 75px;
+  right: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+  transition: all .4s ease-in-out;
+
+  &.js-isShown {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+}
+
+.notification-closeBtn {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.notification-text {
+  margin-bottom: 0;
+}

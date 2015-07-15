@@ -13,6 +13,7 @@ use PublicBundle\Form\CommentaireType;
 use PublicBundle\Entity\ContactEmail;
 use PublicBundle\Form\ContactEmailType;
 use Symfony\Component\HttpFoundation\Request as Request;
+use Symfony\Component\Security\Core\SecurityContext;
 
 use Doctrine\Common\Util\Debug as Debug ;
 
@@ -23,13 +24,28 @@ class PublicController extends Controller
      * @Route("/home",name="public.home.index")
      * @Template("PublicBundle:Public:home.html.twig")
      */
-    public function indexAction()
+    public function indexAction(\Symfony\Component\HttpFoundation\Request $request)
     {
         $doctrine   = $this->getDoctrine();
         $rc         = $doctrine->getRepository('PublicBundle:Post') ;
         $results    = $rc->getThreeLastPost();
 
-        return array('results' => $results);
+        $error = "";
+        $session = $request->getSession();
+
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = '';
+        }
+
+        if ($error) {
+            $error = $error->getMessage();
+        }
+
+        return array('results' => $results, 'error' => $error);
     }
 
     /**
