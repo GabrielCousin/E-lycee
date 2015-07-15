@@ -1,38 +1,54 @@
+{% set route = app.request.attributes.get('_route') %}
 
-<form method="POST" {{ form_enctype(form) }} class="form-horizontal" novalidate>
-    <p class="form-group">
-        {{ form_label(form.title, 'Titre : ') }}
-        {{ form_widget(form.title,{'attr' : {'class':'form-control'}}) }}
-        {{ form_errors(form.title) }}
-    </p>
-    <p class="form-group">
-        {{ form_label(form.extract, 'Extrait : ') }}
-        {{ form_widget(form.extract,{'attr' : {'class':'form-control'}}) }}
-        {{ form_errors(form.extract) }}
-    </p>
-    <p class="form-group">
-        {{ form_label(form.content, 'Contenu : ') }}
-        {{ form_widget(form.content,{'attr' : {'class':'form-control'}}) }}
-        {{ form_errors(form.content) }}
-    </p>
-    <p class="form-group">
-        {{ form_label(form.urlThumbnail, 'image : ') }}
-        {{ form_widget(form.urlThumbnail,{'attr' : {'class':'form-control'}}) }}
-        {{ form_errors(form.urlThumbnail) }}
-    </p>
-    <p class="form-group">
-        {{ form_label(form.createAt, 'créé le  : ') }}
-        {{ form_widget(form.createAt,{'attr' : {'class':'form-control'}}) }}
-        {{ form_errors(form.createAt) }}
-    </p>
-    <p class="form-group">
-        {{ form_label(form.status, 'status  : ') }}
-        {{ form_widget(form.status,{'attr' : {'class':'form-control'}}) }}
-        {{ form_errors(form.status) }}
-    </p>
-    {{ form_widget(form._token) }}
-    <p>
-        <input type="submit" value="Modifier" class="btn"/>
-    </p>
-</form>
-{#{{  dump(form) }}#}
+{% if route ends with 'new' %}
+  {% set title = "Nouvel article" %}
+{% else %}
+  {% set title = "Édition de l\'article \"" ~ form.title.vars.value ~ "\"" %}
+{% endif %}
+{% extends "DashboardBundle::templates/base.html.twig" %}
+
+{% block mainContent %}
+
+  {{ form_start(form, {'method': 'POST', 'attr': {'class': 'mdl-grid'}}) }}
+
+    <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col dashboard-section">
+      <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+          {{ form_errors(form.title) }}
+          {{ form_widget(form.title,{'attr' : {'class':'mdl-textfield__input'}}) }}
+          {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+          {{ form_errors(form.extract) }}
+          {{ form_widget(form.extract,{'attr' : {'class':'mdl-textfield__input', 'rows': '3'}}) }}
+          {{ form_label(form.extract, 'Extrait', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+          {{ form_errors(form.content) }}
+          {{ form_widget(form.content,{'attr' : {'class':'mdl-textfield__input', 'rows': '7'}}) }}
+          {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+          {{ form_errors(form.urlThumbnail) }}
+          {{ form_widget(form.urlThumbnail,{'attr' : {'class':'mdl-textfield__input', 'rows': '7'}}) }}
+          {{ form_label(form.urlThumbnail, 'Lien de l\'image', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+        </div>
+      </div>
+    </section>
+    <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--4-col dashboard-section clearfix">
+      <div class="mdl-cell mdl-cell--12-col">
+          {{ form_label(form.createAt, 'Date de création', {'label_attr': {'class': 'mdl-typography--title select-label'} }) }}
+          {{ form_widget(form.createAt,{'attr' : {'class':''}}) }}
+          {{ form_errors(form.createAt) }}
+      </div>
+      <div class="mdl-cell mdl-cell--12-col">
+          {{ form_label(form.status, 'Status', {'label_attr': {'class': 'mdl-typography--title select-label'} }) }}
+          {{ form_widget(form.status,{'attr' : {'class':''}}) }}
+          {{ form_errors(form.status) }}
+      </div>
+      {{ form_widget(form._token) }}
+      <input type="submit" value="Modifier" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push"/>
+    </section>
+  {{ form_end(form) }}
+
+{% endblock %}
