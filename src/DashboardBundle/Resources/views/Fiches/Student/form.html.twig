@@ -1,0 +1,26 @@
+{% set title = "Dashboard | Prof" %}
+{% extends "DashboardBundle::templates/base.html.twig" %}
+
+{% block mainContent %}
+<form method="POST">
+{{ dump(score) }}
+   <pre>
+       titre de la fiche : {{ score.fiche.title }}
+       la question : {{ score.fiche.content }}
+
+   </pre>
+
+    <pre>
+{% for key , formReponse in form.children %}
+    {% if key != "_token" %}
+    {{ form_label(formReponse) }}
+    {% endif %}
+    {{ form_widget(formReponse) }}
+    {{ form_errors(formReponse) }}
+{% endfor %}
+    </pre>
+<input type="submit" value="envoyer" />
+    </form>
+
+
+{% endblock %}

@@ -6,8 +6,6 @@
     pour conditions sur les liens à activer ou non pour pouvoir répondre :
     - Fiche A faire / ou faite : QCM.status.name = "DONE" ou "UNDONE"
     </pre>
-    <a id="add-article" class="article-adder mdl-button mdl-js-button mdl-button--fab mdl-button--colored" href="{{ url('teacher.fiches.new') }}"><i class="material-icons">add</i></a>
-    <div class="mdl-tooltip" for="add-article">Ajouter une fiche</div>
 
     <table class="article-list mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
       <thead>
@@ -16,7 +14,7 @@
           <th class="mdl-data-table__cell--non-numeric">Question</th>
           <th class="cell--xs">Note</th>
           <th class="cell--s">Fait/pas Fait</th>
-          <th class="cell--xs">Répondre (disabled si fermé ou déjàfait)</th>
+          <th class="cell--xs">Répondre (disabled si déjàfait)</th>
         </tr>
       </thead>
       <tbody>
@@ -28,7 +26,7 @@
                 <td class="cell--xs">{% if (QCM.status.name == "UNDONE") %}-{% else %}{{  QCM.note  }}{% endif %}</td>
                 <td class="cell--s">{{ QCM.status.label }}</td>
                 <td class="mdl-data-table__cell--non-numeric cell--xs">
-                  <a href="#" data-id="{{ QCM.id }}">Répondre</a>
+                  <a href="{{ url('student.fiches.form',{'id':QCM.id} ) }}">Répondre</a>
                 </td>
             </tr>
         {% endfor %}
