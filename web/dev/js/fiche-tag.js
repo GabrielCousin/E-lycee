@@ -9,6 +9,7 @@ $(document).ready(function() {
     $addTagLink.on('click', function(e) {
         e.preventDefault();
         addTagForm(collectionHolder, $newLinkLi);
+        AllowSubmit.init();
     });
 });
 function addTagForm(collectionHolder, $newLinkLi) {

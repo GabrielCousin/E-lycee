@@ -32,7 +32,7 @@
         "></ul>
 
       </div>
-      <input type="submit" value="Créer la fiche" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push"/>
+      <input disabled type="submit" value="Créer la fiche" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push"/>
       {{ form_widget(form._token) }}
       {{ form_widget(form.choices) }}
     </section>
@@ -44,4 +44,5 @@
 {% block javascripts %}
   {{ parent() }}
   <script src="{{ asset('dev/js/fiche-tag.js') }}"></script>
+  <script src="{{ asset('dev/js/allow-submit.js') }}"></script>
 {% endblock %}
