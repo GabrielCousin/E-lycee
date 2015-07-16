@@ -20,16 +20,33 @@
     {% include "PublicBundle::includes/footer.html.twig" %}
   </main>
 
-  {% block javascripts %}{% endblock %}
-    <script type='text/javascript' src="{{ asset('js/scripts.js') }}"></script>
-  {% if browser_sync == true %}
-    <script type='text/javascript' id="__bs_script__">//<![CDATA[
-      document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.7.13.js'><\/script>".replace("HOST", location.hostname));
-      //]]>
+  {% include "PublicBundle::includes/modal.html.twig" %}
+
+  {% block javascripts %}
+    <script type='text/javascript' src="{{ asset('dev/js/material.js') }}"></script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+    <script src="{{ asset('dev/js/signin.js') }}"></script>
+    <script src="{{ asset('dev/js/notification.js') }}"></script>
+    <script>
+      var signin = SignIn;
+      signin.init();
     </script>
-  {% endif %}
-  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-  <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+    <script>
+      var notif = Notification;
+      notif.init();
+    </script>
+
+    {% if browser_sync == true %}
+      <script type='text/javascript' id="__bs_script__">//<![CDATA[
+        document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.7.13.js'><\/script>".replace("HOST", location.hostname));
+        //]]>
+      </script>
+    {% endif %}
+  {% endblock %}
 </body>
 
 </html>
