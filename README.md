@@ -4,7 +4,7 @@
 ## Installation du Projet
 
 ### Requirements
-- Node.js
+- [Node.js](https://nodejs.org/)
 - MySQL
 - Gulp installé globalement `npm install -g gulp`
 
@@ -30,6 +30,16 @@ npm install
 ### Base de données
 1. Créer une base de données `e-lycee`
 2. Importer `elycee.sql` : `mysql -u root -p e-lycee < elycee.sql`
+
+
+## Dependencies
+
+### CSS
+- [Material Design Light](http://getmdl.io)
+
+### JS
+- [jQuery](https://jquery.com/)
+- [Better-dateinput-polyfill](https://github.com/chemerisuk/better-dateinput-polyfill)
 
 
 ## Crédits
