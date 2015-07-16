@@ -45,7 +45,7 @@
     <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--4-col dashboard-section clearfix">
       <div class="mdl-cell mdl-cell--12-col">
           {{ form_label(form.createAt, 'Date de création', {'label_attr': {'class': 'mdl-typography--title'} }) }}
-          {{ form_widget(form.createAt,{'attr' : {'class':'mdl-textfield__input'}}) }}
+          {{ form_widget(form.createAt,{'attr' : {'class':'mdl-textfield__input', 'data-format': 'dd-MM-yyyy'}}) }}
           {{ form_errors(form.createAt) }}
       </div>
       <div class="mdl-cell mdl-cell--12-col">
@@ -58,4 +58,15 @@
     </section>
   {{ form_end(form) }}
 
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('dev/js/better-dom.js') }}"></script>
+  <script src="{{ asset('dev/js/better-i18n.js') }}"></script>
+  <script src="{{ asset('dev/js/better-dateinput-polyfill.js') }}"></script>
+
+  <script>
+
+  </script>
 {% endblock %}

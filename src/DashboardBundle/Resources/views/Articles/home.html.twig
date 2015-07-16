@@ -39,3 +39,8 @@
     </tbody>
   </table>
 {% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('dev/js/publish-status.js') }}"></script>
+{% endblock %}
