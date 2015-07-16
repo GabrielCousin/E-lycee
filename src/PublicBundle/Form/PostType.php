@@ -19,14 +19,16 @@ class PostType extends AbstractType
             ->add('extract')
             ->add('content')
             ->add('picture', 'iphp_file')
-            ->add('createAt')
-            ->add('status','entity',array(
+            ->add('createAt', 'date', array(
+                'widget' => 'single_text'
+            ))
+            ->add('status','entity', array(
                 'class' => 'PublicBundle:Status',
                 'property' => 'label'
             ))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
