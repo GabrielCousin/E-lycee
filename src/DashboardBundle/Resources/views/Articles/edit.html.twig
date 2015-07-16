@@ -2,8 +2,10 @@
 
 {% if route ends with 'new' %}
   {% set title = "Nouvel article" %}
+  {% set submitValue = "Créer" %}
 {% else %}
   {% set title = "Édition de l\'article \"" ~ form.title.vars.value ~ "\"" %}
+  {% set submitValue = "Modifier" %}
 {% endif %}
 {% extends "DashboardBundle::templates/base.html.twig" %}
 
@@ -52,7 +54,7 @@
           {{ form_errors(form.status) }}
       </div>
       {{ form_widget(form._token) }}
-      <input type="submit" value="Modifier" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push"/>
+      <input type="submit" value={{submitValue}} class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push"/>
     </section>
   {{ form_end(form) }}
 
