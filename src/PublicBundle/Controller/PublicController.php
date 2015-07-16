@@ -66,10 +66,10 @@ class PublicController extends Controller
 //            echo '</pre>';
 //            exit();
             $message = \Swift_Message::newInstance()
-                ->setSubject('Test d\'envoie email')
+                ->setSubject('E-mail de contact')
                 ->setFrom('elycee.dev@gmail.com')
                 ->setTo(array('elycee.dev@gmail.com', $form->getData()->getEmail()))
-                ->setBody($this->renderView('PublicBundle:Public:contactEmail.txt.twig', array('contact' => $contact)));
+                ->setBody($this->renderView('PublicBundle:Public:contactEmail.html.twig', array('contact' => $contact)), 'text/html');
             $this->get('mailer')->send($message);
             return $this->redirect($this->generateUrl('public.home.index'));
         }
