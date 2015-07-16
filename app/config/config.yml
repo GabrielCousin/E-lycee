@@ -103,3 +103,14 @@ endroid_twitter:
     consumer_secret: "lLhj3voWq8koTL7uToQ6W182PplQUZ8mbjV3XgtZhuLhclYJ5Y"
     access_token: "20164712-I7p9VdZ4Ttgux3BEwvXTXV9jwRLmo0x9qXhcuCwne"
     access_token_secret: "nsGCYOxD9TjjfagkTfXBmMEIJMbpyhnB3jBjNGTCpIJeL"
+
+# bundle upload files
+iphp_file_store:
+    mappings:
+       picture:
+           upload_dir:  %kernel.root_dir%/../web/public/upload/images/pictures
+           upload_path: /
+           namer:
+               translit: ~
+               propertyPostfix:    #or propertyPostfix
+                   params: { field : id, delimiter: "_" }

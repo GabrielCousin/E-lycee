@@ -29,7 +29,7 @@
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">E-lycée</span>
     {% if app.user is not null %}
-      <h3 class="mdl-layout__drawerSubtitle">Bonjour {{ app.user | title }}</h3>
+      <h3 class="mdl-layout__drawerSubtitle">Bonjour {{ app.user.firstname | title }}</h3>
     {% endif %}
 
     <nav class="mdl-navigation">
@@ -53,7 +53,7 @@
 
 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
   {% if app.user is not null %}
-    <li disabled class="mdl-menu__item">Bonjour {{ app.user | title }}</li>
+    <li disabled class="mdl-menu__item">Bonjour {{ app.user.firstname | title }}</li>
   {% endif %}
   {% if is_granted('ROLE_STUDENT') %}
     <li><a class="mdl-menu__item" href="{{ url(student) }}">Dashboard</a></li>

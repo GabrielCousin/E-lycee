@@ -18,7 +18,7 @@ class PostType extends AbstractType
             ->add('title')
             ->add('extract')
             ->add('content')
-            ->add('urlThumbnail')
+            ->add('picture', 'iphp_file')
             ->add('createAt')
             ->add('status','entity',array(
                 'class' => 'PublicBundle:Status',

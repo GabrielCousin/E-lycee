@@ -28,11 +28,16 @@
           {{ form_widget(form.content,{'attr' : {'class':'mdl-textfield__input', 'rows': '7'}}) }}
           {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+{#        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
           {{ form_errors(form.urlThumbnail) }}
           {{ form_widget(form.urlThumbnail,{'attr' : {'class':'mdl-textfield__input', 'rows': '7'}}) }}
           {{ form_label(form.urlThumbnail, 'Lien de l\'image', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
-        </div>
+        </div>#}
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+              {{ form_label(form.picture, 'Picture : ') }}
+              {{ form_widget(form.picture) }}
+              {#{{ form_errors(form.picture) }}#}
+          </div>
       </div>
     </section>
     <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--4-col dashboard-section clearfix">

@@ -3,6 +3,7 @@
 namespace PublicBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert ;
 
 /**
  * Commentaire
@@ -25,6 +26,8 @@ class Commentaire
      * @var string
      *
      * @ORM\Column(name="contenu", type="text")
+     * @Assert\NotBlank(message="Vous devez saisir un nom")
+     *
      */
     private $contenu;
 
@@ -32,8 +35,17 @@ class Commentaire
      * @var datetime
      *
      * @ORM\Column(name="createAt", type="datetime")
+     *
      */
     private $createAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=150)
+     * @Assert\NotBlank(message="Vous devez saisir un pseudo pour ce commentaire")
+     */
+    private $username;
 
     /**
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="commentaires")
@@ -43,20 +55,13 @@ class Commentaire
     private $post;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=150)
-     */
-    private $username;
-    
-    /**
      * Get id
      *
      * @return integer 
      */
 
     public function __construct(){
-        $this->createAt = new \Datetime();
+        $this->createAt = new \Datetime('now');
     }
     public function getId()
     {

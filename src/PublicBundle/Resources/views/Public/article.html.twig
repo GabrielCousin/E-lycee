@@ -3,8 +3,13 @@
 
 {% block mainContent %}
 
+ {%  if  article.picture.fileName is defined and article.picture.fileName != NULL %}
+     {% set pictureUrl = asset('public/upload/images/pictures' ~ article.picture.fileName) %}
+ {% else %}
+    {% set pictureUrl = '' %}
+ {%  endif  %}
 
-<div class="demo-ribbon" style="background-image: url('{{ article.urlThumbnail }}');"></div>
+<div class="demo-ribbon" style="background-image: url('{{ pictureUrl }}');"></div>
 <main class="demo-main mdl-layout__content">
   <div class="demo-container mdl-grid">
     <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
@@ -19,7 +24,7 @@
           {% endif %}
         {% endif %}
 
-        <p>Posté le <strong>{{ article.createAt.date | date('d M Y')}}</strong> par <strong>{{ article.auteur }}</strong></p>
+        <p>Posté le <strong>{{ article.createAt.date | date('d M Y')}}</strong> par <strong>{{ article.auteur.firstname }} {{ article.auteur.lastname }}</strong></p>
         <p>{{ article.content }}</p>
 
 

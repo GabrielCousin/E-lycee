@@ -40,7 +40,7 @@ class PostRepository extends EntityRepository
     public function getPostByAuteur($id){
         $results = $this
             ->createQueryBuilder('p')
-            ->select('p.title, p.id, p.extract, p.createAt','s.label,s.name','a.username')
+            ->select('p.title, p.id, p.extract, p.createAt','s.label,s.name','a.username,a.firstname,a.lastname')
             ->join('p.auteur','a')
             ->join('p.status','s')
             ->where('a.id = :id')

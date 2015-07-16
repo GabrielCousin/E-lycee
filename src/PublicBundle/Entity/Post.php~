@@ -4,8 +4,9 @@ namespace PublicBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert ;
-use UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection ;
+use Iphp\FileStoreBundle\Mapping\Annotation as FileStore;
+
 
 
 /**
@@ -15,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection ;
  * @ORM\Entity(
  *      repositoryClass="PostRepository"
  * )
+ * @FileStore\Uploadable
  */
 class Post
 {
@@ -31,13 +33,27 @@ class Post
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=150)
+     * @Assert\NotBlank(message="Vous devez renseigner un titre à votre article")
+     * @Assert\Length(
+    *       min = "2",
+     *      max = "150",
+     *      minMessage = "Votre titre doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
+     * )
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="extract", type="text")
+     * @ORM\Column(name="extract", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez renseigner un extrait à votre article")
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "255",
+     *      minMessage = "Votre extrait doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre extrait ne peut pas être plus long que {{ limit }} caractères"
+     * )
      */
     private $extract;
 
@@ -45,15 +61,26 @@ class Post
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotBlank(message="Vous n'avez pas mis de contenu dans votre article")
+     * @Assert\Length(
+     *      min = "100",
+     *      minMessage = "Votre article doit faire au moins {{ limit }} caractères"
+     * )
      */
     private $content;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="url_thumbnail", type="string", length=150)
+     * @ORM\Column(name="picture", type="array", nullable=true)
+     * @Assert\Image(
+     *      maxSize="2M",
+     *      mimeTypes={"image/jpeg","image/png","image/gif"},
+     *      mimeTypesMessage="Vous devez transférer des JPG,PNG ou GIF uniquement."
+     * )
+     * @FileStore\UploadableField(mapping="picture")
      */
-    private $urlThumbnail;
+    private $picture;
 
     /**
      * @var datetime
@@ -84,6 +111,8 @@ class Post
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->createAt = new \Datetime('now');
+
     }
 
     /**
