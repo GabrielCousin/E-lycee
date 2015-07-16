@@ -9606,6 +9606,14 @@ select {
 .mdl-data-table__select {
   width: 100%; }
 
+#list-edit-nav {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease-in-out; }
+  #list-edit-nav.js-isShown {
+    opacity: 1;
+    visibility: visible; }
+
 .u-push {
   float: right; }
 

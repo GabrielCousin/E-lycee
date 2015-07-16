@@ -1,43 +1,55 @@
 {% set title = "Liste des fiches" %}
 {% extends "DashboardBundle::templates/base.html.twig" %}
 
+{% block NavEditMenu %}
+  {% include "DashboardBundle::includes/nav-editor.html.twig" %}
+{% endblock %}
+
 {% block mainContent %}
 
-    <a id="add-article" class="article-adder mdl-button mdl-js-button mdl-button--fab mdl-button--colored" href="{{ url('teacher.fiches.new') }}"><i class="material-icons">add</i></a>
-    <div class="mdl-tooltip" for="add-article">Ajouter une fiche</div>
+  <a id="add-article" class="article-adder mdl-button mdl-js-button mdl-button--fab mdl-button--colored" href="{{ url('teacher.fiches.new') }}"><i class="material-icons">add</i></a>
+  <div class="mdl-tooltip" for="add-article">Ajouter une fiche</div>
 
-    {#{{ dump(fiches) }}#}
-    <table class="article-list mdl-data-table mdl-data-table--selectable mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
-      <thead>
-        <tr>
-          <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
-          <th class="mdl-data-table__cell--non-numeric">Question</th>
-          <th class="cell--xs">Nb. de choix</th>
-          <th class="cell--xs">Niveau</th>
-          <th class="cell--s">Réponses</th>
-          <th class="mdl-data-table__cell--non-numeric cell--xs">Status</th>
-          <th class="cell--xs">Actions</th>
+  <table class="article-list mdl-data-table mdl-data-table--selectable mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+    <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
+        <th class="mdl-data-table__cell--non-numeric">Question</th>
+        <th class="cell--xs">Nb. de choix</th>
+        <th class="cell--xs">Niveau</th>
+        <th class="cell--s">Réponses</th>
+        <th class="mdl-data-table__cell--non-numeric cell--xs">Status</th>
+        <th class="cell--xs">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for fiche in fiches %}
+        <tr data-id="{{ fiche.id }}">
+          <td class="mdl-data-table__cell--non-numeric cell--s"><a href="#">{{ fiche.title }}</a></td>
+          <td class="mdl-data-table__cell--non-numeric">{{ fiche.content }}</td>
+          <td class="cell--xs">{{ fiche.choices | length }}</td>
+          <td class="cell--xs">{{ fiche.niveau.name }}</td>
+          <td class="cell--s">
+            {% set ficheDone = 0 %}
+            {% for score in fiche.scores %}
+              {% if score.status.name == 'DONE' %}
+                {% set ficheDone = ficheDone + 1 %}
+              {% endif %}
+            {% endfor %}
+
+            {{ ficheDone }} / {{ fiche.scores | length }}
+          </td>
+          <td class="mdl-data-table__cell--non-numeric cell--xs">
+            <a href="#" class="editPublish" data-type="fiche" data-id="{{ fiche.id }}">{{ fiche.status.label }}</a>
+          </td>
+          <td class="cell--xs">
+            <a class="material-icons" href="{{ url('teacher.fiches.update',{'id':fiche.id}) }}">mode_edit</a>
+            <a class="material-icons deleteItem" href="#" data-type="fiche" data-id="{{ fiche.id }}">delete</a>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        {% for fiche in fiches %}
-            <tr>
-                <td class="mdl-data-table__cell--non-numeric cell--s"><a href="#">{{ fiche.title }}</a></td>
-                <td class="mdl-data-table__cell--non-numeric">{{ fiche.content }}</td>
-                <td class="cell--xs">{{ fiche.choices | length }}</td>
-                <td class="cell--xs">{{ fiche.niveau.name }}</td>
-                <td class="cell--s">répondus/total</td>
-                <td class="mdl-data-table__cell--non-numeric cell--xs">
-                  <a href="#" class="editPublish" data-type="fiche" data-id="{{ fiche.id }}">{{ fiche.status.label }}</a>
-                </td>
-                <td class="cell--xs">
-                  <a class="material-icons" href="{{ url('teacher.fiches.update',{'id':fiche.id}) }}">mode_edit</a>
-                  <a class="material-icons" href="#" class="deleteItem" data-type="fiche" data-id="{{ fiche.id }}">delete</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
+      {% endfor %}
+    </tbody>
 
-    </table>
+  </table>
 
 {% endblock %}

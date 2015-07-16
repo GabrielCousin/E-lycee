@@ -113,8 +113,8 @@ class PostsController extends Controller
         $em         = $doctrine->getManager();
         $repository = $doctrine->getRepository('PublicBundle:Post');
         $post       = $repository->find($id);
-//                echo '<pre>';Debug::dump($post->getStatus()->getId());echo '</pre>';exit();
-//        $status = $repository->find($id);
+        // echo '<pre>';Debug::dump($post->getStatus()->getId());echo '</pre>';exit();
+        // $status = $repository->find($id);
 
         $em->remove($post);
         $em->flush();
@@ -122,5 +122,59 @@ class PostsController extends Controller
         $request->getSession()->getFlashBag()->set('notice', $message);
         $urlRedirect = $this->generateUrl('teacher.articles.view');
         return $this->redirect($urlRedirect);
+    }
+    /**
+     * @Route("/professeur/article/deleteMultiple/", name="teacher.article.deleteMultiple", options={"expose"=true})
+     */
+    public function deleteMultipleAction(Request $request){
+        // $doctrine   = $this->getDoctrine();
+        // $em         = $doctrine->getManager();
+        // $repository = $doctrine->getRepository('PublicBundle:Post');
+        // $post       = $repository->find($id);
+        // echo '<pre>';Debug::dump($post->getStatus()->getId());echo '</pre>';exit();
+        // $status = $repository->find($id);
+
+        // $em->remove($post);
+        // $em->flush();
+        // $message = "Les articles ont bien été supprimés";
+        // $request->getSession()->getFlashBag()->set('notice', $message);
+        // $urlRedirect = $this->generateUrl('teacher.articles.view');
+        // return $this->redirect($urlRedirect);
+    }
+    /**
+     * @Route("/professeur/article/publishMultiple/", name="teacher.article.publishMultiple", options={"expose"=true})
+     */
+    public function publishMultipleAction(Request $request){
+        // $doctrine   = $this->getDoctrine();
+        // $em         = $doctrine->getManager();
+        // $repository = $doctrine->getRepository('PublicBundle:Post');
+        // $post       = $repository->find($id);
+        // echo '<pre>';Debug::dump($post->getStatus()->getId());echo '</pre>';exit();
+        // $status = $repository->find($id);
+
+        // $em->remove($post);
+        // $em->flush();
+        // $message = "Les articles ont bien été supprimés";
+        // $request->getSession()->getFlashBag()->set('notice', $message);
+        // $urlRedirect = $this->generateUrl('teacher.articles.view');
+        // return $this->redirect($urlRedirect);
+    }
+    /**
+     * @Route("/professeur/article/unpublishMultiple/", name="teacher.article.unpublishMultiple", options={"expose"=true})
+     */
+    public function unpublishMultipleAction(Request $request){
+        // $doctrine   = $this->getDoctrine();
+        // $em         = $doctrine->getManager();
+        // $repository = $doctrine->getRepository('PublicBundle:Post');
+        // $post       = $repository->find($id);
+        // echo '<pre>';Debug::dump($post->getStatus()->getId());echo '</pre>';exit();
+        // $status = $repository->find($id);
+
+        // $em->remove($post);
+        // $em->flush();
+        // $message = "Les articles ont bien été supprimés";
+        // $request->getSession()->getFlashBag()->set('notice', $message);
+        // $urlRedirect = $this->generateUrl('teacher.articles.view');
+        // return $this->redirect($urlRedirect);
     }
 }
