@@ -43,4 +43,10 @@
 {% block javascripts %}
   {{ parent() }}
   <script src="{{ asset('dev/js/publish-status.js') }}"></script>
+  <script>
+    var multipleActions = MultipleActions;
+    (function init() {
+      setTimeout(function(){ multipleActions.init() }, 200);
+    })();
+  </script>
 {% endblock %}

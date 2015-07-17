@@ -6,7 +6,7 @@
     <thead>
       <tr>
         <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
-        <th class="mdl-data-table__cell--non-numeric">Question</th>
+        <th class="mdl-data-table__cell--non-numeric u-hide-mini">Question</th>
         <th class="cell--xs">Note</th>
         <th class="cell--s">Statut</th>
         <th class="cell--xs">Répondre</th>
@@ -16,7 +16,7 @@
       {% for QCM in scores %}
         <tr>
           <td class="mdl-data-table__cell--non-numeric cell--s">{{ QCM.fiche.title }}</td>
-          <td class="mdl-data-table__cell--non-numeric">{{  QCM.fiche.content }}</td>
+          <td class="mdl-data-table__cell--non-numeric u-hide-mini">{{  QCM.fiche.content }}</td>
           <td class="cell--xs">{% if (QCM.status.name == "UNDONE") %}-{% else %}{{ QCM.note }}{% endif %}</td>
           <td class="cell--s">{{ QCM.status.label }}</td>
           <td class="cell--xs">

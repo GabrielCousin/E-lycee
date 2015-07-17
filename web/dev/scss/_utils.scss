@@ -5,3 +5,9 @@
 .u-fgrow {
   flex-grow: 1;
 }
+
+.u-hide-mini {
+  @media screen and (max-width: 720px) {
+    display: none;
+  }
+}

@@ -14,9 +14,9 @@
     <thead>
       <tr>
         <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
-        <th class="mdl-data-table__cell--non-numeric">Question</th>
-        <th class="cell--xs">Nb. de choix</th>
-        <th class="cell--xs">Niveau</th>
+        <th class="mdl-data-table__cell--non-numeric u-hide-mini">Question</th>
+        <th class="cell--xs u-hide-mini">Choix</th>
+        <th class="cell--xs u-hide-mini">Niveau</th>
         <th class="cell--s">Réponses</th>
         <th class="mdl-data-table__cell--non-numeric cell--xs">Status</th>
         <th class="cell--xs">Actions</th>
@@ -26,9 +26,9 @@
       {% for fiche in fiches %}
         <tr data-id="{{ fiche.id }}">
           <td class="mdl-data-table__cell--non-numeric cell--s">{{ fiche.title }}</td>
-          <td class="mdl-data-table__cell--non-numeric">{{ fiche.content }}</td>
-          <td class="cell--xs">{{ fiche.choices | length }}</td>
-          <td class="cell--xs">{{ fiche.niveau.name }}</td>
+          <td class="mdl-data-table__cell--non-numeric u-hide-mini">{{ fiche.content }}</td>
+          <td class="cell--xs u-hide-mini">{{ fiche.choices | length }}</td>
+          <td class="cell--xs u-hide-mini">{{ fiche.niveau.name }}</td>
           <td class="cell--s">
             {% set ficheDone = 0 %}
             {% for score in fiche.scores %}

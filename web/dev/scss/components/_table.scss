@@ -1,0 +1,31 @@
+.mdl-data-table__select {
+  width: 100%;
+}
+
+#list-edit-nav {
+  opacity: 0;
+  visibility: hidden;
+  transition: all .2s ease-in-out;
+
+  &.js-isShown {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  @media screen and (max-width: 720px) {
+    display: none;
+  }
+}
+
+
+
+.mdl-data-table--selectable {
+  @media screen and (max-width: 720px) {
+    tr {
+      th:first-child,
+      td:first-child {
+        display: none;
+      }
+    }
+  }
+}
