@@ -4,6 +4,9 @@ namespace DashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert ;
+use Iphp\FileStoreBundle\Mapping\Annotation as FileStore;
+
 
 /**
  * Fiche
@@ -26,6 +29,13 @@ class Fiche
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=100)
+     * @Assert\NotBlank(message="Vous devez renseigner un titre à votre fiche")
+     * @Assert\Length(
+     *       min = "2",
+     *      max = "100",
+     *      minMessage = "Votre titre doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
+     * )
      */
     private $title;
 
@@ -33,6 +43,13 @@ class Fiche
      * @var string
      *
      * @ORM\Column(name="content", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez renseigner la question")
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "255",
+     *      minMessage = "Votre question doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre question de peut pas faire plus de {{ limit }} caractères"
+     * )
      */
     private $content;
 
@@ -56,8 +73,10 @@ class Fiche
      *
      */
     private $status;
+
     /**
      * @ORM\OneToMany(targetEntity="DashboardBundle\Entity\Choix", mappedBy="fiche", cascade={"persist","remove"})
+     * @Assert\Valid
      */
     protected $choices;
 

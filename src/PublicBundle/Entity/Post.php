@@ -35,7 +35,7 @@ class Post
      * @ORM\Column(name="title", type="string", length=150)
      * @Assert\NotBlank(message="Vous devez renseigner un titre à votre article")
      * @Assert\Length(
-    *       min = "2",
+     *       min = "2",
      *      max = "150",
      *      minMessage = "Votre titre doit faire au moins {{ limit }} caractères",
      *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"

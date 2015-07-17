@@ -20,7 +20,7 @@ class ChoixType extends AbstractType
                 'choices' => array('1' => 'oui', '0' => 'non'),
                 'required' => true
             ))
-            ->add('note')
+            ->add('note','number',array('empty_data'=>'2'))
         ;
     }
     

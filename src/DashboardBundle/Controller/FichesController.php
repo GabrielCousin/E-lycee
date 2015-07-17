@@ -97,10 +97,6 @@ class FichesController extends Controller
      */
     public function updateAction($id,Request $request)
     {
-        /*      echo '<pre>';
-              Debug::dump($request->getQueryString());
-              echo '</pre>';
-              exit();*/
         $doctrine = $this->getDoctrine();
         $rp = $doctrine->getRepository('DashboardBundle:Fiche');
         $statusRp = $doctrine->getRepository('PublicBundle:Status');
@@ -115,10 +111,14 @@ class FichesController extends Controller
                 'class' => 'PublicBundle:Status',
                 'property' => 'label'
             ));
+        $statusActuel = $fiche->getStatus() ;
         $form->handleRequest($request);
         if ($request->isMethod('POST')){
             if ($form->isValid() && $form->isSubmitted()) {
                 $data = $form->getData();
+//                                echo '<pre>';Debug::dump($statusActuel);echo '</pre>';exit();
+
+                $data->setStatus($statusActuel);
                 $dataNiveau = $data->getNiveau();
 
                 // si changement de niveau : réinitialisation des scores et attributions de nouveaux "scores" aux étudiants du niveau correspondant.
@@ -160,16 +160,7 @@ class FichesController extends Controller
         $doctrine   = $this->getDoctrine();
         $em         = $doctrine->getManager();
         $repository = $doctrine->getRepository('DashboardBundle:Fiche');
-        $scoreRp = $doctrine->getRepository('DashboardBundle:Score');
         $fiche       = $repository->find($id);
-/*        $scores     = $fiche->getScores();
-        foreach ($scores as $score){
-            $em->remove($score);
-            $em->flush();
-        }*/
-//                echo '<pre>';Debug::dump($post->getStatus()->getId());echo '</pre>';exit();
-//        $status = $repository->find($id);
-
         $em->remove($fiche);
         $em->flush();
         $message = "La fiche a bien été supprimée";
@@ -186,7 +177,6 @@ class FichesController extends Controller
         $repository = $doctrine->getRepository('DashboardBundle:Fiche');
         $repositoryStatus = $doctrine->getRepository('PublicBundle:Status');
         $fiche    = $repository->find($id);
-//        $status = $repository->find($id);
         if ($fiche->getStatus()->getId() == 1 ){
             $status = $repositoryStatus->find(2);
             $fiche->setStatus($status);

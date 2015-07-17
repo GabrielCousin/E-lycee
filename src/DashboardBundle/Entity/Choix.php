@@ -3,7 +3,8 @@
 namespace DashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert ;
+use Iphp\FileStoreBundle\Mapping\Annotation as FileStore;
 /**
  * Choix
  *
@@ -25,6 +26,9 @@ class Choix
      * @var integer
      *
      * @ORM\Column(name="note", type="integer")
+     * @Assert\NotNull(message="Vous devez donner une note à la réponse")
+     * @Assert\GreaterThan(value = 0,message="La note doit être strictement positive ")
+     *
      */
 
     private $note;
@@ -53,6 +57,9 @@ class Choix
     private $fiche;
 
 
+    public function __construct(){
+        $this->note = 2;
+    }
     /**
      * Get id
      *
