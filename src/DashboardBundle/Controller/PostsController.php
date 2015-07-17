@@ -16,7 +16,7 @@ use Doctrine\Common\Util\Debug;
 class PostsController extends Controller
 {
     /**
- * @Route("professeur/articles/list", name="teacher.articles.view")
+ * @Route("professeur/articles/list", name="teacher.articles.view",options={"expose"=true})
  * @Template("DashboardBundle:Articles:home.html.twig")
  */
     public function homeAction()
@@ -124,57 +124,70 @@ class PostsController extends Controller
         return $this->redirect($urlRedirect);
     }
     /**
-     * @Route("/professeur/article/deleteMultiple/", name="teacher.article.deleteMultiple", options={"expose"=true})
+     * @Route("/professeur/article/multiple/", name="teacher.article.multiple", options={"expose"=true})
+     * @Method({"POST","GET"})
      */
-    public function deleteMultipleAction(Request $request){
-        // $doctrine   = $this->getDoctrine();
-        // $em         = $doctrine->getManager();
-        // $repository = $doctrine->getRepository('PublicBundle:Post');
-        // $post       = $repository->find($id);
-        // echo '<pre>';Debug::dump($post->getStatus()->getId());echo '</pre>';exit();
-        // $status = $repository->find($id);
+    public function ManageMultipleAction(Request $request){
+//         echo '<pre>';Debug::dump($request->query->get('ids'));echo '</pre>';exit();
+        $action = $request->query->get('action');
+        $ids    = $request->query->get('ids');
+        $ids = explode(',',$ids);
 
-        // $em->remove($post);
-        // $em->flush();
-        // $message = "Les articles ont bien été supprimés";
-        // $request->getSession()->getFlashBag()->set('notice', $message);
-        // $urlRedirect = $this->generateUrl('teacher.articles.view');
-        // return $this->redirect($urlRedirect);
+        $doctrine   = $this->getDoctrine();
+        $em         = $doctrine->getManager();
+        $postRp = $doctrine->getRepository('PublicBundle:Post');
+        $statusRp = $doctrine->getRepository('PublicBundle:Status');
+        $posts = $postRp->getPostsByIds($ids);
+        switch ($action) {
+            case 'UNPUBLISH' :
+                $unpublished = $statusRp->findOneBy(array('name'=>'UNPUBLISHED'));
+                foreach ($posts as $post){
+                    $post->setStatus($unpublished);
+                    $em->persist($post);
+                }
+                $message = ( count($posts) == 1 ) ? 'Votre article n\'est plus publié' : 'Vos '.count($posts).' articles ne sont plus publiés' ;
+
+            break ;
+            case 'PUBLISH' :
+                $published = $statusRp->findOneBy(array('name'=>'PUBLISHED'));
+                foreach ($posts as $post){
+                    $post->setStatus($published);
+                    $em->persist($post);
+                }
+                $message = ( count($posts) == 1 ) ? 'Votre article a été publié' : 'Vos '.count($posts).' articles ont été publiés' ;
+            break ;
+            case 'DELETE':
+                foreach ($posts as $post){
+                    $em->remove($post);
+                }
+                $message = ( count($posts) == 1 ) ? 'L\'article a été supprimé' : 'Vos '.count($posts).' articles ont été supprimés avec succès' ;
+            break ;
+            default :
+                $message = "une erreur s'est produite.";
+                break;
+        }
+        $em->flush();
+        $response = array('status'=>'OK','message'=>$message);
+        return new JsonResponse($response);
     }
     /**
      * @Route("/professeur/article/publishMultiple/", name="teacher.article.publishMultiple", options={"expose"=true})
      */
     public function publishMultipleAction(Request $request){
-        // $doctrine   = $this->getDoctrine();
-        // $em         = $doctrine->getManager();
-        // $repository = $doctrine->getRepository('PublicBundle:Post');
-        // $post       = $repository->find($id);
-        // echo '<pre>';Debug::dump($post->getStatus()->getId());echo '</pre>';exit();
-        // $status = $repository->find($id);
+//        echo '<pre>';Debug::dump($request->query->get('ids'));echo '</pre>';exit();
 
-        // $em->remove($post);
-        // $em->flush();
-        // $message = "Les articles ont bien été supprimés";
-        // $request->getSession()->getFlashBag()->set('notice', $message);
-        // $urlRedirect = $this->generateUrl('teacher.articles.view');
-        // return $this->redirect($urlRedirect);
+        $response = array('status'=>'OK','message'=>'');
+        return new JsonResponse($response);
+
     }
     /**
      * @Route("/professeur/article/unpublishMultiple/", name="teacher.article.unpublishMultiple", options={"expose"=true})
      */
     public function unpublishMultipleAction(Request $request){
-        // $doctrine   = $this->getDoctrine();
-        // $em         = $doctrine->getManager();
-        // $repository = $doctrine->getRepository('PublicBundle:Post');
-        // $post       = $repository->find($id);
-        // echo '<pre>';Debug::dump($post->getStatus()->getId());echo '</pre>';exit();
-        // $status = $repository->find($id);
+//        echo '<pre>';Debug::dump($request->query->get('ids'));echo '</pre>';exit();
 
-        // $em->remove($post);
-        // $em->flush();
-        // $message = "Les articles ont bien été supprimés";
-        // $request->getSession()->getFlashBag()->set('notice', $message);
-        // $urlRedirect = $this->generateUrl('teacher.articles.view');
-        // return $this->redirect($urlRedirect);
+        $response = array('status'=>'OK','message'=>'');
+        return new JsonResponse($response);
+
     }
 }

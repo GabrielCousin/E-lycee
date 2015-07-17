@@ -63,4 +63,15 @@ class PostRepository extends EntityRepository
 
         return $results;
     }
+
+    public function getPostsByIds(Array $ids){
+        $stringIds = implode(' ,',$ids);
+        $results = $this
+            ->createQueryBuilder('p')
+            ->where ('p.id IN (' . $stringIds . ')')
+            ->getQuery()
+            ->getResult();
+
+        return $results ;
+    }
 }
