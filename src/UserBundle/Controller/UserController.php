@@ -20,10 +20,10 @@ class UserController extends Controller
      */
     public function loginAction(Request $request) {
 
-        $poney = $this->renderView('UserBundle:Security:login.html.twig');
+        $loginForm = $this->renderView('UserBundle:Security:login.html.twig');
 
         $response = array(
-            'poney' => $poney
+            'loginForm' => $loginForm
         );
 
         return new JsonResponse($response);

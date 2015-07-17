@@ -35,7 +35,7 @@ var SignIn = {
   addSuccess: function(e) {
     if(this.xhr.readyState == 4 && this.xhr.status == 200) {
       var response = JSON.parse(this.xhr.responseText);
-      this.content.innerHTML = response.poney;
+      this.content.innerHTML = response.loginForm;
       componentHandler.upgradeDom();
     }
   }
