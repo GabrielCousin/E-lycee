@@ -9619,11 +9619,17 @@ select {
 
 .dashboard-section {
   padding: 20px; }
+  @media screen and (max-width: 720px) {
+    .dashboard-section {
+      width: calc(100% - 16px); } }
 
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover,
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link.is-active {
   background-color: #00BCD4;
   color: #37474F; }
+
+.dashboard-datetime-wrapper {
+  margin-bottom: 40px; }
 
 .u-push {
   float: right; }

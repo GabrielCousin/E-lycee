@@ -12,7 +12,7 @@
     visibility: visible;
   }
 
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: $bp-tablet) {
     display: none;
   }
 }
@@ -20,7 +20,7 @@
 
 
 .mdl-data-table--selectable {
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: $bp-tablet) {
     tr {
       th:first-child,
       td:first-child {

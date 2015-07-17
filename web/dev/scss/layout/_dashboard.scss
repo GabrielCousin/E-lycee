@@ -13,14 +13,13 @@
   .cell--xs {
     padding-left: 0;
 
-    @media screen and (min-width: 1024px) {
+    @media screen and (min-width: $bp-desktop) {
       min-width: 80px;
     }
   }
 
   .cell--s {
-
-    @media screen and (min-width: 1024px) {
+    @media screen and (min-width: $bp-desktop) {
       min-width: 150px;
     }
   }
@@ -39,6 +38,10 @@
 
 .dashboard-section {
   padding: 20px;
+
+  @media screen and (max-width: $bp-tablet) {
+    width: calc(100% - 16px);
+  }
 }
 
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
@@ -47,4 +50,8 @@
     background-color: #00BCD4;
     color: #37474F;
   }
+}
+
+.dashboard-datetime-wrapper {
+  margin-bottom: 40px;
 }

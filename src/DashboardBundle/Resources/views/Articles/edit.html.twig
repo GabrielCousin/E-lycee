@@ -43,7 +43,7 @@
       </div>
     </section>
     <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--4-col dashboard-section clearfix">
-      <div class="mdl-cell mdl-cell--12-col">
+      <div class="mdl-cell mdl-cell--12-col dashboard-datetime-wrapper">
           {{ form_label(form.createAt, 'Date de création', {'label_attr': {'class': 'mdl-typography--title'} }) }}
           {{ form_widget(form.createAt,{'attr' : {'class':'mdl-textfield__input', 'data-format': 'dd-MM-yyyy'}}) }}
           {{ form_errors(form.createAt) }}

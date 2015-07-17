@@ -3,11 +3,11 @@
   margin-left: 30px;
   padding: 24px;
 
-  @media screen and (max-width: 860px) {
+  @media screen and (max-width: $bp-mini-laptop) {
     width: 35vw;
   }
 
-  @media screen and (max-width: 680px) {
+  @media screen and (max-width: $bp-tablet) {
     width: 100%;
     margin: 48px 0;
   }
