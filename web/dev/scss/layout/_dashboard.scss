@@ -55,3 +55,59 @@
 .dashboard-datetime-wrapper {
   margin-bottom: 40px;
 }
+
+
+.demo-chart {
+  text-align: center;
+  align-self: flex-start;
+
+  .mdl-typography--title {
+    margin-bottom: 5px;
+
+    + .mdl-typography--title {
+      margin: 0;
+    }
+  }
+}
+
+.dashboard-index-card {
+  min-height: 0;
+  height: 80px;
+
+  &.js-isExpanded {
+    height: auto;
+  }
+  h5 {
+    margin-top: 0;
+  }
+}
+
+.dashboard-index-card__list {
+  list-style: none;
+  padding: 0;
+  display: none;
+
+  .js-isExpanded & {
+    display: block;
+  }
+}
+
+.dashboard-index-card__action {
+  display: none;
+
+  .js-isExpanded & {
+    display: block;
+  }
+}
+
+.dashboard-index-card__list-item {
+  i {
+    color: rgb(244, 67, 54);
+  }
+
+  &.is-published {
+    i {
+      color: rgb(76, 175, 80);
+    }
+  }
+}

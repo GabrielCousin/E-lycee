@@ -9631,6 +9631,42 @@ select {
 .dashboard-datetime-wrapper {
   margin-bottom: 40px; }
 
+.demo-chart {
+  text-align: center;
+  -webkit-align-self: flex-start;
+      -ms-flex-item-align: start;
+          align-self: flex-start; }
+  .demo-chart .mdl-typography--title {
+    margin-bottom: 5px; }
+    .demo-chart .mdl-typography--title + .mdl-typography--title {
+      margin: 0; }
+
+.dashboard-index-card {
+  min-height: 0;
+  height: 80px; }
+  .dashboard-index-card.js-isExpanded {
+    height: auto; }
+  .dashboard-index-card h5 {
+    margin-top: 0; }
+
+.dashboard-index-card__list {
+  list-style: none;
+  padding: 0;
+  display: none; }
+  .js-isExpanded .dashboard-index-card__list {
+    display: block; }
+
+.dashboard-index-card__action {
+  display: none; }
+  .js-isExpanded .dashboard-index-card__action {
+    display: block; }
+
+.dashboard-index-card__list-item i {
+  color: #f44336; }
+
+.dashboard-index-card__list-item.is-published i {
+  color: #4caf50; }
+
 .u-push {
   float: right; }
 
