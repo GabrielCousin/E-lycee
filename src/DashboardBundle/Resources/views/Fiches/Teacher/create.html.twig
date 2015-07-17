@@ -44,5 +44,6 @@
 {% block javascripts %}
   {{ parent() }}
   <script src="{{ asset('dev/js/fiche-tag.js') }}"></script>
-  <script src="{{ asset('dev/js/allow-submit.js') }}"></script>
+  <!-- form-allow est pour le moment initialisé via fiche-tag.js -->
+  <script src="{{ asset('dev/js/form-allow.js') }}"></script>
 {% endblock %}

@@ -1,6 +1,6 @@
 // Récupère le div qui contient la collection de tags
 var collectionHolder = $('.form-choices');
-var $addTagLink = $('<button class="add_tag_link mdl-button mdl-js-button mdl-js-ripple-effect">Ajouter une question</button>');
+var $addTagLink = $('<button class="fiche-question-adder add_tag_link mdl-button mdl-js-button mdl-js-ripple-effect">Ajouter une question</button>');
 var $newLinkLi = $('<li></li>').append($addTagLink);
 $(document).ready(function() {
     // ajoute l'ancre « ajouter un tag » et li à la balise ul
@@ -9,7 +9,7 @@ $(document).ready(function() {
     $addTagLink.on('click', function(e) {
         e.preventDefault();
         addTagForm(collectionHolder, $newLinkLi);
-        AllowSubmit.init();
+        Allow.init();
     });
 });
 function addTagForm(collectionHolder, $newLinkLi) {
@@ -21,7 +21,7 @@ function addTagForm(collectionHolder, $newLinkLi) {
     var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
 
     // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un tag"
-    var $newFormLi = $('<li></li>').append(newForm);
+    var $newFormLi = $('<li class="fiche-question"></li>').append(newForm);
     $newLinkLi.before($newFormLi);
     // ajoute un lien de suppression au nouveau formulaire
     addTagFormDeleteLink($newFormLi);
