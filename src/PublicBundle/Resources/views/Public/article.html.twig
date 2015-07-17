@@ -15,8 +15,7 @@
     <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
     <div class="demo-content demo-content--no-spacing mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
       <div class="news-content-wrapper">
-        <!-- <div class="demo-crumbs mdl-color-text--grey-500"></div> -->
-        <h3>{{ article.title }}</h3>
+        <h1 class="mdl-typography--display-1">{{ article.title }}</h1>
 
         {% if is_granted('ROLE_TEACHER') %}
           {% if app.user.id == article.auteur.id %}

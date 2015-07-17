@@ -2,6 +2,15 @@
   max-width: 840px;
   margin: 48px auto;
   display: flex;
+
+  @media screen and (max-width: 860px) {
+    max-width: 90%;
+  }
+
+  @media screen and (max-width: 680px) {
+    flex-direction: column;
+  }
+
 }
 
 .demo-ribbon {
@@ -10,6 +19,15 @@
 
 .demo-content--no-spacing {
   padding: 0;
+}
+
+.demo-ribbon {
+  height: 50vh;
+  background-position: center;
+}
+
+.demo-main {
+  margin-top: -20vh;
 }
 
 .news-content-wrapper {

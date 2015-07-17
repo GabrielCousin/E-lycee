@@ -1,6 +1,15 @@
 .demo-card-wide.mdl-card {
   width: 512px;
+
+  @media screen and (max-width: 860px) {
+    width: 55vw;
+  }
+
+  @media screen and (max-width: 680px) {
+    width: 100%;
+  }
 }
+
 .demo-card-wide > .mdl-card__title {
   color: #fff;
   height: 176px;
@@ -13,4 +22,14 @@
 
 .mdl-card:not(:last-of-type) {
   margin-bottom: 48px;
+}
+
+.mdl-card__actions {
+  @media screen and (max-width: 680px) {
+    text-align: center;
+
+    .u-push {
+      float: none;
+    }
+  }
 }

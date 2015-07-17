@@ -2,6 +2,15 @@
   @extend .mdl-card;
   margin-left: 30px;
   padding: 24px;
+
+  @media screen and (max-width: 860px) {
+    width: 35vw;
+  }
+
+  @media screen and (max-width: 680px) {
+    width: 100%;
+    margin: 48px 0;
+  }
 }
 
 

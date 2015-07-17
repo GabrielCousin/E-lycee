@@ -9621,6 +9621,10 @@ html, body {
   vertical-align: middle;
   padding-right: 15px; }
 
+a[disabled] {
+  color: rgba(0, 0, 0, 0.26);
+  pointer-events: none; }
+
 .modal {
   z-index: 11;
   top: 50%;
@@ -9675,7 +9679,7 @@ html, body {
 .notification-closeBtn {
   position: absolute;
   right: 16px;
-  top: 12px; }
+  top: 16px; }
 
 .notification-text {
   margin-bottom: 0; }
@@ -9694,6 +9698,12 @@ html, body {
 
 .demo-card-wide.mdl-card, .demo-card-wide.modal, .demo-card-wide.sidebar {
   width: 512px; }
+  @media screen and (max-width: 860px) {
+    .demo-card-wide.mdl-card, .demo-card-wide.modal, .demo-card-wide.sidebar {
+      width: 55vw; } }
+  @media screen and (max-width: 680px) {
+    .demo-card-wide.mdl-card, .demo-card-wide.modal, .demo-card-wide.sidebar {
+      width: 100%; } }
 
 .demo-card-wide > .mdl-card__title {
   color: #fff;
@@ -9706,6 +9716,12 @@ html, body {
 
 .mdl-card:not(:last-of-type), .modal:not(:last-of-type), .sidebar:not(:last-of-type) {
   margin-bottom: 48px; }
+
+@media screen and (max-width: 680px) {
+  .mdl-card__actions {
+    text-align: center; }
+    .mdl-card__actions .u-push {
+      float: none; } }
 
 .main-navbar .mdl-navigation__link {
   opacity: .5; }
@@ -9723,12 +9739,27 @@ html, body {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
+  @media screen and (max-width: 860px) {
+    .base-wrapper {
+      max-width: 90%; } }
+  @media screen and (max-width: 680px) {
+    .base-wrapper {
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column; } }
 
 .demo-ribbon {
   background-size: cover; }
 
 .demo-content--no-spacing {
   padding: 0; }
+
+.demo-ribbon {
+  height: 50vh;
+  background-position: center; }
+
+.demo-main {
+  margin-top: -20vh; }
 
 .news-content-wrapper {
   padding: 80px 56px; }
@@ -9760,6 +9791,13 @@ html, body {
 .sidebar {
   margin-left: 30px;
   padding: 24px; }
+  @media screen and (max-width: 860px) {
+    .sidebar {
+      width: 35vw; } }
+  @media screen and (max-width: 680px) {
+    .sidebar {
+      width: 100%;
+      margin: 48px 0; } }
 
 .sidebar__list {
   border-left: solid 3px #C0EbF1;
