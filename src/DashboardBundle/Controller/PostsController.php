@@ -80,6 +80,8 @@ class PostsController extends Controller
         }
         return array('form' => $form->createView());
     }
+
+
     /**
      * @Route("/professeur/article/edit/status/{id}", name="teacher.article.editStatus", options={"expose"=true})
      */
@@ -105,6 +107,8 @@ class PostsController extends Controller
         $response = array('status'=>'OK','message'=>$message);
         return new JsonResponse($response);
     }
+
+
     /**
      * @Route("/professeur/article/delete/{id}", name="teacher.article.delete", options={"expose"=true})
      */
@@ -113,9 +117,6 @@ class PostsController extends Controller
         $em         = $doctrine->getManager();
         $repository = $doctrine->getRepository('PublicBundle:Post');
         $post       = $repository->find($id);
-        // echo '<pre>';Debug::dump($post->getStatus()->getId());echo '</pre>';exit();
-        // $status = $repository->find($id);
-
         $em->remove($post);
         $em->flush();
         $message = "L'article a bien été supprimé";
@@ -123,16 +124,15 @@ class PostsController extends Controller
         $urlRedirect = $this->generateUrl('teacher.articles.view');
         return $this->redirect($urlRedirect);
     }
+
     /**
      * @Route("/professeur/article/multiple/", name="teacher.article.multiple", options={"expose"=true})
      * @Method({"POST","GET"})
      */
     public function ManageMultipleAction(Request $request){
-//         echo '<pre>';Debug::dump($request->query->get('ids'));echo '</pre>';exit();
         $action = $request->query->get('action');
         $ids    = $request->query->get('ids');
         $ids = explode(',',$ids);
-
         $doctrine   = $this->getDoctrine();
         $em         = $doctrine->getManager();
         $postRp = $doctrine->getRepository('PublicBundle:Post');
@@ -146,7 +146,6 @@ class PostsController extends Controller
                     $em->persist($post);
                 }
                 $message = ( count($posts) == 1 ) ? 'Votre article n\'est plus publié' : 'Vos '.count($posts).' articles ne sont plus publiés' ;
-
             break ;
             case 'PUBLISH' :
                 $published = $statusRp->findOneBy(array('name'=>'PUBLISHED'));
@@ -170,24 +169,5 @@ class PostsController extends Controller
         $response = array('status'=>'OK','message'=>$message);
         return new JsonResponse($response);
     }
-    /**
-     * @Route("/professeur/article/publishMultiple/", name="teacher.article.publishMultiple", options={"expose"=true})
-     */
-    public function publishMultipleAction(Request $request){
-//        echo '<pre>';Debug::dump($request->query->get('ids'));echo '</pre>';exit();
 
-        $response = array('status'=>'OK','message'=>'');
-        return new JsonResponse($response);
-
-    }
-    /**
-     * @Route("/professeur/article/unpublishMultiple/", name="teacher.article.unpublishMultiple", options={"expose"=true})
-     */
-    public function unpublishMultipleAction(Request $request){
-//        echo '<pre>';Debug::dump($request->query->get('ids'));echo '</pre>';exit();
-
-        $response = array('status'=>'OK','message'=>'');
-        return new JsonResponse($response);
-
-    }
 }

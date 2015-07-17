@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class FicheRepository extends EntityRepository
 {
+    public function getFichesById(Array $ids){
+        $stringIds = implode(' ,',$ids);
+        $results = $this
+            ->createQueryBuilder('f')
+            ->where ('f.id IN (' . $stringIds . ')')
+            ->getQuery()
+            ->getResult();
+
+        return $results ;
+    }
 }

@@ -19,7 +19,7 @@ use PublicBundle\Entity\Status;
 class FichesController extends Controller
 {
  /**
- * @Route("professeur/fiches/list", name="teacher.fiches.home")
+ * @Route("professeur/fiches/list", name="teacher.fiches.home",options={"expose"=true})
  * @Template("DashboardBundle:Fiches:Teacher/home.html.twig")
  */
     public function homeAction()
@@ -188,6 +188,50 @@ class FichesController extends Controller
             $message = "publié";
         }
         $em->persist($fiche);
+        $em->flush();
+        $response = array('status'=>'OK','message'=>$message);
+        return new JsonResponse($response);
+    }
+    /**
+     * @Route("/professeur/fiches/multiple/", name="teacher.fiches.multiple", options={"expose"=true})
+     * @Method({"POST","GET"})
+     */
+    public function ManageMultipleAction(Request $request){
+        $action = $request->query->get('action');
+        $ids    = $request->query->get('ids');
+        $ids = explode(',',$ids);
+        $doctrine   = $this->getDoctrine();
+        $em         = $doctrine->getManager();
+        $postRp = $doctrine->getRepository('DashboardBundle:Fiche');
+        $statusRp = $doctrine->getRepository('PublicBundle:Status');
+        $posts = $postRp->getFichesById($ids);
+        switch ($action) {
+            case 'UNPUBLISH' :
+                $unpublished = $statusRp->findOneBy(array('name'=>'UNPUBLISHED'));
+                foreach ($posts as $post){
+                    $post->setStatus($unpublished);
+                    $em->persist($post);
+                }
+                $message = ( count($posts) == 1 ) ? 'Votre fiche n\'est plus publié' : 'Vos '.count($posts).' fiches ne sont plus publiés' ;
+                break ;
+            case 'PUBLISH' :
+                $published = $statusRp->findOneBy(array('name'=>'PUBLISHED'));
+                foreach ($posts as $post){
+                    $post->setStatus($published);
+                    $em->persist($post);
+                }
+                $message = ( count($posts) == 1 ) ? 'Votre fiche a été publié' : 'Vos '.count($posts).' fiches ont été publiés' ;
+                break ;
+            case 'DELETE':
+                foreach ($posts as $post){
+                    $em->remove($post);
+                }
+                $message = ( count($posts) == 1 ) ? 'La fiche a été supprimé' : 'Vos '.count($posts).' fiches ont été supprimés avec succès' ;
+                break ;
+            default :
+                $message = "une erreur s'est produite.";
+                break;
+        }
         $em->flush();
         $response = array('status'=>'OK','message'=>$message);
         return new JsonResponse($response);

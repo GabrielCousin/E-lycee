@@ -7,22 +7,29 @@ var MultipleActions = {
   publishBtn: document.getElementById('list-items-publish'),
   unpublishBtn: document.getElementById('list-items-unpublish'),
   routes : {
-      'multiple': 'teacher.article.multiple',
-      'postList':  'teacher.articles.view'
+      'post' :{
+          'multipleAction': 'teacher.article.multiple',
+          'redirect':  'teacher.articles.view',
+      },
+      'fiche':{
+          'multipleAction': 'teacher.fiches.multiple',
+          'redirect':  'teacher.fiches.home',
+      }
   },
+  type: '',
 
 
   init: function () {
     var checkbox = document.querySelectorAll('.mdl-checkbox__ripple-container');
-
+    this.type = this.menu.dataset.type ;
     for (var i = 0, l = checkbox.length; i < l; i++) {
       checkbox[i].addEventListener('click', this.menuVisibility.bind(this), false);
     };
       var app = this ;
     if (this.ids !== []) {
-      this.deleteBtn.addEventListener('click', function(){ app.multipleAction('DELETE')}, false);
-      this.publishBtn.addEventListener('click',function(){ app.multipleAction('PUBLISH')}, false);
-      this.unpublishBtn.addEventListener('click',function(){ app.multipleAction('UNPUBLISH')}, false);
+      this.deleteBtn.addEventListener('click', function(){ app.multipleAction('DELETE',this.type)}, false);
+      this.publishBtn.addEventListener('click',function(){ app.multipleAction('PUBLISH',this.type)}, false);
+      this.unpublishBtn.addEventListener('click',function(){ app.multipleAction('UNPUBLISH',this.type)}, false);
     };
   },
 
@@ -82,14 +89,15 @@ var MultipleActions = {
     var ids = this.ids,
         app = this ;
     if (action === "DELETE"){
-        if (!confirm('êtes vous sur de vouloir supprimer ces articles ?')) return false;
+       var lebelType =  ( type === 'post' ) ? "articles" : "fiches" ;
+        if (!confirm('êtes vous sur de vouloir supprimer ces ' + labelType + ' ?')) return false;
     }
-    var route = Routing.generate(this.routes.multiple,{'action':action,'ids': ids.join(',')});
+    var route = Routing.generate(this.routes[app.type].multipleAction,{'action':action,'ids': ids.join(',')});
     var xhr = this.initXhr();
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-            document.location.href= Routing.generate(app.routes.postList);
+            document.location.href= Routing.generate(app.routes[app.type].redirect);
         }
     };
     xhr.open('GET', route, true);
