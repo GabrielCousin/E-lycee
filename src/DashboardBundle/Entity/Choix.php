@@ -4,7 +4,6 @@ namespace DashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert ;
-use Iphp\FileStoreBundle\Mapping\Annotation as FileStore;
 /**
  * Choix
  *
@@ -26,7 +25,7 @@ class Choix
      * @var integer
      *
      * @ORM\Column(name="note", type="integer")
-     * @Assert\NotNull(message="Vous devez donner une note à la réponse")
+     * @Assert\NotBlank(message="Vous devez donner une note à la réponse")
      * @Assert\GreaterThan(value = 0,message="La note doit être strictement positive ")
      *
      */
@@ -38,6 +37,7 @@ class Choix
      * @var boolean
      *
      * @ORM\Column(name="reponse", type="boolean")
+     * @Assert\Choice(choices = {"0","1"}, message = "Choisissez un réponse valide.")
      */
 
     private $reponse;
@@ -46,6 +46,13 @@ class Choix
      * @var string
      *
      * @ORM\Column(name="content", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez donner une description à ce choix")
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "255",
+     *      minMessage = "Votre description doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre description ne peut pas être plus longue que {{ limit }} caractères"
+     * )
      */
     private $content;
 

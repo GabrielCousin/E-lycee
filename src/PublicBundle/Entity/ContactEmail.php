@@ -3,7 +3,7 @@
 namespace PublicBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert ;
 /**
  * Contact
  *
@@ -25,6 +25,13 @@ class ContactEmail
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=50)
+     * @Assert\NotBlank(message="merci de bien vouloir renseigner votre prénom")
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "50",
+     *      minMessage = "Votre nom doit faire au minimum {{ limit }} caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
+     * )
      */
     private $prenom;
 
@@ -32,6 +39,13 @@ class ContactEmail
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=50)
+     * @Assert\NotBlank(message="merci de bien vouloir renseigner votre nom")
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "50",
+     *      minMessage = "Votre nom doit faire au minimum {{ limit }} caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
+     * )
      */
     private $nom;
 
@@ -39,6 +53,17 @@ class ContactEmail
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=150)
+     * @Assert\NotBlank(message="vous devez renseigner un email pour que nous puissions vous répondre")
+     * @Assert\Email(
+     *     message = "'{{ value }}' n'est pas un email valide.",
+     *     checkMX = true
+     * )
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "150",
+     *      minMessage = "Votre email doit faire au minimum {{ limit }} caractères",
+     *      maxMessage = "Votre email ne peut pas être plus long que {{ limit }} caractères"
+     * )
      */
     private $email;
 
@@ -46,6 +71,11 @@ class ContactEmail
      * @var string
      *
      * @ORM\Column(name="message", type="text")
+     * @Assert\NotBlank(message="vous devez écrire un message, qui sera transmis à l'administration de l'école")
+     * @Assert\Length(
+     *     min = "20",
+     *     minMessage = "Votre message doit faire au minimum {{ limit }} caractères",
+     * )
      */
     private $message;
 
@@ -56,7 +86,9 @@ class ContactEmail
      */
     private $createAt;
 
-
+    public function __construct(){
+        $this->createAt = new \Datetime('now');
+    }
     /**
      * Get id
      *

@@ -18,6 +18,7 @@ class ChoixType extends AbstractType
             ->add('content')
             ->add('reponse','choice',array(
                 'choices' => array('1' => 'oui', '0' => 'non'),
+                'expanded'  => true,
                 'required' => true
             ))
             ->add('note','number',array('empty_data'=>'2'))
