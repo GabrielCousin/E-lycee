@@ -6,7 +6,7 @@
 
   {% for post in results %}
       {%  if  post.picture.fileName is defined and post.picture.fileName != NULL %}
-          {% set pictureUrl = asset('public/upload/images/pictures' ~ post.picture.fileName) %}
+          {% set pictureUrl = asset(images_path ~ post.picture.fileName) %}
       {% else %}
           {% set pictureUrl = '' %}
       {%  endif  %}

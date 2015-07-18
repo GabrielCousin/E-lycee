@@ -36,6 +36,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     globals:
+        images_path:     "%images_path%"
         browser_sync:     "%browser_sync%"
         fos_csrf_provider: "@form.csrf_provider"
 

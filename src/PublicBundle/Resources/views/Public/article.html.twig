@@ -4,7 +4,7 @@
 {% block mainContent %}
 
 {% if article.picture.fileName is defined and article.picture.fileName != NULL %}
-  {% set pictureUrl = asset('public/upload/images/pictures' ~ article.picture.fileName) %}
+  {% set pictureUrl = asset(images_path ~ article.picture.fileName) %}
 {% else %}
   {% set pictureUrl = '' %}
 {% endif %}
