@@ -9723,6 +9723,13 @@ a[disabled] {
     .mdl-card__actions .u-push {
       float: none; } }
 
+.form-errors ul {
+  padding: 0; }
+  .form-errors ul li {
+    font-size: 12px;
+    color: #f44336;
+    list-style: none; }
+
 .main-navbar .mdl-navigation__link {
   opacity: .5; }
   .main-navbar .mdl-navigation__link.is-active {

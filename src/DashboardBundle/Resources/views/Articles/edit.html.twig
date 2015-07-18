@@ -16,29 +16,29 @@
     <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col dashboard-section">
       <div class="mdl-grid mdl-grid--no-spacing">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-          {{ form_errors(form.title) }}
+          <div class="form-errors">{{ form_errors(form.title) }}</div>
           {{ form_widget(form.title,{'attr' : {'class':'mdl-textfield__input'}}) }}
           {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-          {{ form_errors(form.extract) }}
+          <div class="form-errors">{{ form_errors(form.extract) }}</div>
           {{ form_widget(form.extract,{'attr' : {'class':'mdl-textfield__input', 'rows': '3'}}) }}
           {{ form_label(form.extract, 'Extrait', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-          {{ form_errors(form.content) }}
+          <div class="form-errors">{{ form_errors(form.content) }}</div>
           {{ form_widget(form.content,{'attr' : {'class':'mdl-textfield__input', 'rows': '7'}}) }}
           {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
         </div>
 {#        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-          {{ form_errors(form.urlThumbnail) }}
+          <div class="form-errors">{{ form_errors(form.urlThumbnail) }}</div>
           {{ form_widget(form.urlThumbnail,{'attr' : {'class':'mdl-textfield__input', 'rows': '7'}}) }}
           {{ form_label(form.urlThumbnail, 'Lien de l\'image', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
         </div>#}
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
               {{ form_label(form.picture, 'Picture : ') }}
               {{ form_widget(form.picture) }}
-              {#{{ form_errors(form.picture) }}#}
+              {#<div class="form-errors">{{ form_errors(form.picture) }}</div>#}
           </div>
       </div>
     </section>
@@ -46,12 +46,12 @@
       <div class="mdl-cell mdl-cell--12-col dashboard-datetime-wrapper">
           {{ form_label(form.createAt, 'Date de création', {'label_attr': {'class': 'mdl-typography--title'} }) }}
           {{ form_widget(form.createAt,{'attr' : {'class':'mdl-textfield__input', 'data-format': 'dd-MM-yyyy'}}) }}
-          {{ form_errors(form.createAt) }}
+          <div class="form-errors">{{ form_errors(form.createAt) }}</div>
       </div>
       <div class="mdl-cell mdl-cell--12-col">
           {{ form_label(form.status, 'Status', {'label_attr': {'class': 'mdl-typography--title select-label'} }) }}
           {{ form_widget(form.status,{'attr' : {'class':''}}) }}
-          {{ form_errors(form.status) }}
+          <div class="form-errors">{{ form_errors(form.status) }}</div>
       </div>
       {{ form_widget(form._token) }}
       <input type="submit" value={{submitValue}} class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push"/>

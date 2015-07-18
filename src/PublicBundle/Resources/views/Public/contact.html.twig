@@ -12,26 +12,26 @@
       {{ form_start(form, {'method': 'POST', 'attr': {'class': ''}}) }}
         <div class="mdl-grid mdl-grid--no-spacing">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-            {{ form_errors(form.prenom) }}
+            <div class="form-errors">{{ form_errors(form.prenom) }}</div>
             {{ form_widget(form.prenom, { 'attr': {'class': 'mdl-textfield__input'} }) }}
             {{ form_label(form.prenom, 'Prénom', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-            {{ form_errors(form.nom) }}
+            <div class="form-errors">{{ form_errors(form.nom) }}</div>
             {{ form_widget(form.nom, { 'attr': {'class': 'mdl-textfield__input'} }) }}
             {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
           </div>
         </div>
         <div class="mdl-grid mdl-grid--no-spacing">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-            {{ form_errors(form.email) }}
+            <div class="form-errors">{{ form_errors(form.email) }}</div>
             {{ form_widget(form.email, {'type': 'email', 'attr': {'class': 'mdl-textfield__input', 'pattern': '[\._+a-z0-9]+[@][\._+a-z0-9]+'} }) }}
             {{ form_label(form.email, 'E-mail', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
           </div>
         </div>
         <div class="mdl-grid mdl-grid--no-spacing">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-            {{ form_errors(form.message) }}
+            <div class="form-errors">{{ form_errors(form.message) }}</div>
             {{ form_widget(form.message, { 'attr': {'class': 'mdl-textfield__input', 'rows': '3'} }) }}
             {{ form_label(form.message, 'Votre message', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
           </div>

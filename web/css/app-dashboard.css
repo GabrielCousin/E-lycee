@@ -9667,6 +9667,13 @@ select {
 .dashboard-index-card__list-item.is-published i {
   color: #4caf50; }
 
+.form-errors ul {
+  padding: 0; }
+  .form-errors ul li {
+    font-size: 12px;
+    color: #f44336;
+    list-style: none; }
+
 .u-push {
   float: right; }
 

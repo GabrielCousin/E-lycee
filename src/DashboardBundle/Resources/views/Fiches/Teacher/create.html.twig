@@ -8,22 +8,22 @@
     <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col dashboard-section clearfix">
       <div class="mdl-grid mdl-grid--no-spacing">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-          {{ form_errors(form.title) }}
+          <div class="form-errors">{{ form_errors(form.title) }}</div>
           {{ form_widget(form.title,{'attr' : {'class':'mdl-textfield__input'}}) }}
           {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
         </div>
         <div class="mdl-cell mdl-cell--12-col">
-          {{ form_errors(form.niveau) }}
+          <div class="form-errors">{{ form_errors(form.niveau) }}</div>
           {{ form_widget(form.niveau,{'attr' : {'class':'u-push'}}) }}
           {{ form_label(form.niveau, 'Niveau', {'label_attr': {'class': 'select-label select-label--inline'} }) }}
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-          {{ form_errors(form.content) }}
+          <div class="form-errors">{{ form_errors(form.content) }}</div>
           {{ form_widget(form.content, {'attr' : {'class':'mdl-textfield__input'}}) }}
           {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
         </div>
 
-        {{ form_errors(form) }}
+        <div class="form-errors">{{ form_errors(form) }}</div>
 
         <ul class="mdl-cell mdl-cell--12-col form-choices" data-prototype="
           {% filter escape %}

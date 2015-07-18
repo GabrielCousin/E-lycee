@@ -22,11 +22,11 @@
                 <span class="mdl-radio__label">{{ child.vars.label }}</span>
               </label>
             {% endfor %}
-            {{ form_errors(formReponse) }}
+            <div class="form-errors">{{ form_errors(formReponse) }}</div>
           </div>
         {% else %}
           {{ form_widget(formReponse) }}
-          {{ form_errors(formReponse) }}
+          <div class="form-errors">{{ form_errors(formReponse) }}</div>
         {% endif %}
       </div>
     {% endfor %}
