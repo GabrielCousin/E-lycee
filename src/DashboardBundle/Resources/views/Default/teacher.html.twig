@@ -7,7 +7,9 @@
   {% endif %}
 {% endfor %}
 
+
 {% set articlesTotal = articles | length %}
+{% set articlesPercent = (articlesPubliés / articlesTotal * 100) | round(1, 'floor') %}
 
 {% set fichesPubliées = 0 %}
 {% for fiche in fiches %}
@@ -17,17 +19,16 @@
 {% endfor %}
 
 {% set fichesTotal = fiches | length %}
-
+{% set fichesPercent = (fichesPubliées / fichesTotal * 100) | round(1, 'floor') %}
 {% extends "DashboardBundle::templates/base.html.twig" %}
 
 
 {% block mainContent %}
   <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
     <div class="demo-chart mdl-cell mdl-cell--3-col">
-      <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
-        <use xlink:href="#piechart" mask="url(#piemask)" />
-        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ (articlesPubliés / articlesTotal * 100) | round(1, 'floor') }}<tspan font-size="0.2" dy="-0.07">%</tspan></text>
-      </svg>
+
+      {% include "DashboardBundle:includes:graph.html.twig" with {'percent': articlesPercent, 'id': 0} %}
+
       <h4 class="mdl-typography--title">{{ articlesPubliés }} articles publiés</h4>
       <h4 class="mdl-typography--title">{{ articlesTotal }} articles créés</h4>
     </div>
@@ -44,10 +45,9 @@
       <h4 class="mdl-typography--title">élèves inscrits</h4>
     </div>
     <div class="demo-chart mdl-cell mdl-cell--3-col">
-      <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
-        <use xlink:href="#piechart" mask="url(#piemask)" />
-        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ (fichesPubliées / fichesTotal * 100) | round(1, 'floor') }}<tspan dy="-0.07" font-size="0.2">%</tspan></text>
-      </svg>
+
+      {% include "DashboardBundle:includes:graph.html.twig" with {'percent': fichesPercent, 'id': 1} %}
+
       <h4 class="mdl-typography--title">{{ fichesPubliées }} fiches publiés</h4>
       <h4 class="mdl-typography--title">{{ fichesTotal }}  fiches créés</h4>
     </div>
@@ -112,19 +112,6 @@
       </button>
     </div>
   </div>
-
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
-    <defs>
-      <mask id="piemask" maskContentUnits="objectBoundingBox">
-        <circle cx=0.5 cy=0.5 r=0.49 fill="white" />
-        <circle cx=0.5 cy=0.5 r=0.40 fill="black" />
-      </mask>
-      <g id="piechart">
-        <circle cx=0.5 cy=0.5 r=0.5 />
-        <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
-      </g>
-    </defs>
-  </svg>
 {% endblock %}
 
 {% block javascripts %}
@@ -133,5 +120,17 @@
   <script src="{{ asset('dev/js/graph.js') }}"></script>
   <script>
     CardToggle.init();
+  </script>
+
+  <script>
+    var Graph0 = Graph;
+    Graph0.percent = {{articlesPercent}};
+    Graph0.id = 0;
+    Graph0.init();
+
+    var Graph1 = Graph;
+    Graph1.percent = {{fichesPercent}};
+    Graph1.id = 1;
+    Graph1.init();
   </script>
 {% endblock %}
