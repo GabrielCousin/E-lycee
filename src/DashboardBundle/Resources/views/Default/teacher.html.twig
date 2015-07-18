@@ -130,4 +130,8 @@
 {% block javascripts %}
   {{ parent() }}
   <script src="{{ asset('dev/js/card-toggle.js') }}"></script>
+  <script src="{{ asset('dev/js/graph.js') }}"></script>
+  <script>
+    CardToggle.init();
+  </script>
 {% endblock %}

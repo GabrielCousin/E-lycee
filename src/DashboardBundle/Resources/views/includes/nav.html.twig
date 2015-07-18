@@ -3,6 +3,7 @@
 {% set articles = 'teacher.articles.view' %}
 {% set homeT = 'teacher.home' %}
 {% set fichesT = 'teacher.fiches.home' %}
+{% set classe = 'teacher.students.list' %}
 
 {% set homeS = 'student.home' %}
 {% set fichesS = 'student.fiches.home' %}
@@ -38,6 +39,7 @@
     {% endif %}
     {% if is_granted('ROLE_TEACHER') %}
       <a class="mdl-navigation__link {% if route == articles %}is-active{% endif %}" href="{{ url(articles, {'id': app.user.id }) }}"><i class="mdl-color-text--blue-grey-400 material-icons">format_align_left</i>Articles</a>
+      <a class="mdl-navigation__link {% if route == classe %}is-active{% endif %}" href="{{ url(classe) }}"><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Élèves</a>
     {% endif %}
   </nav>
 </div>

@@ -1,0 +1,28 @@
+{% set title = "Liste des étudiants" %}
+{% extends "DashboardBundle::templates/base.html.twig" %}
+
+{% block mainContent %}
+
+  <table class="article-list mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+    <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric">Nom</th>
+        <th class="mdl-data-table__cell--non-numeric">Prénom</th>
+        <th>Moyenne</th>
+        <th>QCM effectués</th>
+        <th>Score total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#% for student in students %#}
+        <tr>
+          <td class="mdl-data-table__cell--non-numeric">{ student.firstname }}</td>
+          <td class="mdl-data-table__cell--non-numeric">{ student.lastname }}</td>
+          <td>{ student.moyenne ? }}</td>
+          <td>{ student.qcm ? }}</td>
+          <td>{ student.score ? }}</td>
+        </tr>
+      {#% endfor %#}
+    </tbody>
+  </table>
+{% endblock %}

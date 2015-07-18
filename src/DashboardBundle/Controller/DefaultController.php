@@ -20,7 +20,14 @@ class DefaultController extends Controller
         $articles   = $doctrine->getRepository('PublicBundle:Post')->getPostByAuteur($token->getUser()->getId());
         return array('articles' => $articles, 'fiches' => $fiches);
     }
-
+    /**
+     * @Route("professeur/classe", name="teacher.students.list")
+     * @Template("DashboardBundle:Students:list.html.twig")
+     */
+    public function classroomAction()
+    {
+        return array();
+    }
     /**
      * @Route("eleve", name="student.home")
      * @Template("DashboardBundle:Default:student.html.twig")
