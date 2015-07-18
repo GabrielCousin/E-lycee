@@ -1,32 +1,43 @@
 {% set title = "Dashboard | Étudiants" %}
+{% set QCMtotal = scores | length %}
+{% set QCMeffectués = 0 %}
+{% set PointsTotal = 0 %}
+
+{% for score in scores %}
+  {% if score.status.id == 4 %}
+    {% set QCMeffectués = QCMeffectués + 1 %}
+  {% endif %}
+  {% set PointsTotal = PointsTotal + score.note %}
+{% endfor %}
+
+{% set PointsMax = 25 %}
+{% set PointsRatio = (PointsTotal / PointsMax * 100) %}
 
 {% extends "DashboardBundle::templates/base.html.twig" %}
 
 {% block mainContent %}
-  <div class="mdl-grid demo-content">
-    <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-      <div class="demo-chart mdl-cell mdl-cell--4-col">
-        <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
-          <use xlink:href="#piechart" mask="url(#piemask)" />
-          <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan font-size="0.2" dy="-0.07">%</tspan></text>
-        </svg>
-        <h4 class="mdl-typography--title">{{ "n" }} QCM effectués</h4>
-        <h4 class="mdl-typography--title">{{ "n" }} QCM disponibles</h4>
-      </div>
-      <div class="demo-chart mdl-cell mdl-cell--4-col">
-        <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
-          <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">1082</text>
-        </svg>
-        <h4 class="mdl-typography--title">moyenne générale</h4>
-      </div>
-      <div class="demo-chart mdl-cell mdl-cell--4-col">
-        <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
-          <use xlink:href="#piechart" mask="url(#piemask)" />
-          <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan dy="-0.07" font-size="0.2">%</tspan></text>
-        </svg>
-        <h4 class="mdl-typography--title">{{ "n" }} score</h4>
-        <h4 class="mdl-typography--title">{{ "n" }} score maximum</h4>
-      </div>
+  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+    <div class="demo-chart mdl-cell mdl-cell--4-col">
+      <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
+        <use xlink:href="#piechart" mask="url(#piemask)" />
+        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ (QCMeffectués / QCMtotal * 100) | round(1, 'floor')}}<tspan font-size="0.2" dy="-0.07">%</tspan></text>
+      </svg>
+      <h4 class="mdl-typography--title">{{ QCMeffectués }} QCM effectués</h4>
+      <h4 class="mdl-typography--title">{{ QCMtotal }} QCM total</h4>
+    </div>
+    <div class="demo-chart mdl-cell mdl-cell--4-col">
+      <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
+        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ (PointsRatio / 5) | round(2, 'floor') }}</text>
+      </svg>
+      <h4 class="mdl-typography--title">moyenne générale</h4>
+    </div>
+    <div class="demo-chart mdl-cell mdl-cell--4-col">
+      <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
+        <use xlink:href="#piechart" mask="url(#piemask)" />
+        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ PointsRatio | round(1, 'floor') }}<tspan dy="-0.07" font-size="0.2">%</tspan></text>
+      </svg>
+      <h4 class="mdl-typography--title">{{ PointsTotal }} score</h4>
+      <h4 class="mdl-typography--title">{{ PointsMax }} score maximum</h4>
     </div>
   </div>
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
@@ -37,7 +48,7 @@
       </mask>
       <g id="piechart">
         <circle cx=0.5 cy=0.5 r=0.5 />
-        <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
+        <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.5 z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
       </g>
     </defs>
   </svg>

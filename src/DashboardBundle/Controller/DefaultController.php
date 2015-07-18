@@ -14,7 +14,11 @@ class DefaultController extends Controller
      */
     public function teacherAction()
     {
-        return array();
+        $token = $this->get('security.context')->getToken();
+        $doctrine   = $this->getDoctrine();
+        $fiches     = $doctrine->getRepository('DashboardBundle:Fiche')->findBy(array('teacher' => $token->getUser()->getId()));
+        $articles   = $doctrine->getRepository('PublicBundle:Post')->getPostByAuteur($token->getUser()->getId());
+        return array('articles' => $articles, 'fiches' => $fiches);
     }
 
     /**
@@ -23,6 +27,10 @@ class DefaultController extends Controller
      */
     public function studentAction()
     {
-        return array();
+        $token = $this->get('security.context')->getToken();
+        $doctrine   = $this->getDoctrine();
+        $scoreRp = $doctrine->getRepository('DashboardBundle:Score');
+        $scores = $scoreRp->getScoreSeenStudent($token->getUser()->getId());
+        return array('scores' => $scores);
     }
 }
