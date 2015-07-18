@@ -24,7 +24,8 @@
         "swiftmailer/swiftmailer": "^5.4",
         "endroid/twitter-bundle": "^1.1",
         "friendsofsymfony/jsrouting-bundle": "^1.5",
-        "iphp/filestore-bundle": "^0.2.3"
+        "iphp/filestore-bundle": "^0.2.3",
+        "friendsofsymfony/comment-bundle": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

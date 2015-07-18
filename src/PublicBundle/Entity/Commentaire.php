@@ -5,15 +5,17 @@ namespace PublicBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert ;
 use Iphp\FileStoreBundle\Mapping\Annotation as FileStore;
+use FOS\CommentBundle\Entity\Comment as BaseComment;
 
 
 /**
  * Commentaire
  *
  * @ORM\Table()
+ * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  * @ORM\Entity(repositoryClass="PublicBundle\Entity\CommentaireRepository")
  */
-class Commentaire
+class Commentaire extends BaseComment
 {
     /**
      * @var integer
@@ -22,13 +24,12 @@ class Commentaire
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="contenu", type="text")
-     * @Assert\NotBlank(message="Vous devez saisir un nom")
      *
      */
     private $contenu;
@@ -55,6 +56,14 @@ class Commentaire
      *
      */
     private $post;
+
+    /**
+     * Thread of this comment
+     *
+     * @var Thread
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="commentaires")
+     */
+    protected $thread;
 
     /**
      * Get id

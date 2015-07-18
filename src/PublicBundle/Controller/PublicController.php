@@ -118,13 +118,6 @@ class PublicController extends Controller
         $article    = $rc->findOneById($id);
 
         $user       = $this->getUser();
-        $userConnect    = false;
-
-        if (true === $this->get('security.context')->isGranted(
-            'IS_AUTHENTICATED_FULLY'
-        )) {
-            $userConnect = true;
-        }
 
         $commentaire = new Commentaire() ;
         $commentairetype = new CommentaireType();
@@ -141,7 +134,7 @@ class PublicController extends Controller
             return $this->redirect($this->generateUrl('public.news.article', array('id' => $id)));
         }
 
-        return array('form' => $formCommentaire->createView(), 'article' => $article, 'userConnect' => $userConnect, 'user' => $user);
+        return array('form' => $formCommentaire->createView(), 'article' => $article, 'user' => $user);
     }
 
     /**

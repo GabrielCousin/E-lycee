@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert ;
 use Doctrine\Common\Collections\ArrayCollection ;
 use Iphp\FileStoreBundle\Mapping\Annotation as FileStore;
+use FOS\CommentBundle\Entity\Thread as BaseThread;
 
 
 
@@ -16,9 +17,10 @@ use Iphp\FileStoreBundle\Mapping\Annotation as FileStore;
  * @ORM\Entity(
  *      repositoryClass="PostRepository"
  * )
+ * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  * @FileStore\Uploadable
  */
-class Post
+class Post extends BaseThread
 {
     /**
      * @var integer
@@ -27,7 +29,7 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -318,29 +320,6 @@ class Post
     public function getCreateAt()
     {
         return $this->createAt;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \PublicBundle\Entity\User $user
-     * @return Post
-     */
-    public function setUser(\PublicBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \PublicBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 
     /**

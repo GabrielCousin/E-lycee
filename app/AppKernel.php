@@ -24,6 +24,9 @@ class AppKernel extends Kernel
             new Endroid\Bundle\TwitterBundle\EndroidTwitterBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Iphp\FileStoreBundle\IphpFileStoreBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

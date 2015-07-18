@@ -2,7 +2,6 @@
 {% extends "PublicBundle::templates/single.html.twig" %}
 
 {% block mainContent %}
-
  {%  if  article.picture.fileName is defined and article.picture.fileName != NULL %}
      {% set pictureUrl = asset('public/upload/images/pictures' ~ article.picture.fileName) %}
  {% else %}
@@ -28,6 +27,8 @@
 
 
         <h4>Commentaires</h4>
+        {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': article.id} %}
+
         {% if article.commentaires is empty %}
           <p>Pas de commentaires pour le moment.</p>
         {% endif %}
@@ -43,7 +44,7 @@
       <section class="comment-section clearfix">
 
           {{ form_start(form, {'method': 'POST', 'attr': {'class': ''}}) }}
-            {% if userConnect == true %}
+            {% if app.user %}
                 <p><small>Vous êtes connecté(e) en tant que : <strong>{{ app.user.username | title }}</strong> | <a href="{{ url('fos_user_security_logout')}}">Se déconnecter</a></small></p>
                 {{ form_widget(form.username, {'type': 'hidden', 'value': app.user.username} ) }}
             {% else %}

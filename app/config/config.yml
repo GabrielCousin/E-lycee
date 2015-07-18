@@ -6,7 +6,7 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi:             ~
@@ -43,7 +43,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        ["FOSCommentBundle"]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -90,6 +90,7 @@ doctrine:
                     UserBundle: ~
                     FOSUserBundle: ~
                     DashboardBundle: ~
+                    FOSCommentBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -114,3 +115,10 @@ iphp_file_store:
                translit: ~
                propertyPostfix:    #or propertyPostfix
                    params: { field : id, delimiter: "_" }
+
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: PublicBundle\Entity\Commentaire
+            thread: PublicBundle\Entity\Post

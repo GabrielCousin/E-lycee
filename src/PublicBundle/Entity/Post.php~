@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert ;
 use Doctrine\Common\Collections\ArrayCollection ;
 use Iphp\FileStoreBundle\Mapping\Annotation as FileStore;
+use FOS\CommentBundle\Entity\Thread as BaseThread;
 
 
 
@@ -16,9 +17,10 @@ use Iphp\FileStoreBundle\Mapping\Annotation as FileStore;
  * @ORM\Entity(
  *      repositoryClass="PostRepository"
  * )
+ * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  * @FileStore\Uploadable
  */
-class Post
+class Post extends BaseThread
 {
     /**
      * @var integer
@@ -27,7 +29,7 @@ class Post
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -35,7 +37,7 @@ class Post
      * @ORM\Column(name="title", type="string", length=150)
      * @Assert\NotBlank(message="Vous devez renseigner un titre à votre article")
      * @Assert\Length(
-    *       min = "2",
+     *       min = "2",
      *      max = "150",
      *      minMessage = "Votre titre doit faire au moins {{ limit }} caractères",
      *      maxMessage = "Votre nom ne peut pas être plus long que {{ limit }} caractères"
@@ -73,6 +75,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="picture", type="array", nullable=true)
+     * @Assert\NotBlank(message="Une image est requise pour votre article")
      * @Assert\Image(
      *      maxSize="2M",
      *      mimeTypes={"image/jpeg","image/png","image/gif"},
@@ -320,25 +323,25 @@ class Post
     }
 
     /**
-     * Set user
+     * Set picture
      *
-     * @param \PublicBundle\Entity\User $user
+     * @param array $picture
      * @return Post
      */
-    public function setUser(\PublicBundle\Entity\User $user = null)
+    public function setPicture($picture)
     {
-        $this->user = $user;
+        $this->picture = $picture;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get picture
      *
-     * @return \PublicBundle\Entity\User 
+     * @return array 
      */
-    public function getUser()
+    public function getPicture()
     {
-        return $this->user;
+        return $this->picture;
     }
 }
