@@ -7,7 +7,7 @@
   {% set title = "Édition de l\'article \"" ~ form.title.vars.value ~ "\"" %}
   {% set submitValue = "Modifier" %}
 {% endif %}
-{% extends "DashboardBundle::templates/base.html.twig" %}
+{% extends "DashboardBundle:templates:base.html.twig" %}
 
 {% block mainContent %}
 
@@ -36,22 +36,22 @@
           {{ form_label(form.urlThumbnail, 'Lien de l\'image', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
         </div>#}
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-              {{ form_label(form.picture, 'Picture : ') }}
-              {{ form_widget(form.picture) }}
-              {#<div class="form-errors">{{ form_errors(form.picture) }}</div>#}
+            {{ form_label(form.picture, 'Picture : ') }}
+            {{ form_widget(form.picture) }}
+            {#<div class="form-errors">{{ form_errors(form.picture) }}</div>#}
           </div>
       </div>
     </section>
     <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--4-col dashboard-section clearfix">
       <div class="mdl-cell mdl-cell--12-col dashboard-datetime-wrapper">
-          {{ form_label(form.createAt, 'Date de création', {'label_attr': {'class': 'mdl-typography--title'} }) }}
-          {{ form_widget(form.createAt,{'attr' : {'class':'mdl-textfield__input', 'data-format': 'dd-MM-yyyy'}}) }}
-          <div class="form-errors">{{ form_errors(form.createAt) }}</div>
+        {{ form_label(form.createAt, 'Date de création', {'label_attr': {'class': 'mdl-typography--title'} }) }}
+        {{ form_widget(form.createAt,{'attr' : {'class':'mdl-textfield__input', 'data-format': 'dd-MM-yyyy'}}) }}
+        <div class="form-errors">{{ form_errors(form.createAt) }}</div>
       </div>
       <div class="mdl-cell mdl-cell--12-col">
-          {{ form_label(form.status, 'Status', {'label_attr': {'class': 'mdl-typography--title select-label'} }) }}
-          {{ form_widget(form.status,{'attr' : {'class':''}}) }}
-          <div class="form-errors">{{ form_errors(form.status) }}</div>
+        {{ form_label(form.status, 'Status', {'label_attr': {'class': 'mdl-typography--title select-label'} }) }}
+        {{ form_widget(form.status,{'attr' : {'class':''}}) }}
+        <div class="form-errors">{{ form_errors(form.status) }}</div>
       </div>
       {{ form_widget(form._token) }}
       <input type="submit" value={{submitValue}} class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push"/>

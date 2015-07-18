@@ -1,13 +1,13 @@
 {% set title = article.title %}
-{% extends "PublicBundle::templates/single.html.twig" %}
+{% extends "PublicBundle:templates:single.html.twig" %}
 
 {% block mainContent %}
 
- {%  if  article.picture.fileName is defined and article.picture.fileName != NULL %}
-     {% set pictureUrl = asset('public/upload/images/pictures' ~ article.picture.fileName) %}
- {% else %}
-    {% set pictureUrl = '' %}
- {%  endif  %}
+{% if article.picture.fileName is defined and article.picture.fileName != NULL %}
+  {% set pictureUrl = asset('public/upload/images/pictures' ~ article.picture.fileName) %}
+{% else %}
+  {% set pictureUrl = '' %}
+{% endif %}
 
 <div class="demo-ribbon" style="background-image: url('{{ pictureUrl }}');"></div>
 <main class="demo-main mdl-layout__content">
@@ -41,30 +41,30 @@
       </div>
 
       <section class="comment-section clearfix">
-
-          {{ form_start(form, {'method': 'POST', 'attr': {'class': ''}}) }}
-            {% if userConnect == true %}
-                <p><small>Vous êtes connecté(e) en tant que : <strong>{{ app.user.username | title }}</strong> | <a href="{{ url('fos_user_security_logout')}}">Se déconnecter</a></small></p>
-                {{ form_widget(form.username, {'type': 'hidden', 'value': app.user.username} ) }}
-            {% else %}
-            <div class="mdl-grid mdl-grid--no-spacing">
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                <div class="form-errors">{{ form_errors(form.username) }}</div>
-                {{ form_widget(form.username, { 'attr': {'class': 'mdl-textfield__input', 'rows': '3'} }) }}
-                {{ form_label(form.username, 'Votre nom', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
-              </div>
+        {{ form_start(form, {'method': 'POST', 'attr': {'class': ''}}) }}
+          {% if userConnect == true %}
+              <p><small>Vous êtes connecté(e) en tant que : <strong>{{ app.user.username | title }}</strong> | <a href="{{ url('fos_user_security_logout')}}">Se déconnecter</a></small></p>
+              {{ form_widget(form.username, {'type': 'hidden', 'value': app.user.username} ) }}
+          {% else %}
+          <div class="mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+              <div class="form-errors">{{ form_errors(form.username) }}</div>
+              {{ form_widget(form.username, { 'attr': {'class': 'mdl-textfield__input', 'rows': '3'} }) }}
+              {{ form_label(form.username, 'Votre nom', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
             </div>
-            {% endif %}
-            <div class="mdl-grid mdl-grid--no-spacing">
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-                <div class="form-errors">{{ form_errors(form.contenu) }}</div>
-                {{ form_widget(form.contenu, { 'attr': {'class': 'mdl-textfield__input', 'rows': '3'} }) }}
-                {{ form_label(form.contenu, 'Votre commentaire', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
-              </div>
+          </div>
+          {% endif %}
+          <div class="mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+              <div class="form-errors">{{ form_errors(form.contenu) }}</div>
+              {{ form_widget(form.contenu, { 'attr': {'class': 'mdl-textfield__input', 'rows': '3'} }) }}
+              {{ form_label(form.contenu, 'Votre commentaire', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
             </div>
-            {{ form_widget(form.envoyer, {'label': 'Envoyer', 'attr': {'class': 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push'}}) }}
-          {{ form_end(form) }}
+          </div>
+          {{ form_widget(form.envoyer, {'label': 'Envoyer', 'attr': {'class': 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push'}}) }}
+        {{ form_end(form) }}
+      </section>
     </div>
   </div>
-
+</main>
 {% endblock %}

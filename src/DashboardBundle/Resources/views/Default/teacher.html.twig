@@ -20,7 +20,7 @@
 
 {% set fichesTotal = fiches | length %}
 {% set fichesPercent = (fichesPubliées / fichesTotal * 100) | round(1, 'floor') %}
-{% extends "DashboardBundle::templates/base.html.twig" %}
+{% extends "DashboardBundle:templates:base.html.twig" %}
 
 
 {% block mainContent %}

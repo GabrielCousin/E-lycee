@@ -12,15 +12,15 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  {% include "PublicBundle::includes/navbar.html.twig" %}
-  {% include "PublicBundle::includes/messages.html.twig" %}
+  {% include "PublicBundle:includes:navbar.html.twig" %}
+  {% include "PublicBundle:includes:messages.html.twig" %}
 
   <main class="mdl-layout__content mdl-color--grey-100">
     {% block mainContent %}{% endblock %}
-    {% include "PublicBundle::includes/footer.html.twig" %}
+    {% include "PublicBundle:includes:footer.html.twig" %}
   </main>
 
-  {% include "PublicBundle::includes/modal.html.twig" %}
+  {% include "PublicBundle:includes:modal.html.twig" %}
 
   {% block javascripts %}
     <script type='text/javascript' src="{{ asset('dev/js/material.js') }}"></script>

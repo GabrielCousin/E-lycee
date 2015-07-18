@@ -2,10 +2,10 @@
 {% set editArticle  = "teacher.article.edit" %}
 {% set newArticle   = "teacher.article.new" %}
 
-{% extends "DashboardBundle::templates/base.html.twig" %}
+{% extends "DashboardBundle:templates:base.html.twig" %}
 
 {% block NavEditMenu %}
-  {% include "DashboardBundle::includes/nav-editor.html.twig" with {'type':'post'} %}
+  {% include "DashboardBundle:includes:nav-editor.html.twig" with {'type':'post'} %}
 {% endblock %}
 
 {% block mainContent %}
