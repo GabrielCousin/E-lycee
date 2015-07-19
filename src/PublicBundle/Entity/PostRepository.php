@@ -24,7 +24,7 @@ class PostRepository extends EntityRepository
     }
 
     public function getPostByPage($page){
-        $nbParPage = 2;
+        $nbParPage = 5;
         $offset = $page * $nbParPage - 1 ;
         $results = $this
             ->createQueryBuilder('p')

@@ -95,20 +95,20 @@ class PublicController extends Controller
     }
 
     /**
-     * @Route("/news", name="public.news.index" )
+     * @Route("/actus/{page}", name="public.news.index", defaults= {"page" = 1})
      * @Template("PublicBundle:Public:news.html.twig")
      */
-    public function newsAction()
+    public function newsAction($page)
     {
         $doctrine   = $this->getDoctrine();
         $rc         = $doctrine->getRepository('PublicBundle:Post') ;
-        $results    = $rc->getPostByPage(1);
+        $results    = $rc->getPostByPage($page);
 
         return array('results' => $results);
     }
 
     /**
-     * @Route("/news/{id}", name="public.news.article")
+     * @Route("/actu/{id}", name="public.news.article")
      * @Template("PublicBundle:Public:article.html.twig")
      */
     public function showPostAction(Request $request, $id)
