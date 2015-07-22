@@ -13,6 +13,8 @@ use PublicBundle\Form\CommentaireType;
 use PublicBundle\Entity\ContactEmail;
 use PublicBundle\Form\ContactEmailType;
 use Symfony\Component\HttpFoundation\Request as Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContext;
 
 use Doctrine\Common\Util\Debug as Debug ;
@@ -100,11 +102,34 @@ class PublicController extends Controller
      */
     public function newsAction($page)
     {
-        $doctrine   = $this->getDoctrine();
-        $rc         = $doctrine->getRepository('PublicBundle:Post') ;
-        $results    = $rc->getPostByPage($page);
+        $doctrine       = $this->getDoctrine();
+        $rc             = $doctrine->getRepository('PublicBundle:Post') ;
+        $postsPerPage   = $this->container->getParameter('home.postsPerPage');
+        $results        = $rc->getPostByPage($page);
+        $maxPostsPages  = $rc->getTotalNewsPages($postsPerPage);
+        return array(
+            'results'       => $results,
+            'currentPage'   => $page,
+            'maxPostsPages' => $maxPostsPages
+        );
+    }
 
-        return array('results' => $results);
+    /**
+     * @Route("/ajaxnews/{page}", name="public.news.ajax", options = {"expose" = true})
+     */
+    public function ajaxnewsAction($page)
+    {
+        $doctrine       = $this->getDoctrine();
+        $rc             = $doctrine->getRepository('PublicBundle:Post') ;
+        $results        = $rc->getPostByPage($page);
+
+        $articleSection = $this->renderView('PublicBundle:includes:article-card.html.twig', array('results' => $results));
+
+        $response = array(
+            'articleSection' => $articleSection,
+        );
+
+        return new JsonResponse($response);
     }
 
     /**

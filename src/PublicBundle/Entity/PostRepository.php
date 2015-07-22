@@ -37,6 +37,17 @@ class PostRepository extends EntityRepository
         return $results;
     }
 
+    public function getTotalNewsPages($postsPerPage){
+        $totalPosts = $this
+            ->createQueryBuilder('p')
+            ->select('COUNT(p.title) AS total')
+            ->where('p.status = 1')
+            ->getQuery()
+            ->getSingleScalarResult();
+        $totalNewsPages = ceil($totalPosts / $postsPerPage);
+        return $totalNewsPages;
+    }
+
     public function getPostByAuteur($id){
         $results = $this
             ->createQueryBuilder('p')
