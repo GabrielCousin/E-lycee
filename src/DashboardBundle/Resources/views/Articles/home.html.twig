@@ -17,7 +17,7 @@
     <thead>
       <tr>
         <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
-        <th class="mdl-data-table__cell--non-numeric">Extrait</th>
+        <th class="mdl-data-table__cell--non-numeric extract">Extrait</th>
         <th class="mdl-data-table__cell--non-numeric cell--s">Créé le</th>
         <th class="mdl-data-table__cell--non-numeric cell--xs">Status</th>
         <th class="cell--xs">Actions</th>
@@ -27,7 +27,7 @@
       {% for post in posts %}
         <tr data-id="{{ post.id }}">
           <td class="mdl-data-table__cell--non-numeric cell--s"><a href="{{ url('public.news.article', {'id': post.id}) }}" target="_blank">{{ post.title }}</a></td>
-          <td class="mdl-data-table__cell--non-numeric">{{ post.extract }}</td>
+          <td class="mdl-data-table__cell--non-numeric extract">{{ post.extract }}</td>
           <td class="mdl-data-table__cell--non-numeric cell--s">{{ post.createAt | date('d M Y')  }}</td>
           <td class="mdl-data-table__cell--non-numeric cell--xs"><a href="#" class="editPublish" data-type="post" data-id="{{ post.id }}">{{ post.label }}</a></td>
           <td class="cell--xs">
