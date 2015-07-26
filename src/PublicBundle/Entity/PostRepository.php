@@ -23,21 +23,20 @@ class PostRepository extends EntityRepository
         return $results;
     }
 
-    public function getPostByPage($page){
-        $nbParPage = 5;
-        $offset = $page * $nbParPage - 1 ;
+    public function getPostByPage($page, $postsPerPage){
+        $offset = $page * $postsPerPage - 1 ;
         $results = $this
             ->createQueryBuilder('p')
             ->orderBy('p.createAt','DESC')
             ->where('p.status = 1')
             ->setFirstResult($offset)
-            ->setMaxResults($nbParPage)
+            ->setMaxResults($postsPerPage)
             ->getQuery()
             ->getResult();
         return $results;
     }
 
-    public function getTotalNewsPages($postsPerPage){
+    public function getTotalNewsPages($postsPerPage) {
         $totalPosts = $this
             ->createQueryBuilder('p')
             ->select('COUNT(p.title) AS total')

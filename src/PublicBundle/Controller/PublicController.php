@@ -104,8 +104,8 @@ class PublicController extends Controller
     {
         $doctrine       = $this->getDoctrine();
         $rc             = $doctrine->getRepository('PublicBundle:Post') ;
-        $postsPerPage   = $this->container->getParameter('home.postsPerPage');
-        $results        = $rc->getPostByPage($page);
+        $postsPerPage   = $this->container->getParameter('home.posts_per_page');
+        $results        = $rc->getPostByPage($page, $postsPerPage);
         $maxPostsPages  = $rc->getTotalNewsPages($postsPerPage);
         return array(
             'results'       => $results,
@@ -121,7 +121,8 @@ class PublicController extends Controller
     {
         $doctrine       = $this->getDoctrine();
         $rc             = $doctrine->getRepository('PublicBundle:Post') ;
-        $results        = $rc->getPostByPage($page);
+        $postsPerPage   = $this->container->getParameter('home.posts_per_page');
+        $results        = $rc->getPostByPage($page, $postsPerPage);
 
         $articleSection = $this->renderView('PublicBundle:includes:article-card.html.twig', array('results' => $results));
 
