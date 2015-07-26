@@ -24,7 +24,7 @@ class PostRepository extends EntityRepository
     }
 
     public function getPostByPage($page, $postsPerPage){
-        $offset = $page * $postsPerPage - 1 ;
+        $offset = ($page - 1) * $postsPerPage;
         $results = $this
             ->createQueryBuilder('p')
             ->orderBy('p.createAt','DESC')
@@ -47,7 +47,7 @@ class PostRepository extends EntityRepository
         return $totalNewsPages;
     }
 
-    public function getPostByAuteur($id){
+    public function getLatestPostsByAuteur($id){
         $results = $this
             ->createQueryBuilder('p')
             ->select('p.title, p.id, p.extract, p.createAt','s.label,s.name','a.username,a.firstname,a.lastname')
@@ -55,11 +55,40 @@ class PostRepository extends EntityRepository
             ->join('p.status','s')
             ->where('a.id = :id')
             ->setParameter(':id',$id)
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+        return $results;
+    }
+
+    public function getTotalPostsPagesByAuteur($itemsPerPage, $id) {
+        $totalPosts = $this
+            ->createQueryBuilder('p')
+            ->select('COUNT(p.title) AS total')
+            ->join('p.auteur','a')
+            ->where('a.id = :id')
+            ->setParameter(':id',$id)
+            ->getQuery()
+            ->getSingleScalarResult();
+        $totalPostsPages = ceil($totalPosts / $itemsPerPage);
+        return $totalPostsPages;
+    }
+
+    public function getPostsByAuteur($page, $itemsPerPage, $id){
+        $offset = ($page - 1) * $itemsPerPage;
+        $results = $this
+            ->createQueryBuilder('p')
+            ->select('p.title, p.id, p.extract, p.createAt','s.label,s.name','a.username,a.firstname,a.lastname')
+            ->join('p.auteur','a')
+            ->join('p.status','s')
+            ->where('a.id = :id')
+            ->setParameter(':id',$id)
+            ->setFirstResult($offset)
+            ->setMaxResults($itemsPerPage)
             ->getQuery()
             ->getResult();
         return $results ;
     }
-
 
     public function getPostTitle($max){
         $results = $this
@@ -70,7 +99,6 @@ class PostRepository extends EntityRepository
             ->setMaxResults($max)
             ->getQuery()
             ->getResult();
-
         return $results;
     }
 
@@ -81,7 +109,6 @@ class PostRepository extends EntityRepository
             ->where ('p.id IN (' . $stringIds . ')')
             ->getQuery()
             ->getResult();
-
         return $results ;
     }
 }
