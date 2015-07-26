@@ -35,8 +35,8 @@
           {{ form_widget(form.urlThumbnail,{'attr' : {'class':'mdl-textfield__input', 'rows': '7'}}) }}
           {{ form_label(form.urlThumbnail, 'Lien de l\'image', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
         </div>#}
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-            {{ form_label(form.picture, 'Picture : ') }}
+          <div class="mdl-cell mdl-cell--12-col">
+            {{ form_label(form.picture, 'Picture', {'label_attr': {'class': 'file-upload-label'}}) }}
             {{ form_widget(form.picture) }}
             {#<div class="form-errors">{{ form_errors(form.picture) }}</div>#}
           </div>
