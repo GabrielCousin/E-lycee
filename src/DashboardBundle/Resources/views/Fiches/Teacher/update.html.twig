@@ -36,9 +36,17 @@
 
     <div class="form-errors">{{ form_errors(form) }}</div>
 
-    <input type="submit" value="Modifier" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push"/>
+    <input type="submit" id="fiche-submit" value="Modifier" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push" onClick="return UpdateNotice.check();"/>
     {{ form_widget(form._token) }}
     {{ form_widget(form.choices) }}
   </section>
 
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type='text/javascript' src="{{ asset('dev/js/fiche-update.js') }}"></script>
+  <script>
+    UpdateNotice.init();
+  </script>
 {% endblock %}
