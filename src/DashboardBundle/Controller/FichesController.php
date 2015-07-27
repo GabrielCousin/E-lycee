@@ -19,16 +19,22 @@ use PublicBundle\Entity\Status;
 class FichesController extends Controller
 {
  /**
- * @Route("professeur/fiches/list", name="teacher.fiches.home",options={"expose"=true})
+ * @Route("professeur/fiches/list/{page}", name="teacher.fiches.home", defaults={"page" = 1}, options={"expose" = true})
  * @Template("DashboardBundle:Fiches:Teacher/home.html.twig")
  */
-    public function homeAction()
+    public function homeAction($page)
     {
-        $token = $this->get('security.context')->getToken();
+        $token      = $this->get('security.context')->getToken();
         $doctrine   = $this->getDoctrine();
         $repository = $doctrine->getRepository('DashboardBundle:Fiche');
-        $fiches    = $repository->findBy(array('teacher' => $token->getUser()->getId()));
-        return array('fiches' => $fiches);
+        // $fiches     = $repository->findBy(array('teacher' => $token->getUser()->getId()));
+        $itemsPerPage   = $this->container->getParameter('dashboard.items_per_page');
+        $id         = $token->getUser()->getId();
+        $fiches     = $repository->getFichesByTeacher($id, $page, $itemsPerPage);
+
+        $maxPages = $repository->getTotalFichesByTeacher($id, $itemsPerPage);
+
+        return array('fiches' => $fiches, 'maxPages' => $maxPages);
     }
     /**
      * @Route("professeur/fiches/new", name="teacher.fiches.new")
