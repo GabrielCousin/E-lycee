@@ -23,4 +23,14 @@ class CommentaireRepository extends EntityRepository
             ->getSingleScalarResult();
         return $result;
     }*/
+
+    public function getTotalCommentaires() {
+        $result = $this
+            ->createQueryBuilder('c')
+            ->select('COUNT(c.id) AS total')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $result;
+    }
 }

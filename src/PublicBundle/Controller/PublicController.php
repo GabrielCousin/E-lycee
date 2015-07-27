@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-use PublicBundle\Entity\Commentaire ;
+use PublicBundle\Entity\Commentaire;
 use PublicBundle\Form\CommentaireType;
 use PublicBundle\Entity\ContactEmail;
 use PublicBundle\Form\ContactEmailType;
