@@ -5,6 +5,7 @@ var rename        = require('gulp-rename');
 var sass          = require('gulp-sass');
 var autoprefixer  = require('gulp-autoprefixer');
 var minifyCSS     = require('gulp-minify-css');
+var minifyJS      = require('gulp-uglify');
 var concat        = require('gulp-concat');
 var gutil         = require('gulp-util');
 
@@ -37,8 +38,22 @@ gulp.task('css:build', function(){
 });
 
 gulp.task('js', function() {
-  return gulp.src(['web/dev/js/material.js'])
+  return gulp.src([
+    'web/dev/js/material.js',
+    'web/dev/js/better-dom.js',
+    'web/dev/js/better-i18n.js',
+    'web/dev/js/better-dateinput-polyfill.js',
+    'web/dev/js/card-toogle.js',
+    'web/dev/js/fiche-tag.js',
+    'web/dev/js/form-allow.js',
+    'web/dev/js/graph.js',
+    'web/dev/js/multiple-actions.js',
+    'web/dev/js/notification.js',
+    'web/dev/js/publish-status.js',
+    'web/dev/js/signin.js',
+  ])
     .pipe(concat('scripts.js'))
+    .pipe(minifyJS())
     .pipe(gulp.dest('web/js'));
 });
 

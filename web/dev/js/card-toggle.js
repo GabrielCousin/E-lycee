@@ -4,7 +4,6 @@ var CardToggle = {
   card: document.querySelectorAll('.dashboard-index-card'),
 
   init: function() {
-
     var self = this;
 
     for (var i = 0, l = this.trigger.length; i < l; i++) {

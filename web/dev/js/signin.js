@@ -24,8 +24,7 @@ var SignIn = {
 
   add: function() {
     var route = Routing.generate('user.login', true);
-    console.log(route);
-
+    
     this.xhr = new XMLHttpRequest();
     this.xhr.open('POST', route, true);
     this.xhr.send(null);

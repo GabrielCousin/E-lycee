@@ -7,17 +7,16 @@ var MultipleActions = {
   publishBtn: document.getElementById('list-items-publish'),
   unpublishBtn: document.getElementById('list-items-unpublish'),
   routes : {
-      'post' :{
-          'multipleAction': 'teacher.article.multiple',
-          'redirect':  'teacher.articles.view',
-      },
-      'fiche':{
-          'multipleAction': 'teacher.fiches.multiple',
-          'redirect':  'teacher.fiches.home',
-      }
+    'post' :{
+      'multipleAction': 'teacher.article.multiple',
+      'redirect': 'teacher.articles.view',
+    },
+    'fiche':{
+      'multipleAction': 'teacher.fiches.multiple',
+      'redirect': 'teacher.fiches.home',
+    }
   },
   type: '',
-
 
   init: function () {
     var checkbox = document.querySelectorAll('.mdl-checkbox__ripple-container');
@@ -25,7 +24,7 @@ var MultipleActions = {
     for (var i = 0, l = checkbox.length; i < l; i++) {
       checkbox[i].addEventListener('click', this.menuVisibility.bind(this), false);
     };
-      var app = this ;
+    var app = this;
     if (this.ids !== []) {
       this.deleteBtn.addEventListener('click', function(){ app.multipleAction('DELETE',this.type)}, false);
       this.publishBtn.addEventListener('click',function(){ app.multipleAction('PUBLISH',this.type)}, false);
@@ -35,7 +34,9 @@ var MultipleActions = {
 
   menuVisibility: function() {
     var self = this;
-    setTimeout(function () { toggle() }, 200);
+    setTimeout(function () {
+      toggle()
+    }, 200);
 
     var toggle = function() {
       self.count = document.querySelectorAll('.is-checked').length;
@@ -53,7 +54,9 @@ var MultipleActions = {
 
   listing: function() {
     var self = this;
-    setTimeout(function(){ getId() }, 500);
+    setTimeout(function(){
+      getId()
+    }, 500);
 
     var getId = function() {
       list = document.querySelectorAll('.is-selected');
@@ -62,47 +65,46 @@ var MultipleActions = {
         id = list[i].getAttribute("data-id");
         self.ids.push(id);
       }
-      console.log(self.ids);
+
     }
   },
 
   initXhr : function(){
     var xhr = null;
-    if(window.XMLHttpRequest || window.ActiveXObject){
-      if(window.ActiveXObject){
+    if (window.XMLHttpRequest || window.ActiveXObject) {
+      if (window.ActiveXObject) {
         try{
             xhr = new ActiveXObject("Msxml2.XMLHTTP");
-        }catch(e){
+        } catch(e) {
             xhr = new ActiveXObject("Microsoft.XMLHTTP");
         }
-      }else{
+      } else {
         xhr = new XMLHttpRequest();
       }
-    }else{
+    } else {
       console.log("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
     }
-    return xhr ;
+    return xhr;
   },
 
   multipleAction: function(action) {
     console.log(action+" des ids : " + this.ids);
     var ids = this.ids,
         app = this ;
-    if (action === "DELETE"){
-       var lebelType =  ( type === 'post' ) ? "articles" : "fiches" ;
-        if (!confirm('êtes vous sur de vouloir supprimer ces ' + labelType + ' ?')) return false;
+    if (action === "DELETE") {
+      var lebelType = (type === 'post') ? "articles" : "fiches";
+      if (!confirm('Êtes-vous sûr de vouloir supprimer ces ' + labelType + ' ?')) return false;
     }
     var route = Routing.generate(this.routes[app.type].multipleAction,{'action':action,'ids': ids.join(',')});
     var xhr = this.initXhr();
 
     xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-            document.location.href= Routing.generate(app.routes[app.type].redirect);
-        }
+      if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+          document.location.href= Routing.generate(app.routes[app.type].redirect);
+      }
     };
     xhr.open('GET', route, true);
     xhr.send(null);
-    // this.xhr.addEventListener('readystatechange', this.addSuccess.bind(this), false);
   }
 
 }

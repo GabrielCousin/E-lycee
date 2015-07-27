@@ -4,7 +4,6 @@ var Notification = {
   count: document.querySelectorAll('.js-isNotice').length,
 
   init : function() {
-    console.log(this.count + " alerte(s)");
     if (this.count > 0)
     this.show();
   },
