@@ -1,4 +1,4 @@
-$('a.editPublish').on('click', function(e) {
+$('.btn-editPublish').on('click', function(e) {
   e.preventDefault();
   var id = $(this).data('id');
   if ($(this).data('type')=== 'post')
@@ -10,22 +10,22 @@ $('a.editPublish').on('click', function(e) {
     url: urlAjax
   }).done(function(response, status) {
     console.log("Le post " + id + " est maintenant " + response.message);
-    $('.editPublish[data-id=' + id + ']').html(response.message);
+    $('.btn-editPublish[data-id=' + id + ']').html(response.message);
     }).fail(function(error,status){
       console.alert("erreur : "+error,status);
     })
 });
 
-$('a.deleteItem').on('click', function(e) {
+$('.btn-deleteItem').on('click', function(e) {
   e.preventDefault();
   var id = $(this).data('id');
   var type = $(this).data('type');
-  var valid = confirm('êtes vous sur de vouloir supprimer cet article ? ');
+  var valid = confirm('Êtes-vous sûr de vouloir supprimer cet item ?');
   if (valid) {
     // redirection et non appel ajax comme précédemment
     if (type =="post")
       document.location.href = Routing.generate('teacher.article.delete',{'id':id});
     else if (type === "fiche")
-    document.location.href = Routing.generate('teacher.fiche.delete',{'id':id});
+      document.location.href = Routing.generate('teacher.fiche.delete',{'id':id});
   }
 });

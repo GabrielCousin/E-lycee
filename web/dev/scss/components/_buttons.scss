@@ -7,3 +7,12 @@ a[disabled] {
   color: rgba(0,0,0,.26);
   pointer-events: none;
 }
+
+.btn-deleteItem,
+.btn-editPublish {
+  border: 0;
+  color: rgb(255,64,129);
+  background: transparent;
+  padding: 0;
+  outline: none;
+}

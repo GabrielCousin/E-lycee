@@ -7870,6 +7870,14 @@ a[disabled] {
   color: rgba(0, 0, 0, 0.26);
   pointer-events: none; }
 
+.btn-deleteItem,
+.btn-editPublish {
+  border: 0;
+  color: #ff4081;
+  background: transparent;
+  padding: 0;
+  outline: none; }
+
 .form-choices {
   padding: 0; }
   .form-choices li {
