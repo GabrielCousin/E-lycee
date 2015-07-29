@@ -49,6 +49,7 @@
   {{ parent() }}
   <script src="{{ asset('dev/js/publish-status.js') }}"></script>
   <script>
+    publishStatus.init();
     var multipleActions = MultipleActions;
     (function init() {
       setTimeout(function(){ multipleActions.init() }, 200);
