@@ -151,7 +151,7 @@
 
         &--current {
             background-color: $layout-drawer-navigation-link-active-background;
-            color: $layout-drawer-naviagtion-link-active-color;
+            color: $layout-drawer-navigation-link-active-color;
         }
       }
     }
@@ -241,6 +241,12 @@
     .mdl-layout--fixed-drawer:not(.is-small-screen) > & {
       margin-left: $layout-drawer-width;
       width: calc(100% - #{$layout-drawer-width});
+    }
+
+    .mdl-layout--fixed-drawer > & {
+      .mdl-layout__header-row {
+        padding-left: 40px;
+      }
     }
 
     & > .mdl-layout-icon {
