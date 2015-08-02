@@ -31,7 +31,7 @@ class Commentaire
      * @Assert\NotBlank(message="Vous n'avez pas mis de contenu à votre commentaire")
      * @Assert\Length(
      *      min = "20",
-     *      minMessage = "Votre commentaire doit comporter au moins {{ limit }} caractères"
+     *      minMessage = "Votre commentaire doit comporter au moins {{ limit }} caractères")
      */
     private $contenu;
 
@@ -52,7 +52,7 @@ class Commentaire
      *      min = "2",
      *      max = "150",
      *      minMessage = "Votre pseudo doit faire au moins {{ limit }} caractères",
-     *      maxMessage = "Votre pseudo ne peut pas être plus long que {{ limit }} caractères"
+     *      maxMessage = "Votre pseudo ne peut pas être plus long que {{ limit }} caractères")
      */
     private $username;
 
