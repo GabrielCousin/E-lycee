@@ -28,8 +28,10 @@ class Commentaire
      * @var string
      *
      * @ORM\Column(name="contenu", type="text")
-     * @Assert\NotBlank(message="Vous devez saisir un nom")
-     *
+     * @Assert\NotBlank(message="Vous n'avez pas mis de contenu à votre commentaire")
+     * @Assert\Length(
+     *      min = "20",
+     *      minMessage = "Votre commentaire doit comporter au moins {{ limit }} caractères"
      */
     private $contenu;
 
@@ -45,7 +47,12 @@ class Commentaire
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=150)
-     * @Assert\NotBlank(message="Vous devez saisir un pseudo pour ce commentaire")
+     * @Assert\NotBlank(message="Vous devez mettre un pseudo à votre commentaire")
+     *  @Assert\Length(
+     *      min = "2",
+     *      max = "150",
+     *      minMessage = "Votre pseudo doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Votre pseudo ne peut pas être plus long que {{ limit }} caractères"
      */
     private $username;
 

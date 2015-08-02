@@ -132,12 +132,26 @@ class PublicController extends Controller
         $formCommentaire->handleRequest($request);
 
         if ($formCommentaire->isValid()){
-            $commentaire->setCreateAt(new \DateTime());
-            $commentaire->setPost($article);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($commentaire);
-            $em->flush();
+            $data = $formCommentaire->getData();
 
+            $akismet = $this->container->get('ornicar_akismet');
+            $isSpam = $akismet->isSpam(array(
+                 'comment_author'  => $data->getUsername(),
+                 'comment_content' => $data->getContenu()
+            ));
+            if (!$isSpam){
+                $commentaire->setCreateAt(new \DateTime());
+                $commentaire->setPost($article);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($commentaire);
+                $em->flush();
+                $message = "Votre commentaire a été ajouté";
+
+            }
+            else {
+                $message = "Vous avez envoyé trop de commentaire sur ce post";
+            }
+            $request->getSession()->getFlashBag()->set('notice', $message);
             return $this->redirect($this->generateUrl('public.news.article', array('id' => $id)));
         }
 

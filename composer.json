@@ -24,6 +24,7 @@
         "swiftmailer/swiftmailer": "^5.4",
         "endroid/twitter-bundle": "^1.1",
         "friendsofsymfony/jsrouting-bundle": "^1.5",
+        "ornicar/akismet-bundle": "dev-master",
         "iphp/filestore-bundle": "^0.2.3"
     },
     "require-dev": {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "23070387fccc8ca54829c53eecab9c34",
+    "hash": "e3076d9615d117cfaff7c6b3dccd6d0d",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -880,12 +880,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "3efbc08a97f218d0a4524dee926fc4381e3d0947"
+                "reference": "5d7017d35f73cdb74e069f9d607cd0448d305078"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/3efbc08a97f218d0a4524dee926fc4381e3d0947",
-                "reference": "3efbc08a97f218d0a4524dee926fc4381e3d0947",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/5d7017d35f73cdb74e069f9d607cd0448d305078",
+                "reference": "5d7017d35f73cdb74e069f9d607cd0448d305078",
                 "shasum": ""
             },
             "require": {
@@ -939,7 +939,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2015-06-10 08:27:05"
+            "time": "2015-07-31 13:22:19"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -994,17 +994,17 @@
         },
         {
             "name": "iphp/filestore-bundle",
-            "version": "v0.2.3",
+            "version": "v0.2.4",
             "target-dir": "Iphp/FileStoreBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vitiko/IphpFileStoreBundle.git",
-                "reference": "e170c9e9da544f38e1c2bda319e68621f4525f61"
+                "reference": "d9d1afbe267aaf84ce26b081d89b55a7eff1b490"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vitiko/IphpFileStoreBundle/zipball/e170c9e9da544f38e1c2bda319e68621f4525f61",
-                "reference": "e170c9e9da544f38e1c2bda319e68621f4525f61",
+                "url": "https://api.github.com/repos/vitiko/IphpFileStoreBundle/zipball/d9d1afbe267aaf84ce26b081d89b55a7eff1b490",
+                "reference": "d9d1afbe267aaf84ce26b081d89b55a7eff1b490",
                 "shasum": ""
             },
             "require": {
@@ -1049,7 +1049,7 @@
                 "symfony file upload",
                 "upload"
             ],
-            "time": "2014-12-09 11:11:03"
+            "time": "2015-07-17 09:08:50"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1298,6 +1298,52 @@
                 "psr-3"
             ],
             "time": "2015-07-12 13:54:09"
+        },
+        {
+            "name": "ornicar/akismet-bundle",
+            "version": "dev-master",
+            "target-dir": "Ornicar/AkismetBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ornicar/OrnicarAkismetBundle.git",
+                "reference": "008cb4503ef79ef82a780fce6763d2f86e1860ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ornicar/OrnicarAkismetBundle/zipball/008cb4503ef79ef82a780fce6763d2f86e1860ec",
+                "reference": "008cb4503ef79ef82a780fce6763d2f86e1860ec",
+                "shasum": ""
+            },
+            "require": {
+                "kriswallsmith/buzz": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ornicar\\AkismetBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thibault Duplessis",
+                    "email": "thibault.duplessis@gmail.com",
+                    "homepage": "http://ornicar.github.com"
+                }
+            ],
+            "description": "Akismet Integration for symfony",
+            "homepage": "https://github.com/ornicar/OrnicarAkismetBundle",
+            "keywords": [
+                "Akismet",
+                "package",
+                "spam",
+                "symfony"
+            ],
+            "time": "2013-01-29 16:41:33"
         },
         {
             "name": "psr/log",
@@ -1733,16 +1779,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.2",
+            "version": "v2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "969d709ad428076bf1084e386dc26dd904d9fb84"
+                "reference": "a9af4708b4bb650c4897e9b8dfbfbdb2ea5f0486"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/969d709ad428076bf1084e386dc26dd904d9fb84",
-                "reference": "969d709ad428076bf1084e386dc26dd904d9fb84",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/a9af4708b4bb650c4897e9b8dfbfbdb2ea5f0486",
+                "reference": "a9af4708b4bb650c4897e9b8dfbfbdb2ea5f0486",
                 "shasum": ""
             },
             "require": {
@@ -1851,20 +1897,20 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-07-13 19:27:49"
+            "time": "2015-07-31 13:24:45"
         },
         {
             "name": "twig/twig",
-            "version": "v1.18.2",
+            "version": "v1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "e8e6575abf6102af53ec283f7f14b89e304fa602"
+                "reference": "edbeaf43b0a606cdaadc32a11d2673614a377b90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/e8e6575abf6102af53ec283f7f14b89e304fa602",
-                "reference": "e8e6575abf6102af53ec283f7f14b89e304fa602",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/edbeaf43b0a606cdaadc32a11d2673614a377b90",
+                "reference": "edbeaf43b0a606cdaadc32a11d2673614a377b90",
                 "shasum": ""
             },
             "require": {
@@ -1873,7 +1919,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.18-dev"
+                    "dev-master": "1.19-dev"
                 }
             },
             "autoload": {
@@ -1908,7 +1954,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-06-06 23:31:24"
+            "time": "2015-07-31 13:45:26"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -2004,7 +2050,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "friendsofsymfony/user-bundle": 20
+        "friendsofsymfony/user-bundle": 20,
+        "ornicar/akismet-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

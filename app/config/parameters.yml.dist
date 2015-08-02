@@ -20,3 +20,7 @@ parameters:
 
     images_path:       'public/upload/images/pictures'
     browser_sync:      true
+
+    #Askimet
+    api_key_askimet: 5b1289fe34fa
+    urlSite: e-lycee.io

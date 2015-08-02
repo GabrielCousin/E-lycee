@@ -115,3 +115,7 @@ iphp_file_store:
                translit: ~
                propertyPostfix:    #or propertyPostfix
                    params: { field : id, delimiter: "_" }
+
+ornicar_akismet:
+    api_key:        "%api_key_askimet%"
+    url:            "%urlSite%"
