@@ -10,6 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert ;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
+ * @ORM\Entity(
+ *      repositoryClass="UserRepository"
+ * )
  */
 class User extends BaseUser
 {

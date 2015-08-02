@@ -12,5 +12,27 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+ 	public function getAllStudents(){
+ 		$student = 'ROLE_STUDENT';
+        $results = $this
+            ->createQueryBuilder('u')
+            ->where('u.roles LIKE :student')
+            ->setParameter('student','%'.$student.'%')
+            ->getQuery()
+            ->getResult();
+        return $results;
+    }
+
+ 	public function getNbrStudents(){
+ 		$student = 'ROLE_STUDENT';
+        $results = $this
+            ->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->where('u.roles LIKE :student')
+            ->setParameter('student','%'.$student.'%')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $results;
+    }
 
 }

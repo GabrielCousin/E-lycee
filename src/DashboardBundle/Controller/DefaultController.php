@@ -5,6 +5,8 @@ namespace DashboardBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use UserBundle\Entity\User;
+use UserBundle\Entity\UserRepository ;
 
 class DefaultController extends Controller
 {
@@ -19,11 +21,13 @@ class DefaultController extends Controller
         $fiches     = $doctrine->getRepository('DashboardBundle:Fiche')->findBy(array('teacher' => $token->getUser()->getId()));
         $articles   = $doctrine->getRepository('PublicBundle:Post')->getPostByAuteur($token->getUser()->getId());
         $totalCommentaires = $doctrine->getRepository('PublicBundle:Commentaire')->getTotalCommentaires();
+        $nbrStudents = $doctrine->getRepository('UserBundle:User')->getNbrStudents();
 
         return array(
             'articles' => $articles,
             'fiches' => $fiches,
-            'totalCommentaires' => $totalCommentaires
+            'totalCommentaires' => $totalCommentaires,
+            'nbrStudents' => $nbrStudents
         );
     }
     /**
@@ -32,7 +36,10 @@ class DefaultController extends Controller
      */
     public function classroomAction()
     {
-        return array();
+        $doctrine = $this->getDoctrine();
+        $rc = $doctrine->getRepository('UserBundle:User');
+        $students = $rc->getAllStudents();
+        return array('students' => $students);
     }
     /**
      * @Route("eleve", name="student.home")

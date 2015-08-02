@@ -1,8 +1,6 @@
 {% set title = "Liste des étudiants" %}
 {% extends "DashboardBundle:templates:base.html.twig" %}
-
 {% block mainContent %}
-
   <table class="article-list mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
     <thead>
       <tr>
@@ -14,15 +12,28 @@
       </tr>
     </thead>
     <tbody>
-      {#% for student in students %#}
+      {% for student in students %}
+        {% set total = 0 %}
+        {% set totauxFiche = 0 %}
+          
+        {% for score in student.scores %}
+          {# Calcul des points totaux de la fiche #}
+          {% set totalFiche = 0 %}
+          {% for choice in  score.fiche.choices %}
+            {% set totalFiche = totalFiche + choice.note %}
+          {% endfor %}
+          {% set total = total + score.note %}
+          {% set totauxFiche = totauxFiche + totalFiche %}
+        {% endfor %}    
         <tr>
-          <td class="mdl-data-table__cell--non-numeric">{ student.firstname }}</td>
-          <td class="mdl-data-table__cell--non-numeric">{ student.lastname }}</td>
-          <td>{ student.moyenne ? }}</td>
-          <td>{ student.qcm ? }}</td>
-          <td>{ student.score ? }}</td>
+          <td class="mdl-data-table__cell--non-numeric">{{ student.firstname }}</td>
+          <td class="mdl-data-table__cell--non-numeric">{{ student.lastname }}</td>
+          <td>{{ (total * 20 / totauxFiche)|number_format(2,',')}}/20</td>
+          <td>{{ student.scores|length }}</td>
+          <td>{{ total }}/{{ totauxFiche }}</td>
         </tr>
-      {#% endfor %#}
+      {% endfor %}
+
     </tbody>
   </table>
 {% endblock %}
