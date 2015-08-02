@@ -20,9 +20,12 @@ var FicheCreate = {
     var prototype = this.collectionHolder.getAttribute('data-prototype');
     var newForm = prototype.replace(/__name__/g, this.collectionHolder.children.length);
 
-    var form = this.collectionHolder.innerHTML + '<li class="fiche-question">' + newForm + '</li>';
+    var form = document.createElement('li');
+    form.classList.add('fiche-question');
+    form.innerHTML = newForm;
 
-    this.collectionHolder.innerHTML = form;
+    this.collectionHolder.appendChild(form);
+
     this.removeForm();
     componentHandler.upgradeDom();
   },
