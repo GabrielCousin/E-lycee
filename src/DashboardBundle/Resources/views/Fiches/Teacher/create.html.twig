@@ -31,6 +31,8 @@
           {% endfilter %}
         "></ul>
 
+        <button type="button" id="adder" class="fiche-question-adder add_tag_link mdl-button mdl-js-button mdl-js-ripple-effect">Ajouter une question</button>
+
       </div>
       <input disabled type="submit" value="Créer la fiche" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push"/>
       {{ form_widget(form._token) }}
@@ -43,7 +45,10 @@
 
 {% block javascripts %}
   {{ parent() }}
-  <script src="{{ asset('dev/js/fiche-tag.js') }}"></script>
-  <!-- form-allow est pour le moment initialisé via fiche-tag.js -->
-  <script src="{{ asset('dev/js/form-allow.js') }}"></script>
+  <script src="{{ asset('dev/js/fiche-create.js') }}"></script>
+
+  <script>
+    FicheCreate.init();
+  </script>
+
 {% endblock %}
