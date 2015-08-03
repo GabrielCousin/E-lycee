@@ -38,7 +38,6 @@ npm install
 - [Material Design Light](http://getmdl.io)
 
 ### JS
-- [jQuery](https://jquery.com/)
 - [Better-dateinput-polyfill](https://github.com/chemerisuk/better-dateinput-polyfill)
 
 
