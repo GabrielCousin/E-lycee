@@ -79,24 +79,6 @@ class PublicController extends Controller
     }
 
     /**
-     * @Route("/legal",name="public.legal")
-     * @Template("PublicBundle:Public:legal.html.twig")
-     */
-    public function legalAction()
-    {
-        return array();
-    }
-
-    /**
-     * @Route("/lycee",name="public.lycee")
-     * @Template("PublicBundle:Public:lycee.html.twig")
-     */
-    public function lyceeAction()
-    {
-        return array();
-    }
-
-    /**
      * @Route("/actus/{page}", name="public.news.index", defaults= {"page" = 1})
      * @Template("PublicBundle:Public:news.html.twig")
      */
@@ -192,12 +174,6 @@ class PublicController extends Controller
         $doctrine   = $this->getDoctrine();
         $rc         = $doctrine->getRepository('PublicBundle:Post') ;
         $results    = $rc->getPostTitle($max);
-        /* echo '<pre>';
-        Debug::dump($results);
-        echo '</pre>';*/
-
-
-
         return array('results' => $results);
     }
 

@@ -23,3 +23,15 @@ app:
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+public.legal:
+    path: /legal
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PublicBundle:Public:legal.html.twig'
+
+public.lycee:
+    path: /lycee
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'PublicBundle:Public:lycee.html.twig'
