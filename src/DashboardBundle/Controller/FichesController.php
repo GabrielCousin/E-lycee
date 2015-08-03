@@ -31,11 +31,13 @@ class FichesController extends Controller
         $itemsPerPage   = $this->container->getParameter('dashboard.posts_per_page');
         $id         = $token->getUser()->getId();
         $fiches     = $repository->getFichesByTeacher($id, $page, $itemsPerPage);
-
         $maxPages = $repository->getTotalFichesByTeacher($id, $itemsPerPage);
 
         return array('fiches' => $fiches, 'maxPages' => $maxPages);
     }
+
+
+
     /**
      * @Route("professeur/fiches/new", name="teacher.fiches.new")
      * @Template("DashboardBundle:Fiches:Teacher/create.html.twig")
@@ -43,11 +45,6 @@ class FichesController extends Controller
      */
     public function createAction(Request $request)
     {
-  /*      echo '<pre>';
-        Debug::dump($request->getQueryString());
-        echo '</pre>';
-        exit();*/
-
         $token = $this->get('security.context')->getToken();
         $doctrine = $this->getDoctrine();
         $statusRp = $doctrine->getRepository('PublicBundle:Status');
@@ -72,7 +69,6 @@ class FichesController extends Controller
                 $niveau = $data->getNiveau();
 
                 $students = $studentRp->findBy(array('niveau' => $niveau->getId() ));
-//                echo '<pre>';  Debug::dump($niveau);    echo '</pre>';    exit();
                 $undone = $statusRp->findOneBy(array('name'=>'UNDONE'));
                 foreach ($students as $key=>$student){
                     $score = new Score();
@@ -82,9 +78,6 @@ class FichesController extends Controller
                     $score->setFiche($data);
                     $em->persist($score);
                 }
-
-
-
 
                 $em->persist($data);
                 $em->flush();

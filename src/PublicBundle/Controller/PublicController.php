@@ -61,22 +61,20 @@ class PublicController extends Controller
         $contactType = new ContactEmailType();
         $form = $this->createForm($contactType,$contact);
         $form->handleRequest($request);
-
         if ($form->isValid()){
-//            echo '<pre>';
-//            Debug::dump($form->getData());
-//            echo '</pre>';
-//            exit();
             $message = \Swift_Message::newInstance()
                 ->setSubject('E-mail de contact')
                 ->setFrom('elycee.dev@gmail.com')
                 ->setTo(array('elycee.dev@gmail.com', $form->getData()->getEmail()))
                 ->setBody($this->renderView('PublicBundle:Public:contactEmail.html.twig', array('contact' => $contact)), 'text/html');
             $this->get('mailer')->send($message);
+            $messageToUser = "Votre message a bien été transmis";
+            $request->getSession()->getFlashBag()->set('notice', $messageToUser);
             return $this->redirect($this->generateUrl('public.home.index'));
-        }
+        } 
         return array('form' => $form->createView());
     }
+
 
     /**
      * @Route("/actus/{page}", name="public.news.index", defaults= {"page" = 1})

@@ -94,7 +94,6 @@ class PostsController extends Controller
         $repository = $doctrine->getRepository('PublicBundle:Post');
         $repositoryStatus = $doctrine->getRepository('PublicBundle:Status');
         $post    = $repository->find($id);
-//        $status = $repository->find($id);
         if ($post->getStatus()->getId() == 1 ){
             $status = $repositoryStatus->find(2);
             $post->setStatus($status);

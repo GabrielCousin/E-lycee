@@ -51,6 +51,7 @@ class PostRepository extends EntityRepository
         $results = $this
             ->createQueryBuilder('p')
             ->select('p.title, p.id, p.extract, p.createAt','s.label,s.name','a.username,a.firstname,a.lastname')
+            ->orderBy('p.createAt', 'DESC')
             ->join('p.auteur','a')
             ->join('p.status','s')
             ->where('a.id = :id')
@@ -65,6 +66,7 @@ class PostRepository extends EntityRepository
         $totalPosts = $this
             ->createQueryBuilder('p')
             ->select('COUNT(p.title) AS total')
+            ->orderBy('p.createAt', 'DESC')
             ->join('p.auteur','a')
             ->where('a.id = :id')
             ->setParameter(':id',$id)
@@ -81,6 +83,7 @@ class PostRepository extends EntityRepository
             ->select('p.title, p.id, p.extract, p.createAt','s.label,s.name','a.username,a.firstname,a.lastname')
             ->join('p.auteur','a')
             ->join('p.status','s')
+            ->orderBy('p.createAt', 'DESC')
             ->where('a.id = :id')
             ->setParameter(':id',$id)
             ->setFirstResult($offset)
