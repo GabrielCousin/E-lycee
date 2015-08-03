@@ -23,8 +23,8 @@ var SignIn = {
   },
 
   add: function() {
-    var route = Routing.generate('user.login', true);
-    
+    var route = Routing.generate('user.ajax.login', true);
+
     this.xhr = new XMLHttpRequest();
     this.xhr.open('POST', route, true);
     this.xhr.send(null);

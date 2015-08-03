@@ -16,11 +16,11 @@ class UserController extends Controller
 {
 
     /**
-     * @Route("/ajaxlogin", name="user.login", options = {"expose" = true})
+     * @Route("/ajaxlogin", name="user.ajax.login", options = {"expose" = true})
      */
-    public function loginAction(Request $request) {
+    public function ajaxLoginAction(Request $request) {
 
-        $loginForm = $this->renderView('UserBundle:Security:login.html.twig');
+        $loginForm = $this->renderView('UserBundle:Security:ajax-login.html.twig');
 
         $response = array(
             'loginForm' => $loginForm

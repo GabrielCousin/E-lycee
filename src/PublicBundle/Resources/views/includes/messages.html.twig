@@ -9,11 +9,5 @@
     {% for notice in app.session.flashBag.get('notice') %}
       <p class="notification-text js-isNotice mdl-typography--title" role="alert">{{ notice }}</p>
     {% endfor %}
-
-    {% if error is defined %}
-      {% if error is not empty %}
-        <p class="notification-text js-isNotice">{{ error }}</p>
-      {% endif %}
-    {% endif %}
   </div>
 </div>

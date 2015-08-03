@@ -1,33 +1,44 @@
-{% trans_default_domain 'FOSUserBundle' %}
+{% set title = "Connexion" %}
 
-{% block fos_user_content %}
-  <form action="{{ path("fos_user_security_check") }}" method="post">
+{% extends "PublicBundle:templates:base.html.twig" %}
+{% block mainContent %}
 
-    <div class="mdl-grid mdl-grid--no-spacing">
-      <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />
+    {% trans_default_domain 'FOSUserBundle' %}
 
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-        <input class="mdl-textfield__input" type="text" id="username" name="_username" value="{#{ last_username }#}" required="required" />
-        <label class="mdl-textfield__label" for="username">Utilisateur</label>
-      </div>
 
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-        <input class="mdl-textfield__input" type="password" id="password" name="_password" required="required" />
-        <label class="mdl-textfield__label" for="password">Mot de passe</label>
-      </div>
+    <main class="page-content mdl-shadow--2dp clearfix">
 
-      <div class="mdl-cell mdl-cell--6-col">
-        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="remember_me">
-          <input type="checkbox" id="remember_me" class="mdl-switch__input" />
-          <span class="mdl-switch__label"><small>Se souvenir de moi</small></span>
-        </label>
-      </div>
+        <h1 class="mdl-typography--display-1">Connexion</h1>
 
-      <div class="mdl-cell mdl-cell--6-col">
-        <input type="submit" id="_submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push" name="_submit" value="Se connecter" />
-      </div>
+        {% if error %}
+            <p class="form-alert">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+        {% endif %}
 
-    </div>
+        <form class="mdl-grid mdl-grid--no-spacing" action="{{ path("fos_user_security_check") }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-  </form>
-{% endblock fos_user_content %}
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                <input class="mdl-textfield__input" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                <label class="mdl-textfield__label" for="username">{{ 'security.login.username'|trans }}</label>
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                <input class="mdl-textfield__input" type="password" id="password" name="_password" required="required" />
+                <label class="mdl-textfield__label" for="password">{{ 'security.login.password'|trans }}</label>
+            </div>
+
+            <div class="mdl-cell mdl-cell--6-col">
+                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="remember_me">
+                    <input type="checkbox" id="remember_me" value="on" class="mdl-switch__input" />
+                    <span class="mdl-switch__label"><small>Se souvenir de moi</small></span>
+                </label>
+            </div>
+
+            <div class="mdl-cell mdl-cell--6-col">
+                <input class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+            </div>
+        </form>
+
+    </main>
+
+{% endblock mainContent %}
