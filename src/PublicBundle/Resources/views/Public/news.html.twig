@@ -7,7 +7,7 @@
     {% include "PublicBundle:includes:article-card.html.twig" %}
   </div>
 
-  <button class="load-more-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+  <button id="load-more-btn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
     Plus d'articles
   </button>
 
@@ -19,6 +19,7 @@
   <script>
     Pagination.current = {{ currentPage }};
     Pagination.max = {{ maxPostsPages }};
+    console.log(Pagination.current + " - " + Pagination.max);
     Pagination.init();
   </script>
 

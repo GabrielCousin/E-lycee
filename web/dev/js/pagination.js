@@ -1,24 +1,15 @@
 var Pagination = {
   content: document.getElementById('posts-wrapper'),
-  loadMore: document.querySelectorAll('.load-more-btn'),
+  loadMore: document.getElementById('load-more-btn'),
 
   init: function() {
-    this.loadMore[0].addEventListener('click', this.check.bind(this), false);
-  },
-
-  check: function() {
-    this.loadMore[0].setAttribute('disabled', 'true');
-
-    if (this.current < this.max) {
-      Loading.show();
-      this.load();
-    } else {
-      this.loadMore[0].innerHTML = 'Tous les articles sont chargés';
-    }
+    this.loadMore.addEventListener('click', this.load.bind(this), false);
   },
 
   load: function() {
     this.pageToLoad = this.current + 1;
+    this.loadMore.setAttribute('disabled', 'true');
+    Loading.show();
     var route = Routing.generate('public.news.ajax', { page: this.pageToLoad }, true);
     this.xhr = new XMLHttpRequest();
     this.xhr.open('POST', route, true);
@@ -32,9 +23,14 @@ var Pagination = {
       this.content.innerHTML += response.articleSection;
       Loading.hide();
       componentHandler.upgradeDom();
-
       this.current = this.pageToLoad;
-      this.loadMore[0].removeAttribute('disabled');
+
+      if (this.current >= this.max) {
+        this.loadMore.setAttribute('disabled', 'true');
+        this.loadMore.innerHTML = 'Tous les articles sont chargés';
+      } else {
+        this.loadMore.removeAttribute('disabled');
+      }
     }
   }
 
