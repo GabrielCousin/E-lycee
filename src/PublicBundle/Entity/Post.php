@@ -321,29 +321,6 @@ class Post
     }
 
     /**
-     * Set user
-     *
-     * @param \PublicBundle\Entity\User $user
-     * @return Post
-     */
-    public function setUser(\PublicBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \PublicBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
      * Set picture
      *
      * @param array $picture

@@ -1,0 +1,6 @@
+{% set title = "erreur" %}
+{% extends "PublicBundle:templates:single.html.twig" %}
+{% block mainContent %}
+    <h1>Oups! Une erreur est survenue</h1>
+    <h2>Le serveur a retourné une erreur "{{ status_code }} {{ status_text }}".</h2>
+{% endblock %}
