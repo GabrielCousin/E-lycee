@@ -8155,6 +8155,10 @@ a[disabled] {
   .content-img + p {
     padding-top: 25px; }
 
+.load-more-btn {
+  display: block;
+  margin: 30px auto 0; }
+
 .sidebar {
   margin-left: 30px;
   padding: 24px; }

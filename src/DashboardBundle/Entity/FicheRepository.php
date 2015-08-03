@@ -20,6 +20,36 @@ class FicheRepository extends EntityRepository
             ->getQuery()
             ->getResult();
 
+        return $results;
+    }
+
+    public function getFichesByTeacher($id, $page, $itemsPerPage) {
+        $offset = ($page - 1) * $itemsPerPage;
+        $results = $this
+            ->createQueryBuilder('f')
+            ->join('f.teacher','t')
+            ->where('f.teacher = :id')
+            ->setParameter(':id',$id)
+            ->setFirstResult($offset)
+            ->setMaxResults($itemsPerPage)
+            ->getQuery()
+            ->getResult();
+
         return $results ;
     }
+
+    public function getTotalFichesByTeacher($id, $itemsPerPage) {
+        $totalFiches = $this
+            ->createQueryBuilder('f')
+            ->join('f.teacher','t')
+            ->select('COUNT(f.id) AS total')
+            ->where('f.teacher = :id')
+            ->setParameter(':id',$id)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $totalFichesPages = ceil($totalFiches / $itemsPerPage);
+        return $totalFichesPages;
+    }
+
 }

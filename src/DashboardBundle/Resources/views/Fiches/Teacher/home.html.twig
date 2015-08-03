@@ -50,6 +50,9 @@
       {% endfor %}
     </tbody>
   </table>
+  {% if maxPages > 1 %}
+    {% include "DashboardBundle:includes:pagination.html.twig" with {'maxPages': maxPages, 'route':'teacher.fiches.home'} %}
+  {% endif %}
 {% endblock %}
 
 {% block javascripts %}

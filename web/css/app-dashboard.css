@@ -8022,6 +8022,16 @@ select {
 .dashboard-index-card__list-item.is-published i {
   color: #4caf50; }
 
+.dashboard-pagination {
+  list-style: none;
+  padding: 10px; }
+  .dashboard-pagination li {
+    display: inline-block; }
+    .dashboard-pagination li:not(:first-child):before {
+      content: " | "; }
+    .dashboard-pagination li a {
+      text-decoration: none; }
+
 .form-errors ul {
   padding: 0; }
   .form-errors ul li {

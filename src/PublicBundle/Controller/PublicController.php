@@ -13,6 +13,8 @@ use PublicBundle\Form\CommentaireType;
 use PublicBundle\Entity\ContactEmail;
 use PublicBundle\Form\ContactEmailType;
 use Symfony\Component\HttpFoundation\Request as Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContext;
 
 use Doctrine\Common\Util\Debug as Debug ;
@@ -95,20 +97,44 @@ class PublicController extends Controller
     }
 
     /**
-     * @Route("/news", name="public.news.index" )
+     * @Route("/actus/{page}", name="public.news.index", defaults= {"page" = 1})
      * @Template("PublicBundle:Public:news.html.twig")
      */
-    public function newsAction()
+    public function newsAction($page)
     {
-        $doctrine   = $this->getDoctrine();
-        $rc         = $doctrine->getRepository('PublicBundle:Post') ;
-        $results    = $rc->getPostByPage(1);
-
-        return array('results' => $results);
+        $doctrine       = $this->getDoctrine();
+        $rc             = $doctrine->getRepository('PublicBundle:Post') ;
+        $postsPerPage   = $this->container->getParameter('home.posts_per_page');
+        $results        = $rc->getPostByPage($page, $postsPerPage);
+        $maxPostsPages  = $rc->getTotalNewsPages($postsPerPage);
+        return array(
+            'results'       => $results,
+            'currentPage'   => $page,
+            'maxPostsPages' => $maxPostsPages
+        );
     }
 
     /**
-     * @Route("/news/{id}", name="public.news.article")
+     * @Route("/ajaxnews/{page}", name="public.news.ajax", options = {"expose" = true})
+     */
+    public function ajaxnewsAction($page)
+    {
+        $doctrine       = $this->getDoctrine();
+        $rc             = $doctrine->getRepository('PublicBundle:Post') ;
+        $postsPerPage   = $this->container->getParameter('home.posts_per_page');
+        $results        = $rc->getPostByPage($page, $postsPerPage);
+
+        $articleSection = $this->renderView('PublicBundle:includes:article-card.html.twig', array('results' => $results));
+
+        $response = array(
+            'articleSection' => $articleSection,
+        );
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/actu/{id}", name="public.news.article")
      * @Template("PublicBundle:Public:article.html.twig")
      */
     public function showPostAction(Request $request, $id)

@@ -1,0 +1,8 @@
+<nav>
+    <ul class="dashboard-pagination">
+      <li>Pages</li>
+      {% for i in 1..maxPages %}
+          <li><a href="{{ url(route, {'page' : i}) }}">{{ i }}</a></li>
+      {% endfor %}
+    </ul>
+</nav>

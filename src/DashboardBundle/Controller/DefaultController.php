@@ -19,16 +19,8 @@ class DefaultController extends Controller
         $token = $this->get('security.context')->getToken();
         $doctrine   = $this->getDoctrine();
         $fiches     = $doctrine->getRepository('DashboardBundle:Fiche')->findBy(array('teacher' => $token->getUser()->getId()));
-        $articles   = $doctrine->getRepository('PublicBundle:Post')->getPostByAuteur($token->getUser()->getId());
-        $totalCommentaires = $doctrine->getRepository('PublicBundle:Commentaire')->getTotalCommentaires();
-        $nbrStudents = $doctrine->getRepository('UserBundle:User')->getNbrStudents();
-
-        return array(
-            'articles' => $articles,
-            'fiches' => $fiches,
-            'totalCommentaires' => $totalCommentaires,
-            'nbrStudents' => $nbrStudents
-        );
+        $articles   = $doctrine->getRepository('PublicBundle:Post')->getLatestPostsByAuteur($token->getUser()->getId());
+        return array('articles' => $articles, 'fiches' => $fiches);
     }
     /**
      * @Route("professeur/classe", name="teacher.students.list")

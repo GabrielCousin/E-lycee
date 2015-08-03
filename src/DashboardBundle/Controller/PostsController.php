@@ -16,16 +16,19 @@ use Doctrine\Common\Util\Debug;
 class PostsController extends Controller
 {
     /**
- * @Route("professeur/articles/list", name="teacher.articles.view",options={"expose"=true})
- * @Template("DashboardBundle:Articles:home.html.twig")
- */
-    public function homeAction()
+     * @Route("professeur/articles/list/{page}", name="teacher.articles.view", defaults={"page" = 1}, options={"expose" = true})
+     * @Template("DashboardBundle:Articles:home.html.twig")
+     */
+    public function homeAction($page)
     {
-        $token = $this->get('security.context')->getToken();
-        $doctrine   = $this->getDoctrine();
-        $repository = $doctrine->getRepository('PublicBundle:Post');
-        $posts    = $repository->getPostByAuteur($token->getUser()->getId());
-        return array('posts' => $posts);
+        $token          = $this->get('security.context')->getToken();
+        $doctrine       = $this->getDoctrine();
+        $repository     = $doctrine->getRepository('PublicBundle:Post');
+        $itemsPerPage   = $this->container->getParameter('dashboard.items_per_page');
+        $posts          = $repository->getPostsByAuteur($page, $itemsPerPage, $token->getUser()->getId());
+        $maxPages       = $repository->getTotalPostsPagesByAuteur($itemsPerPage, $token->getUser()->getId());
+
+        return array('posts' => $posts, 'maxPages' => $maxPages);
     }
 
     /**
