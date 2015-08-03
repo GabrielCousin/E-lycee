@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+
 class ChoixType extends AbstractType
 {
     /**
@@ -17,9 +20,9 @@ class ChoixType extends AbstractType
         $builder
             ->add('content')
             ->add('reponse','choice',array(
-                'choices' => array('1' => 'oui', '0' => 'non'),
+                'choices' => array('oui' => 'oui', 'non' => 'non'),
                 'expanded'  => true,
-                'required' => true
+                'required' => true,
             ))
             ->add('note','number',array('empty_data'=>'2'))
         ;

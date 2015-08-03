@@ -50,7 +50,7 @@ class  ScoresController extends Controller
         $form = $this->createFormBuilder($score) ;
         foreach ($fiche->getChoices() as $choice ){
             $form->add('reponse_'.$choice->getId(),'choice',array(
-                'choices'   => array('1' => 'oui', '0' => 'non'),
+                'choices'   => array('oui' => 'oui', 'non' => 'non'),
                 'label'     => $choice->getContent(),
                 'expanded'  => true,
                 'mapped'    => false,
@@ -66,12 +66,11 @@ class  ScoresController extends Controller
                 $note = 0 ;
                 $max  = 0;
                 foreach ($data as $key => $reponse){
-//                                     echo '<pre>';Debug::dump($reponse->getData() );echo '</pre>';exit();
                     $id_choix = explode('_',$key)[1];
                     $choix = $choixRp->find($id_choix);
+                                    // echo '<pre>';Debug::dump($reponse->getData(), $choix->getReponse() );echo '</pre>';exit();
                     if ($reponse->getData() == $choix->getReponse()){
                        $note += $choix->getNote() ;
-
                     }
                     $max += $choix->getNote() ;
                 }

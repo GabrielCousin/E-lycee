@@ -34,10 +34,10 @@ class Choix
 
 
     /**
-     * @var boolean
+     * @var string 
      *
-     * @ORM\Column(name="reponse", type="boolean")
-     * @Assert\Choice(choices = {"0","1"}, message = "Choisissez un réponse valide.")
+     * @ORM\Column(name="reponse", type="string")
+     * @Assert\Choice(choices = {"non","oui"}, message = "Choisissez un réponse valide.")
      */
 
     private $reponse;

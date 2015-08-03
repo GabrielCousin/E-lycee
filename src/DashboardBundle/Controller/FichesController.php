@@ -110,12 +110,12 @@ class FichesController extends Controller
                 'class' => 'PublicBundle:Status',
                 'property' => 'label'
             ));
+                               // echo '<pre>';Debug::dump($fiche->getChoices());echo '</pre>';exit();
         $statusActuel = $fiche->getStatus() ;
         $form->handleRequest($request);
         if ($request->isMethod('POST')){
             if ($form->isValid() && $form->isSubmitted()) {
                 $data = $form->getData();
-//                                echo '<pre>';Debug::dump($statusActuel);echo '</pre>';exit();
 
                 $data->setStatus($statusActuel);
                 $dataNiveau = $data->getNiveau();
