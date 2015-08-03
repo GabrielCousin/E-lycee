@@ -39,6 +39,7 @@ twig:
         images_path:     "%images_path%"
         browser_sync:     "%browser_sync%"
         fos_csrf_provider: "@form.csrf_provider"
+        upload_dir: /public/upload/images/pictures    
 
 # Assetic Configuration
 assetic:
@@ -110,7 +111,7 @@ iphp_file_store:
     mappings:
        picture:
            upload_dir:  %kernel.root_dir%/../web/public/upload/images/pictures
-           upload_path: /
+           upload_path: 
            namer:
                translit: ~
                propertyPostfix:    #or propertyPostfix

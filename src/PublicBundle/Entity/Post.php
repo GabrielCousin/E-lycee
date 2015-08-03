@@ -73,7 +73,6 @@ class Post
      * @var string
      *
      * @ORM\Column(name="picture", type="array", nullable=true)
-     * @Assert\NotBlank(message="Une image est requise pour votre article")
      * @Assert\Image(
      *      maxSize="2M",
      *      mimeTypes={"image/jpeg","image/png","image/gif"},

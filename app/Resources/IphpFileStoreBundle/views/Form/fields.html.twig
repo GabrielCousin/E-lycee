@@ -2,9 +2,7 @@
 	    {% set fileData = value %}
     <div {{ block('widget_container_attributes') }}>
 
-        {% if upload %}
         {{ form_widget(form.file) }}
-        {% endif  %}
 
         {# if was upload error value is uploadedFile and originalName no exists#}
         {% if fileData and fileData.originalName is defined %}
@@ -16,8 +14,8 @@
             <table>
                 <tr>
                     {% if fileData.width is defined %}
-                        <td><a href="{{ fileUrl }}" target="_blank" class="full-img-link"><img
-                                        src="{{ fileUrl }}" width="{{  fileData.width > 200 ? 200 : fileData.width }}" border="0"></a>
+                        <td><a href="{{ upload_dir ~ fileUrl }}" target="_blank" class="full-img-link"><img
+                                        src="{{  upload_dir ~ fileUrl }}" width="{{  fileData.width > 200 ? 200 : fileData.width }}" border="0"></a>
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;</td>
                     {% endif %}

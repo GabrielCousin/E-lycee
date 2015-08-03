@@ -48,15 +48,17 @@ class PostsController extends Controller
     {
         $token = $this->get('security.context')->getToken();
         $doctrine   = $this->getDoctrine();
+        $repository = $doctrine->getRepository('PublicBundle:Post');
+        $pictureDefault = $repository->find(1)->getPicture();
         $user = $token->getUser();
         $em = $doctrine->getManager();
 
         if (!$id){ //route de création d'article
             $post = new Post();
+            $post->setPicture($pictureDefault);
             $message = "L'article a été ajouté";
         }
         else { // route d'update d'article
-            $repository = $doctrine->getRepository('PublicBundle:Post');
             $post    = $repository->find($id);
             $message   = "L'article a été mis à jour";
             $auteurId = $post->getAuteur()->getId();
@@ -64,7 +66,7 @@ class PostsController extends Controller
                 // MESSAGE D'ERREUR
                 $message = "Vous n'êtes pas autorisé à modifier cet article";
                 $request->getSession()->getFlashBag()->set('notice', $message);
-                return $this->redirect($this->generateUrl('teacher.home'));
+                return $this->redirect($this->generateUrl('teacher.articles.view'));
             }
         }
 
@@ -75,6 +77,14 @@ class PostsController extends Controller
         if ($form->isValid() && $form->isSubmitted()){
             $data = $form->getData();
             $data->setAuteur($user);
+            if ($data->getPicture() == null){
+
+                if ($post->getPicture() == null){
+                    $data->setPicture($pictureDefault);
+       // echo '<pre>';Debug::dump($data);echo '</pre>';exit();
+                } 
+                else  $data->setPicture($post->getPicture());
+            }
             $em->persist($data);
             $em->flush();
             $request->getSession()->getFlashBag()->set('notice',$message);
