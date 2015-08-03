@@ -28,7 +28,7 @@ class FichesController extends Controller
         $doctrine   = $this->getDoctrine();
         $repository = $doctrine->getRepository('DashboardBundle:Fiche');
         // $fiches     = $repository->findBy(array('teacher' => $token->getUser()->getId()));
-        $itemsPerPage   = $this->container->getParameter('dashboard.items_per_page');
+        $itemsPerPage   = $this->container->getParameter('dashboard.posts_per_page');
         $id         = $token->getUser()->getId();
         $fiches     = $repository->getFichesByTeacher($id, $page, $itemsPerPage);
 
