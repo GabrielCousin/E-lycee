@@ -39,6 +39,8 @@ var publishStatus = {
         var target = document.querySelectorAll('.btn-editPublish[data-id="' + id + '"]')[0];
         Loading.hide();
         target.innerHTML = response.message;
+        Notification.show();
+        Notification.content.innerHTML = "Votre " + type + " #" + id + " est maintenant " + response.message + "(e)";
       }
     }, false);
   },

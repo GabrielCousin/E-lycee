@@ -1,6 +1,7 @@
 var Notification = {
 
   wrapper: document.getElementById('notification'),
+  content: document.getElementById('notification-content'),
   count: document.querySelectorAll('.js-isNotice').length,
 
   init : function() {
