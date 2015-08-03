@@ -71,7 +71,7 @@ class PublicController extends Controller
             $messageToUser = "Votre message a bien été transmis";
             $request->getSession()->getFlashBag()->set('notice', $messageToUser);
             return $this->redirect($this->generateUrl('public.home.index'));
-        } 
+        }
         return array('form' => $form->createView());
     }
 
@@ -181,7 +181,7 @@ class PublicController extends Controller
      */
     public function latestTweetsAction(){
         $twitter = $this->get('endroid.twitter');
-        $response = $twitter->query('search/tweets', 'GET', 'json', array('q' => 'LLG75005', 'count' => '3'));
+        $response = $twitter->query('search/tweets', 'GET', 'json', array('q' => 'ecolemultimedia', 'count' => '3'));
         $tweets = json_decode($response->getContent());
 
         return array('tweets' => $tweets);
