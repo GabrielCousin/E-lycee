@@ -29,10 +29,10 @@
           <td class="mdl-data-table__cell--non-numeric cell--s"><a href="{{ url('public.news.article', {'id': post.id}) }}" target="_blank">{{ post.title }}</a></td>
           <td class="mdl-data-table__cell--non-numeric extract">{{ post.extract }}</td>
           <td class="mdl-data-table__cell--non-numeric cell--s">{{ post.createAt | date('d M Y')  }}</td>
-          <td class="mdl-data-table__cell--non-numeric cell--xs"><a href="#" class="editPublish" data-type="post" data-id="{{ post.id }}">{{ post.label }}</a></td>
+          <td class="mdl-data-table__cell--non-numeric cell--xs"><button class="btn-editPublish" data-type="post" data-id="{{ post.id }}">{{ post.label }}</button></td>
           <td class="cell--xs">
             <a class="material-icons" href="{{ url(editArticle, {'id':post.id}) }}">mode_edit</a>
-            <a class="material-icons deleteItem" href="#" data-type="post" data-id="{{ post.id }}">delete</a>
+            <button class="material-icons btn-deleteItem" data-type="post" data-id="{{ post.id }}">delete</button>
           </td>
         </tr>
       {% endfor %}
@@ -49,6 +49,7 @@
   {{ parent() }}
   <script src="{{ asset('dev/js/publish-status.js') }}"></script>
   <script>
+    publishStatus.init();
     var multipleActions = MultipleActions;
     (function init() {
       setTimeout(function(){ multipleActions.init() }, 200);

@@ -52,9 +52,9 @@
 
   .mdl-spinner.is-active & {
     animation:
-        mdl-spinner__fill-unfill-rotate (4 * 1333ms)
+        mdl-spinner__fill-unfill-rotate (4 * $spinner-arc-time)
             $animation-curve-fast-out-slow-in infinite both,
-        mdl-spinner__layer-1-fade-in-out (4 * 1333ms)
+        mdl-spinner__layer-1-fade-in-out (4 * $spinner-arc-time)
             $animation-curve-fast-out-slow-in infinite both;
   }
 }
@@ -68,9 +68,9 @@
 
   .mdl-spinner.is-active & {
     animation:
-        mdl-spinner__fill-unfill-rotate (4 * 1333ms)
+        mdl-spinner__fill-unfill-rotate (4 * $spinner-arc-time)
             $animation-curve-fast-out-slow-in infinite both,
-        mdl-spinner__layer-2-fade-in-out (4 * 1333ms)
+        mdl-spinner__layer-2-fade-in-out (4 * $spinner-arc-time)
             $animation-curve-fast-out-slow-in infinite both;
   }
 }
@@ -84,9 +84,9 @@
 
   .mdl-spinner.is-active & {
     animation:
-        mdl-spinner__fill-unfill-rotate (4 * 1333ms)
+        mdl-spinner__fill-unfill-rotate (4 * $spinner-arc-time)
             $animation-curve-fast-out-slow-in infinite both,
-        mdl-spinner__layer-3-fade-in-out (4 * 1333ms)
+        mdl-spinner__layer-3-fade-in-out (4 * $spinner-arc-time)
             $animation-curve-fast-out-slow-in infinite both;
   }
 }
@@ -100,9 +100,9 @@
 
   .mdl-spinner.is-active & {
     animation:
-        mdl-spinner__fill-unfill-rotate (4 * 1333ms)
+        mdl-spinner__fill-unfill-rotate (4 * $spinner-arc-time)
             $animation-curve-fast-out-slow-in infinite both,
-        mdl-spinner__layer-4-fade-in-out (4 * 1333ms)
+        mdl-spinner__layer-4-fade-in-out (4 * $spinner-arc-time)
             $animation-curve-fast-out-slow-in infinite both;
   }
 }
@@ -218,7 +218,7 @@
     transform: rotate(129deg);
 
     .mdl-spinner.is-active & {
-      animation: mdl-spinner__left-spin 1333ms
+      animation: mdl-spinner__left-spin $spinner-arc-time
           $animation-curve-fast-out-slow-in infinite both;
     }
   }
@@ -229,7 +229,7 @@
     transform: rotate(-129deg);
 
     .mdl-spinner.is-active & {
-      animation: mdl-spinner__right-spin 1333ms
+      animation: mdl-spinner__right-spin $spinner-arc-time
           $animation-curve-fast-out-slow-in infinite both;
     }
   }
