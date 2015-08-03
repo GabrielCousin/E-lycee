@@ -24,7 +24,7 @@ class PostsController extends Controller
         $token          = $this->get('security.context')->getToken();
         $doctrine       = $this->getDoctrine();
         $repository     = $doctrine->getRepository('PublicBundle:Post');
-        $itemsPerPage   = $this->container->getParameter('dashboard.items_per_page');
+        $itemsPerPage   = $this->container->getParameter('dashboard.posts_per_page');
         $posts          = $repository->getPostsByAuteur($page, $itemsPerPage, $token->getUser()->getId());
         $maxPages       = $repository->getTotalPostsPagesByAuteur($itemsPerPage, $token->getUser()->getId());
 

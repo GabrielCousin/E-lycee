@@ -20,7 +20,15 @@ class DefaultController extends Controller
         $doctrine   = $this->getDoctrine();
         $fiches     = $doctrine->getRepository('DashboardBundle:Fiche')->findBy(array('teacher' => $token->getUser()->getId()));
         $articles   = $doctrine->getRepository('PublicBundle:Post')->getLatestPostsByAuteur($token->getUser()->getId());
-        return array('articles' => $articles, 'fiches' => $fiches);
+        $totalCommentaires = $doctrine->getRepository('PublicBundle:Commentaire')->getTotalCommentaires();
+        $nbrStudents = $doctrine->getRepository('UserBundle:User')->getNbrStudents();
+
+        return array(
+            'articles' => $articles,
+            'fiches' => $fiches,
+            'totalCommentaires' => $totalCommentaires,
+            'nbrStudents' => $nbrStudents
+        );
     }
     /**
      * @Route("professeur/classe", name="teacher.students.list")
