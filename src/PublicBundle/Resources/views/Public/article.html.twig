@@ -17,7 +17,7 @@
       <div class="news-content-wrapper">
         <h1 class="mdl-typography--display-1">{{ article.title }}</h1>
 
-        {% if is_granted('ROLE_TEACHER') %}
+        {% if app.user and is_granted('ROLE_TEACHER') %}
           {% if app.user.id == article.auteur.id %}
             <small><a href="{{ url('teacher.article.edit', {id: article.id})}}">Editer l'article</a></small>
           {% endif %}

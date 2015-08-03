@@ -1,3 +1,10 @@
+root:
+    pattern: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /home
+        permanent: true
+
 dashboard:
     resource: "@DashboardBundle/Controller/"
     type:     annotation
@@ -12,7 +19,6 @@ user:
     resource: "@UserBundle/Controller/"
     type:     annotation
     prefix:   /
-
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

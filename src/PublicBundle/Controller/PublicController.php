@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\Request as Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 use Doctrine\Common\Util\Debug as Debug ;
 
@@ -32,22 +34,7 @@ class PublicController extends Controller
         $rc         = $doctrine->getRepository('PublicBundle:Post') ;
         $results    = $rc->getThreeLastPost();
 
-        $error = "";
-        $session = $request->getSession();
-
-        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-        } elseif (null !== $session && $session->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-        } else {
-            $error = '';
-        }
-
-        if ($error) {
-            $error = $error->getMessage();
-        }
-
-        return array('results' => $results, 'error' => $error);
+        return array('results' => $results);
     }
 
     /**
@@ -72,6 +59,7 @@ class PublicController extends Controller
             $request->getSession()->getFlashBag()->set('notice', $messageToUser);
             return $this->redirect($this->generateUrl('public.home.index'));
         }
+
         return array('form' => $form->createView());
     }
 
@@ -87,11 +75,16 @@ class PublicController extends Controller
         $postsPerPage   = $this->container->getParameter('home.posts_per_page');
         $results        = $rc->getPostByPage($page, $postsPerPage);
         $maxPostsPages  = $rc->getTotalNewsPages($postsPerPage);
-        return array(
-            'results'       => $results,
-            'currentPage'   => $page,
-            'maxPostsPages' => $maxPostsPages
-        );
+
+        if (null === $results || empty($results)) {
+            throw $this->createNotFoundException('La page n\'existe pas');
+        } else {
+            return array(
+                'results'       => $results,
+                'currentPage'   => $page,
+                'maxPostsPages' => $maxPostsPages
+            );
+        }
     }
 
     /**
@@ -161,7 +154,16 @@ class PublicController extends Controller
             return $this->redirect($this->generateUrl('public.news.article', array('id' => $id)));
         }
 
-        return array('form' => $formCommentaire->createView(), 'article' => $article, 'userConnect' => $userConnect, 'user' => $user);
+        if (null === $article) {
+            throw $this->createNotFoundException('L\'article n\'existe pas');
+        } else {
+            return array(
+                'form' => $formCommentaire->createView(),
+                'article' => $article,
+                'userConnect' => $userConnect,
+                'user' => $user
+            );
+        }
     }
 
     /**
@@ -172,6 +174,7 @@ class PublicController extends Controller
         $doctrine   = $this->getDoctrine();
         $rc         = $doctrine->getRepository('PublicBundle:Post') ;
         $results    = $rc->getPostTitle($max);
+
         return array('results' => $results);
     }
 

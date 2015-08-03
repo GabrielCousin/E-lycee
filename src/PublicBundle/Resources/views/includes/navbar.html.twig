@@ -36,11 +36,11 @@
       <a class="mdl-navigation__link" href="{{ url(home)}}">Accueil</a>
       <a class="mdl-navigation__link" href="{{ url(news)}}">Actus</a>
       <a class="mdl-navigation__link" href="{{ url(lycee)}}">Le lycée</a>
-      {% if is_granted('ROLE_STUDENT') %}
+      {% if app.user and is_granted('ROLE_STUDENT') %}
         <a class="mdl-navigation__link" href="{{ url(student) }}">Dashboard</a>
         <a class="mdl-navigation__link" href="{{ url('student.fiches.home') }}">Fiches</a>
         <a class="mdl-navigation__link" href="{{ url(logout) }}">Déconnexion</a>
-      {% elseif is_granted('ROLE_TEACHER') %}
+      {% elseif app.user and is_granted('ROLE_TEACHER') %}
         <a class="mdl-navigation__link" href="{{ url(teacher)}}">Dashboard</a>
         <a class="mdl-navigation__link" href="{{ url('teacher.articles.view', {'id': app.user.id }) }}">Articles</a>
         <a class="mdl-navigation__link" href="{{ url('teacher.fiches.home') }}">Fiches</a>
@@ -55,11 +55,11 @@
   {% if app.user is not null %}
     <li disabled class="mdl-menu__item">Bonjour {{ app.user.firstname | title }}</li>
   {% endif %}
-  {% if is_granted('ROLE_STUDENT') %}
+  {% if app.user and is_granted('ROLE_STUDENT') %}
     <li><a class="mdl-menu__item" href="{{ url(student) }}">Dashboard</a></li>
     <li><a class="mdl-menu__item" href="{{ url('student.fiches.home') }}">Fiches</a></li>
     <li><a class="mdl-menu__item" href="{{ url(logout) }}">Déconnexion</a></li>
-  {% elseif is_granted('ROLE_TEACHER') %}
+  {% elseif app.user and is_granted('ROLE_TEACHER') %}
     <li><a class="mdl-menu__item" href="{{ url(teacher)}}">Dashboard</a></li>
     <li><a class="mdl-menu__item" href="{{ url('teacher.articles.view', {'id': app.user.id }) }}">Articles</a></li>
     <li><a class="mdl-menu__item" href="{{ url('teacher.fiches.home') }}">Fiches</a></li>
