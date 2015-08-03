@@ -48,6 +48,7 @@ gulp.task('js', function() {
     'web/dev/js/fiche-update.js',
     'web/dev/js/graph.js',
     'web/dev/js/multiple-actions.js',
+    'web/dev/js/loader.js',
     'web/dev/js/notification.js',
     'web/dev/js/publish-status.js',
     'web/dev/js/signin.js',

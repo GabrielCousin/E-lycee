@@ -10,6 +10,7 @@ var Pagination = {
     this.loadMore[0].setAttribute('disabled', 'true');
 
     if (this.current < this.max) {
+      Loading.show();
       this.load();
     } else {
       this.loadMore[0].innerHTML = 'Tous les articles sont chargés';
@@ -29,6 +30,7 @@ var Pagination = {
     if(this.xhr.readyState == 4 && this.xhr.status == 200) {
       var response = JSON.parse(this.xhr.responseText);
       this.content.innerHTML += response.articleSection;
+      Loading.hide();
       componentHandler.upgradeDom();
 
       this.current = this.pageToLoad;

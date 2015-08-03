@@ -15,16 +15,14 @@ var SignIn = {
   toggle: function() {
     if (!this.modal.classList.contains('js-isShown')) {
       this.add();
-      this.modal.classList.toggle('js-isShown');
     } else {
-      this.modal.classList.toggle('js-isShown');
+      this.modal.classList.remove('js-isShown');
     };
-
   },
 
   add: function() {
     var route = Routing.generate('user.ajax.login', true);
-
+    Loading.show();
     this.xhr = new XMLHttpRequest();
     this.xhr.open('POST', route, true);
     this.xhr.send(null);
@@ -33,6 +31,8 @@ var SignIn = {
 
   addSuccess: function(e) {
     if(this.xhr.readyState == 4 && this.xhr.status == 200) {
+      Loading.hide();
+      this.modal.classList.add('js-isShown');
       var response = JSON.parse(this.xhr.responseText);
       this.content.innerHTML = response.loginForm;
       componentHandler.upgradeDom();

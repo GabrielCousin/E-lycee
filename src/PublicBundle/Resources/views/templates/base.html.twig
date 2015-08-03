@@ -27,6 +27,7 @@
     {% include "PublicBundle::includes/footer.html.twig" %}
   </main>
 
+  {% include "PublicBundle::includes/loader.html.twig" %}
   {% include "PublicBundle::includes/modal.html.twig" %}
 
   {% block javascripts %}
@@ -35,16 +36,12 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 
+    <script src="{{ asset('dev/js/loader.js') }}"></script>
     <script src="{{ asset('dev/js/signin.js') }}"></script>
     <script src="{{ asset('dev/js/notification.js') }}"></script>
     <script>
-      var signin = SignIn;
-      signin.init();
-    </script>
-
-    <script>
-      var notif = Notification;
-      notif.init();
+      SignIn.init();
+      Notification.init();
     </script>
 
     {% if browser_sync == true %}

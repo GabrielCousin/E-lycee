@@ -18,7 +18,6 @@ var publishStatus = {
   },
 
   switch: function(id, type) {
-
     var self = this;
 
     switch(type) {
@@ -30,6 +29,7 @@ var publishStatus = {
         break;
     }
 
+    Loading.show();
     this.xhr = new XMLHttpRequest();
     this.xhr.open('POST', route, true);
     this.xhr.send(null);
@@ -37,6 +37,7 @@ var publishStatus = {
       if(self.xhr.readyState == 4 && self.xhr.status == 200) {
         var response = JSON.parse(self.xhr.responseText);
         var target = document.querySelectorAll('.btn-editPublish[data-id="' + id + '"]')[0];
+        Loading.hide();
         target.innerHTML = response.message;
       }
     }, false);

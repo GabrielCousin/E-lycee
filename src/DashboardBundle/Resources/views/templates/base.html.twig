@@ -29,6 +29,9 @@
         </div>
       </main>
     </div>
+
+    {% include "PublicBundle::includes/loader.html.twig" %}
+
     {% block javascripts %}
       <script type='text/javascript' src="{{ asset('dev/js/material.js') }}"></script>
       <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -42,10 +45,10 @@
         </script>
       {% endif %}
 
+      <script src="{{ asset('dev/js/loader.js') }}"></script>
       <script src="{{ asset('dev/js/multiple-actions.js') }}"></script>
       <script>
-        var notif = Notification;
-        notif.init();
+        Notification.init();
       </script>
     {% endblock %}
 

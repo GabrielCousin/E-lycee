@@ -100,7 +100,7 @@ var MultipleActions = {
 
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-          document.location.href= Routing.generate(app.routes[app.type].redirect);
+        document.location.href= Routing.generate(app.routes[app.type].redirect);
       }
     };
     xhr.open('GET', route, true);
