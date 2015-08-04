@@ -1,4 +1,4 @@
-<form action="{{ path('public.showResults.index')}}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('public.search.index')}}" method="post" {{ form_enctype(form) }}>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable textfield-demo">
         {{ form_label(form.expression, 'search', {'label_attr': {'class': 'mdl-button mdl-js-button mdl-button--icon material-icons searchBtn'} }) }}
         <div class="mdl-textfield__expandable-holder">

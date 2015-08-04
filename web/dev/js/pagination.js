@@ -12,7 +12,7 @@ var Pagination = {
     Loading.show();
 
     if (this.type == "search") {
-      var route = Routing.generate('public.showResults.index', { page: this.pageToLoad }, true);
+      var route = Routing.generate('public.news.ajax', { page: this.pageToLoad , expression: this.expression}, true);
     } else {
       var route = Routing.generate('public.news.ajax', { page: this.pageToLoad }, true);
     }
