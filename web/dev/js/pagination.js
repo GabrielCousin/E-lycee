@@ -10,7 +10,12 @@ var Pagination = {
     this.pageToLoad = this.current + 1;
     this.loadMore.setAttribute('disabled', 'true');
     Loading.show();
-    var route = Routing.generate('public.news.ajax', { page: this.pageToLoad }, true);
+
+    if (this.type == "search") {
+      var route = Routing.generate('public.showResults.index', { page: this.pageToLoad }, true);
+    } else {
+      var route = Routing.generate('public.news.ajax', { page: this.pageToLoad }, true);
+    }
     this.xhr = new XMLHttpRequest();
     this.xhr.open('POST', route, true);
     this.xhr.send(null);
