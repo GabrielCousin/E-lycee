@@ -2,135 +2,124 @@
 
 {% set articlesPubliés = 0 %}
 {% for article in articles %}
-  {% if article.name == "PUBLISHED" %}
-    {% set articlesPubliés = articlesPubliés + 1 %}
-  {% endif %}
+    {% if article.name == "PUBLISHED" %}
+        {% set articlesPubliés = articlesPubliés + 1 %}
+    {% endif %}
 {% endfor %}
-
 
 {% set articlesTotal = articles | length %}
 {% set articlesPercent = (articlesPubliés / articlesTotal * 100) | round(1, 'floor') %}
 
 {% set fichesPubliées = 0 %}
 {% for fiche in fiches %}
-  {% if fiche.status.id == 1 %}
-    {% set fichesPubliées = fichesPubliées + 1 %}
-  {% endif %}
+    {% if fiche.status.id == 1 %}
+        {% set fichesPubliées = fichesPubliées + 1 %}
+    {% endif %}
 {% endfor %}
 
 {% set fichesTotal = fiches | length %}
 {% set fichesPercent = (fichesPubliées / fichesTotal * 100) | round(1, 'floor') %}
+
 {% extends "DashboardBundle:templates:base.html.twig" %}
 
-
 {% block mainContent %}
-  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-    <div class="demo-chart mdl-cell mdl-cell--3-col">
+    <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+        <div class="demo-chart mdl-cell mdl-cell--3-col">
+            {% include "DashboardBundle:includes:graph.html.twig" with {'percent': articlesPercent, 'id': 0} %}
 
-      {% include "DashboardBundle:includes:graph.html.twig" with {'percent': articlesPercent, 'id': 0} %}
+            <h4 class="mdl-typography--title">{{ articlesPubliés }} articles publiés</h4>
+            <h4 class="mdl-typography--title">{{ articlesTotal }} articles créés</h4>
+        </div>
+        <div class="demo-chart mdl-cell mdl-cell--3-col">
+            <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
+                <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ totalCommentaires }}</text>
+            </svg>
+            <h4 class="mdl-typography--title">commentaires</h4>
+        </div>
+        <div class="demo-chart mdl-cell mdl-cell--3-col">
+            <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
+                <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ nbrStudents }}</text>
+            </svg>
+            <h4 class="mdl-typography--title">élèves inscrits</h4>
+        </div>
+        <div class="demo-chart mdl-cell mdl-cell--3-col">
+            {% include "DashboardBundle:includes:graph.html.twig" with {'percent': fichesPercent, 'id': 1} %}
 
-      <h4 class="mdl-typography--title">{{ articlesPubliés }} articles publiés</h4>
-      <h4 class="mdl-typography--title">{{ articlesTotal }} articles créés</h4>
+            <h4 class="mdl-typography--title">{{ fichesPubliées }} fiches publiés</h4>
+            <h4 class="mdl-typography--title">{{ fichesTotal }}  fiches créés</h4>
+        </div>
     </div>
-    <div class="demo-chart mdl-cell mdl-cell--3-col">
-      <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
-        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ totalCommentaires }}</text>
-      </svg>
-      <h4 class="mdl-typography--title">commentaires</h4>
+    <div class="dashboard-index-card mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--6-col">
+        <div class="mdl-card__supporting-text">
+            <h5 class="mdl-typography--headline">Articles récents</h5>
+            <ul class="dashboard-index-card__list">
+                {% for article in articles | slice(0, 3) %}
+                    {% if article.name == "PUBLISHED" %}
+                    <li class="dashboard-index-card__list-item is-published">
+                        <i id="article-{{ article.id }}" class="prelabel__icon material-icons">label</i>{{ article.title }}</i>
+                        <div class="mdl-tooltip" for="article-{{ article.id }}">Publié</div>
+                    </li>
+                    {% else %}
+                    <li class="dashboard-index-card__list-item">
+                        <i id="article-{{ article.id }}" class="prelabel__icon material-icons">label_outline</i>{{ article.title }}</i>
+                        <div class="mdl-tooltip" for="article-{{ article.id }}">Non-publié</div>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="dashboard-index-card__action mdl-card__actions mdl-card--border">
+            <a href="{{ url('teacher.articles.view')}}" class="mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect">Voir la liste des articles</a>
+        </div>
+        <div class="mdl-card__menu">
+            <button data-id="0" class="dashboard-index-card__trigger mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                <i class="material-icons">filter_list</i>
+            </button>
+        </div>
     </div>
-    <div class="demo-chart mdl-cell mdl-cell--3-col">
-      <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
-        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ nbrStudents }}</text>
-      </svg>
-      <h4 class="mdl-typography--title">élèves inscrits</h4>
+    <div class="dashboard-index-card mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--6-col">
+        <div class="mdl-card__supporting-text">
+            <h5 class="mdl-typography--headline">Fiches récentes</h5>
+            <ul class="dashboard-index-card__list">
+                {% for fiche in fiches | slice(0, 3) %}
+                    {% if fiche.status.id == 1 %}
+                    <li class="dashboard-index-card__list-item is-published">
+                        <i id="fiche-{{ fiche.id }}" class="prelabel__icon material-icons">label</i>{{ fiche.title }}</i>
+                        <div class="mdl-tooltip" for="fiche-{{ fiche.id }}">Publié</div>
+                    </li>
+                    {% else %}
+                    <li class="dashboard-index-card__list-item">
+                        <i id="fiche-{{ fiche.id }}" class="prelabel__icon material-icons">label_outline</i>{{ fiche.title }}</i>
+                        <div class="mdl-tooltip" for="fiche-{{ fiche.id }}">Non publié</div>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="dashboard-index-card__action mdl-card__actions mdl-card--border">
+            <a href="{{ url('teacher.fiches.home')}}" class="mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect">Voir la liste des fiches</a>
+        </div>
+        <div class="mdl-card__menu">
+            <button data-id="1" class="dashboard-index-card__trigger mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                <i class="material-icons">filter_list</i>
+            </button>
+        </div>
     </div>
-    <div class="demo-chart mdl-cell mdl-cell--3-col">
-
-      {% include "DashboardBundle:includes:graph.html.twig" with {'percent': fichesPercent, 'id': 1} %}
-
-      <h4 class="mdl-typography--title">{{ fichesPubliées }} fiches publiés</h4>
-      <h4 class="mdl-typography--title">{{ fichesTotal }}  fiches créés</h4>
-    </div>
-  </div>
-  <div class="dashboard-index-card mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--6-col">
-    <div class="mdl-card__supporting-text">
-      <h5 class="mdl-typography--headline">Articles récents</h5>
-      <ul class="dashboard-index-card__list">
-        {% for article in articles | slice(0, 3) %}
-          {% if article.name == "PUBLISHED" %}
-            <li class="dashboard-index-card__list-item is-published">
-              <i id="article-{{ article.id }}" class="prelabel__icon material-icons">label</i>{{ article.title }}</i>
-              <div class="mdl-tooltip" for="article-{{ article.id }}">Publié</div>
-            </li>
-          {% else %}
-            <li class="dashboard-index-card__list-item">
-              <i id="article-{{ article.id }}" class="prelabel__icon material-icons">label_outline</i>{{ article.title }}</i>
-              <div class="mdl-tooltip" for="article-{{ article.id }}">Non-publié</div>
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="dashboard-index-card__action mdl-card__actions mdl-card--border">
-      <a href="{{ url('teacher.articles.view')}}" class="mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect">
-        Voir la liste des articles
-      </a>
-    </div>
-    <div class="mdl-card__menu">
-      <button data-id="0" class="dashboard-index-card__trigger mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-        <i class="material-icons">filter_list</i>
-      </button>
-    </div>
-  </div>
-  <div class="dashboard-index-card mdl-card mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--6-col">
-    <div class="mdl-card__supporting-text">
-      <h5 class="mdl-typography--headline">Fiches récentes</h5>
-      <ul class="dashboard-index-card__list">
-        {% for fiche in fiches | slice(0, 3) %}
-          {% if fiche.status.id == 1 %}
-            <li class="dashboard-index-card__list-item is-published">
-              <i id="fiche-{{ fiche.id }}" class="prelabel__icon material-icons">label</i>{{ fiche.title }}</i>
-              <div class="mdl-tooltip" for="fiche-{{ fiche.id }}">Publié</div>
-            </li>
-          {% else %}
-            <li class="dashboard-index-card__list-item">
-              <i id="fiche-{{ fiche.id }}" class="prelabel__icon material-icons">label_outline</i>{{ fiche.title }}</i>
-              <div class="mdl-tooltip" for="fiche-{{ fiche.id }}">Non publié</div>
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="dashboard-index-card__action mdl-card__actions mdl-card--border">
-      <a href="{{ url('teacher.fiches.home')}}" class="mdl-button mdl-js-button mdl-button--primary mdl-js-ripple-effect">
-        Voir la liste des fiches
-      </a>
-    </div>
-    <div class="mdl-card__menu">
-      <button data-id="1" class="dashboard-index-card__trigger mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-        <i class="material-icons">filter_list</i>
-      </button>
-    </div>
-  </div>
 {% endblock %}
 
 {% block javascripts %}
-  {{ parent() }}
-  <script src="{{ asset('dev/js/card-toggle.js') }}"></script>
-  <script src="{{ asset('dev/js/graph.js') }}"></script>
-  <script>
-    CardToggle.init();
-  </script>
+    {{ parent() }}
+    <script>
+        CardToggle.init();
 
-  <script>
-    var Graph0 = Graph;
-    Graph0.percent = {{articlesPercent}};
-    Graph0.id = 0;
-    Graph0.init();
+        var Graph0 = Graph;
+        Graph0.percent = {{articlesPercent}};
+        Graph0.id = 0;
+        Graph0.init();
 
-    var Graph1 = Graph;
-    Graph1.percent = {{fichesPercent}};
-    Graph1.id = 1;
-    Graph1.init();
-  </script>
+        var Graph1 = Graph;
+        Graph1.percent = {{fichesPercent}};
+        Graph1.id = 1;
+        Graph1.init();
+    </script>
 {% endblock %}

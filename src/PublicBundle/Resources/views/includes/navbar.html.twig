@@ -8,63 +8,59 @@
 {% set student = 'student.home' %}
 
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-  <header class="mdl-layout__header">
-    <div class="mdl-layout__header-row">
-      <!-- Title -->
-      <span class="mdl-layout-title">E-lycée</span>
-      <!-- Add spacer, to align navigation to the right -->
-      <div class="mdl-layout-spacer"></div>
-      <!-- Navigation. We hide it in small screens. -->
-      <nav class="mdl-navigation mdl-layout--large-screen-only main-navbar">
-        <a class="mdl-navigation__link {% if route == home %}is-active{% endif %}" href="{{ url(home)}}">Accueil</a>
-        <a class="mdl-navigation__link {% if route == news %}is-active{% endif %}" href="{{ url(news)}}">Actus</a>
-        <a class="mdl-navigation__link {% if route == lycee %}is-active{% endif %}" href="{{ url(lycee)}}">Le lycée</a>
-      </nav>
-      <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons">more_vert</i>
-      </button>
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <span class="mdl-layout-title">E-lycée</span>
+            <div class="mdl-layout-spacer"></div>
+            <nav class="mdl-navigation mdl-layout--large-screen-only main-navbar">
+                <a class="mdl-navigation__link {% if route == home %}is-active{% endif %}" href="{{ url(home)}}">Accueil</a>
+                <a class="mdl-navigation__link {% if route == news %}is-active{% endif %}" href="{{ url(news)}}">Actus</a>
+                <a class="mdl-navigation__link {% if route == lycee %}is-active{% endif %}" href="{{ url(lycee)}}">Le lycée</a>
+            </nav>
+            <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">more_vert</i>
+            </button>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">E-lycée</span>
+        {% if app.user is not null %}
+            <h3 class="mdl-layout__drawerSubtitle">Bonjour {{ app.user.firstname | title }}</h3>
+        {% endif %}
+
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="{{ url(home)}}">Accueil</a>
+            <a class="mdl-navigation__link" href="{{ url(news)}}">Actus</a>
+            <a class="mdl-navigation__link" href="{{ url(lycee)}}">Le lycée</a>
+            {% if app.user and is_granted('ROLE_STUDENT') %}
+                <a class="mdl-navigation__link" href="{{ url(student) }}">Dashboard</a>
+                <a class="mdl-navigation__link" href="{{ url('student.fiches.home') }}">Fiches</a>
+                <a class="mdl-navigation__link" href="{{ url(logout) }}">Déconnexion</a>
+            {% elseif app.user and is_granted('ROLE_TEACHER') %}
+                <a class="mdl-navigation__link" href="{{ url(teacher)}}">Dashboard</a>
+                <a class="mdl-navigation__link" href="{{ url('teacher.articles.view', {'id': app.user.id }) }}">Articles</a>
+                <a class="mdl-navigation__link" href="{{ url('teacher.fiches.home') }}">Fiches</a>
+                <a class="mdl-navigation__link" href="{{ url(logout) }}">Déconnexion</a>
+            {% else %}
+                <a class="mdl-navigation__link js-modalSwitch" href="#">Connexion</a>
+            {% endif %}
+        </nav>
     </div>
-  </header>
-  <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">E-lycée</span>
-    {% if app.user is not null %}
-      <h3 class="mdl-layout__drawerSubtitle">Bonjour {{ app.user.firstname | title }}</h3>
-    {% endif %}
 
-    <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="{{ url(home)}}">Accueil</a>
-      <a class="mdl-navigation__link" href="{{ url(news)}}">Actus</a>
-      <a class="mdl-navigation__link" href="{{ url(lycee)}}">Le lycée</a>
-      {% if app.user and is_granted('ROLE_STUDENT') %}
-        <a class="mdl-navigation__link" href="{{ url(student) }}">Dashboard</a>
-        <a class="mdl-navigation__link" href="{{ url('student.fiches.home') }}">Fiches</a>
-        <a class="mdl-navigation__link" href="{{ url(logout) }}">Déconnexion</a>
-      {% elseif app.user and is_granted('ROLE_TEACHER') %}
-        <a class="mdl-navigation__link" href="{{ url(teacher)}}">Dashboard</a>
-        <a class="mdl-navigation__link" href="{{ url('teacher.articles.view', {'id': app.user.id }) }}">Articles</a>
-        <a class="mdl-navigation__link" href="{{ url('teacher.fiches.home') }}">Fiches</a>
-        <a class="mdl-navigation__link" href="{{ url(logout) }}">Déconnexion</a>
-      {% else %}
-        <a class="mdl-navigation__link js-modalSwitch" href="#">Connexion</a>
-      {% endif %}
-    </nav>
-</div>
-
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
-  {% if app.user is not null %}
-    <li disabled class="mdl-menu__item">Bonjour {{ app.user.firstname | title }}</li>
-  {% endif %}
-  {% if app.user and is_granted('ROLE_STUDENT') %}
-    <li><a class="mdl-menu__item" href="{{ url(student) }}">Dashboard</a></li>
-    <li><a class="mdl-menu__item" href="{{ url('student.fiches.home') }}">Fiches</a></li>
-    <li><a class="mdl-menu__item" href="{{ url(logout) }}">Déconnexion</a></li>
-  {% elseif app.user and is_granted('ROLE_TEACHER') %}
-    <li><a class="mdl-menu__item" href="{{ url(teacher)}}">Dashboard</a></li>
-    <li><a class="mdl-menu__item" href="{{ url('teacher.articles.view', {'id': app.user.id }) }}">Articles</a></li>
-    <li><a class="mdl-menu__item" href="{{ url('teacher.fiches.home') }}">Fiches</a></li>
-    <li><a class="mdl-menu__item" href="{{ url(logout) }}">Déconnexion</a></li>
-  {% else %}
-    <li><a class="mdl-menu__item js-modalSwitch" href="#">Connexion</a></li>
-  {% endif %}
-</ul>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+        {% if app.user is not null %}
+            <li disabled class="mdl-menu__item">Bonjour {{ app.user.firstname | title }}</li>
+        {% endif %}
+        {% if app.user and is_granted('ROLE_STUDENT') %}
+            <li><a class="mdl-menu__item" href="{{ url(student) }}">Dashboard</a></li>
+            <li><a class="mdl-menu__item" href="{{ url('student.fiches.home') }}">Fiches</a></li>
+            <li><a class="mdl-menu__item" href="{{ url(logout) }}">Déconnexion</a></li>
+        {% elseif app.user and is_granted('ROLE_TEACHER') %}
+            <li><a class="mdl-menu__item" href="{{ url(teacher)}}">Dashboard</a></li>
+            <li><a class="mdl-menu__item" href="{{ url('teacher.articles.view', {'id': app.user.id }) }}">Articles</a></li>
+            <li><a class="mdl-menu__item" href="{{ url('teacher.fiches.home') }}">Fiches</a></li>
+            <li><a class="mdl-menu__item" href="{{ url(logout) }}">Déconnexion</a></li>
+        {% else %}
+            <li><a class="mdl-menu__item js-modalSwitch" href="#">Connexion</a></li>
+        {% endif %}
+    </ul>

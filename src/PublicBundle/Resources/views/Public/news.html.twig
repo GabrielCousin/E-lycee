@@ -1,26 +1,21 @@
 {% set title = "Actualités" %}
-
 {% extends "PublicBundle:templates:base.html.twig" %}
+
 {% block mainContent %}
+    <div id="posts-wrapper">
+        {% include "PublicBundle:includes:article-card.html.twig" %}
+    </div>
 
-  <div id="posts-wrapper">
-    {% include "PublicBundle:includes:article-card.html.twig" %}
-  </div>
-
-  <button id="load-more-btn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-    Plus d'articles
-  </button>
-
+    <button id="load-more-btn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        Plus d'articles
+    </button>
 {% endblock %}
 
 {% block javascripts %}
-  {{ parent() }}
-  <script src="{{ asset('dev/js/pagination.js') }}"></script>
-  <script>
-    Pagination.current = {{ currentPage }};
-    Pagination.max = {{ maxPostsPages }};
-    console.log(Pagination.current + " - " + Pagination.max);
-    Pagination.init();
-  </script>
-
+    {{ parent() }}
+    <script>
+        Pagination.current = {{ currentPage }};
+        Pagination.max = {{ maxPostsPages }};
+        Pagination.init();
+    </script>
 {% endblock %}

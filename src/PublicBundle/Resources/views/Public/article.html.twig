@@ -3,68 +3,67 @@
 
 {% block mainContent %}
 
-{% if article.picture.fileName is defined and article.picture.fileName != NULL %}
-  {% set pictureUrl = asset(images_path ~ article.picture.fileName) %}
-{% else %}
-  {% set pictureUrl = '' %}
-{% endif %}
+    {% if article.picture.fileName is defined and article.picture.fileName != NULL %}
+        {% set pictureUrl = asset(images_path ~ article.picture.fileName) %}
+    {% else %}
+        {% set pictureUrl = '' %}
+    {% endif %}
 
-<div class="demo-ribbon" style="background-image: url('{{ pictureUrl }}');"></div>
-<main class="demo-main mdl-layout__content">
-  <div class="demo-container mdl-grid">
-    <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-    <div class="demo-content demo-content--no-spacing mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
-      <div class="news-content-wrapper">
-        <h1 class="mdl-typography--display-1">{{ article.title }}</h1>
+    <div class="demo-ribbon" style="background-image: url('{{ pictureUrl }}');"></div>
+    <main class="demo-main mdl-layout__content">
+        <div class="demo-container mdl-grid">
+            <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+            <div class="demo-content demo-content--no-spacing mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+                <div class="news-content-wrapper">
+                    <h1 class="mdl-typography--display-1">{{ article.title }}</h1>
 
-        {% if app.user and is_granted('ROLE_TEACHER') %}
-          {% if app.user.id == article.auteur.id %}
-            <small><a href="{{ url('teacher.article.edit', {id: article.id})}}">Editer l'article</a></small>
-          {% endif %}
-        {% endif %}
+                    {% if app.user and is_granted('ROLE_TEACHER') %}
+                        {% if app.user.id == article.auteur.id %}
+                            <small><a href="{{ url('teacher.article.edit', {id: article.id})}}">Editer l'article</a></small>
+                        {% endif %}
+                    {% endif %}
 
-        <p>Posté le <strong>{{ article.createAt.date | date('d M Y')}}</strong> par <strong>{{ article.auteur.firstname }} {{ article.auteur.lastname }}</strong></p>
-        <p>{{ article.content }}</p>
+                    <p>Posté le <strong>{{ article.createAt.date | date('d M Y')}}</strong> par <strong>{{ article.auteur.firstname }} {{ article.auteur.lastname }}</strong></p>
+                    <p>{{ article.content }}</p>
 
+                    <h4>Commentaires</h4>
+                    {% if article.commentaires is empty %}
+                        <p>Pas de commentaires pour le moment.</p>
+                    {% endif %}
 
-        <h4>Commentaires</h4>
-        {% if article.commentaires is empty %}
-          <p>Pas de commentaires pour le moment.</p>
-        {% endif %}
+                    {% for commentaire in article.commentaires %}
+                        <div class="section__text">
+                            <h5>{{ commentaire.username | title }} <span class="comment-info">- Envoyé le {{ commentaire.createAt.date | date('d M Y') }}</span></h5>
+                            <p>{{ commentaire.contenu }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
 
-        {% for commentaire in article.commentaires %}
-          <div class="section__text">
-            <h5>{{ commentaire.username | title }} <span class="comment-info">- Envoyé le {{ commentaire.createAt.date | date('d M Y') }}</span></h5>
-            <p>{{ commentaire.contenu }}</p>
-          </div>
-        {% endfor %}
-      </div>
-
-      <section class="comment-section clearfix">
-        {{ form_start(form, {'method': 'POST', 'attr': {'class': ''}}) }}
-          {% if userConnect == true %}
-              <p><small>Vous êtes connecté(e) en tant que : <strong>{{ app.user.username | title }}</strong> | <a href="{{ url('fos_user_security_logout')}}">Se déconnecter</a></small></p>
-              {{ form_widget(form.username, {'type': 'hidden', 'value': app.user.username} ) }}
-          {% else %}
-          <div class="mdl-grid mdl-grid--no-spacing">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-              <div class="form-errors">{{ form_errors(form.username) }}</div>
-              {{ form_widget(form.username, { 'attr': {'class': 'mdl-textfield__input', 'rows': '3'} }) }}
-              {{ form_label(form.username, 'Votre nom', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+                <section class="comment-section clearfix">
+                    {{ form_start(form, {'method': 'POST', 'attr': {'class': ''}}) }}
+                    {% if userConnect == true %}
+                        <p><small>Vous êtes connecté(e) en tant que : <strong>{{ app.user.username | title }}</strong> | <a href="{{ url('fos_user_security_logout')}}">Se déconnecter</a></small></p>
+                        {{ form_widget(form.username, {'type': 'hidden', 'value': app.user.username} ) }}
+                    {% else %}
+                        <div class="mdl-grid mdl-grid--no-spacing">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                <div class="form-errors">{{ form_errors(form.username) }}</div>
+                                {{ form_widget(form.username, { 'attr': {'class': 'mdl-textfield__input', 'rows': '3'} }) }}
+                                {{ form_label(form.username, 'Votre nom', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="mdl-grid mdl-grid--no-spacing">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                            <div class="form-errors">{{ form_errors(form.contenu) }}</div>
+                            {{ form_widget(form.contenu, { 'attr': {'class': 'mdl-textfield__input', 'rows': '3'} }) }}
+                            {{ form_label(form.contenu, 'Votre commentaire', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+                        </div>
+                    </div>
+                    {{ form_widget(form.envoyer, {'label': 'Envoyer', 'attr': {'class': 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push'}}) }}
+                    {{ form_end(form) }}
+                </section>
             </div>
-          </div>
-          {% endif %}
-          <div class="mdl-grid mdl-grid--no-spacing">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-              <div class="form-errors">{{ form_errors(form.contenu) }}</div>
-              {{ form_widget(form.contenu, { 'attr': {'class': 'mdl-textfield__input', 'rows': '3'} }) }}
-              {{ form_label(form.contenu, 'Votre commentaire', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
-            </div>
-          </div>
-          {{ form_widget(form.envoyer, {'label': 'Envoyer', 'attr': {'class': 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push'}}) }}
-        {{ form_end(form) }}
-      </section>
-    </div>
-  </div>
-</main>
+        </div>
+    </main>
 {% endblock %}
