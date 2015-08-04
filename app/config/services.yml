@@ -19,3 +19,7 @@ services:
     redirect.after.login:
         class: UserBundle\Service\AfterLoginRedirection
         arguments: [@router]
+
+    manageMultiple : 
+        class: DashboardBundle\Service\ManageMultiple
+        arguments: [@doctrine]

@@ -18,10 +18,11 @@ use PublicBundle\Entity\Status;
 
 class FichesController extends Controller
 {
- /**
- * @Route("professeur/fiches/list/{page}", name="teacher.fiches.home", defaults={"page" = 1}, options={"expose" = true})
- * @Template("DashboardBundle:Fiches:Teacher/home.html.twig")
- */
+    
+    /**
+    * @Route("professeur/fiches/list/{page}", name="teacher.fiches.home", defaults={"page" = 1}, options={"expose" = true})
+    * @Template("DashboardBundle:Fiches:Teacher/home.html.twig")
+    */
     public function homeAction($page)
     {
         $token      = $this->get('security.context')->getToken();
@@ -35,7 +36,6 @@ class FichesController extends Controller
 
         return array('fiches' => $fiches, 'maxPages' => $maxPages);
     }
-
 
 
     /**
@@ -89,6 +89,8 @@ class FichesController extends Controller
         }
         return array('form' => $form->createView());
     }
+
+
     /**
      * @Route("professeur/fiches/update/{id}", name="teacher.fiches.update")
      * @Template("DashboardBundle:Fiches:Teacher/update.html.twig")
@@ -103,11 +105,9 @@ class FichesController extends Controller
 
         $em = $doctrine->getManager();
         $fiche = $rp->findOneBy(array('id'=>$id));
-
         if(empty($fiche)) {
             throw $this->createNotFoundException('La fiche n\'existe pas');
         }
-
         $niveauFiche = $fiche->getNiveau();
         $ficheType = new FicheType();
         $form = $this->createForm($ficheType, $fiche)
@@ -115,18 +115,13 @@ class FichesController extends Controller
                 'class' => 'PublicBundle:Status',
                 'property' => 'label'
             ));
-                               // echo '<pre>';Debug::dump($fiche->getChoices());echo '</pre>';exit();
         $statusActuel = $fiche->getStatus() ;
         $form->handleRequest($request);
         if ($request->isMethod('POST')){
             if ($form->isValid() && $form->isSubmitted()) {
                 $data = $form->getData();
-
                 $data->setStatus($statusActuel);
                 $dataNiveau = $data->getNiveau();
-
-                // si changement de niveau : réinitialisation des scores et attributions de nouveaux "scores" aux étudiants du niveau correspondant.
-                // faire une validation intermédiaire en js confirm()
                 if ($dataNiveau != $niveauFiche ){
                     $scores = $data->getScores();
                     foreach($scores as $score){
@@ -146,7 +141,6 @@ class FichesController extends Controller
                         }
                     }
                 }
-
                 $em->persist($data);
                 $em->flush();
                 $message = "Votre fiche a été créée";
@@ -157,6 +151,8 @@ class FichesController extends Controller
         }
         return array('form' => $form->createView());
     }
+
+
     /**
      * @Route("/professeur/fiche/delete/{id}", name="teacher.fiche.delete", options={"expose"=true})
      */
@@ -177,6 +173,8 @@ class FichesController extends Controller
         $urlRedirect = $this->generateUrl('teacher.fiches.home');
         return $this->redirect($urlRedirect);
     }
+
+
     /**
      * @Route("/professeur/fiche/edit/status/{id}", name="teacher.fiche.editStatus", options={"expose"= true})
      */
@@ -201,6 +199,7 @@ class FichesController extends Controller
         $response = array('status'=>'OK','message'=>$message);
         return new JsonResponse($response);
     }
+
     /**
      * @Route("/professeur/fiches/multiple/", name="teacher.fiches.multiple", options={"expose"=true})
      * @Method({"POST","GET"})
@@ -209,40 +208,8 @@ class FichesController extends Controller
         $action = $request->query->get('action');
         $ids    = $request->query->get('ids');
         $ids = explode(',',$ids);
-        $doctrine   = $this->getDoctrine();
-        $em         = $doctrine->getManager();
-        $postRp = $doctrine->getRepository('DashboardBundle:Fiche');
-        $statusRp = $doctrine->getRepository('PublicBundle:Status');
-        $posts = $postRp->getFichesById($ids);
-        switch ($action) {
-            case 'UNPUBLISH' :
-                $unpublished = $statusRp->findOneBy(array('name'=>'UNPUBLISHED'));
-                foreach ($posts as $post){
-                    $post->setStatus($unpublished);
-                    $em->persist($post);
-                }
-                $message = ( count($posts) == 1 ) ? 'Votre fiche n\'est plus publié' : 'Vos '.count($posts).' fiches ne sont plus publiés' ;
-                break ;
-            case 'PUBLISH' :
-                $published = $statusRp->findOneBy(array('name'=>'PUBLISHED'));
-                foreach ($posts as $post){
-                    $post->setStatus($published);
-                    $em->persist($post);
-                }
-                $message = ( count($posts) == 1 ) ? 'Votre fiche a été publié' : 'Vos '.count($posts).' fiches ont été publiés' ;
-                break ;
-            case 'DELETE':
-                foreach ($posts as $post){
-                    $em->remove($post);
-                }
-                $message = ( count($posts) == 1 ) ? 'La fiche a été supprimé' : 'Vos '.count($posts).' fiches ont été supprimés avec succès' ;
-                break ;
-            default :
-                $message = "une erreur s'est produite.";
-                break;
-        }
-        $em->flush();
-        $response = array('status'=>'OK','message'=>$message);
+
+        $response = $this->get('manageMultiple')->ficheStatusManage($ids,$action);
         return new JsonResponse($response);
     }
 }
