@@ -29,9 +29,6 @@ class Commentaire
      *
      * @ORM\Column(name="contenu", type="text")
      * @Assert\NotBlank(message="Vous n'avez pas mis de contenu à votre commentaire")
-     * @Assert\Length(
-     *      min = "20",
-     *      minMessage = "Votre commentaire doit comporter au moins {{ limit }} caractères")
      */
     private $contenu;
 
