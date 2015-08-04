@@ -44,6 +44,11 @@ class  ScoresController extends Controller
         $em = $doctrine->getManager();
         $scoreRp = $doctrine->getRepository('DashboardBundle:Score');
         $score = $scoreRp->find($id);
+
+        if(empty($score)) {
+            throw $this->createNotFoundException('La fiche n\'existe pas');
+        }
+
         $fiche = $score->getFiche();
         // faire une vérification si la fiche n'est pas publiée ou déja faire ....
 

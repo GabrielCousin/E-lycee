@@ -41,3 +41,9 @@ public.lycee:
     defaults:
         _controller: FrameworkBundle:Template:template
         template: 'PublicBundle:Public:lycee.html.twig'
+
+dashboard.onboarding:
+    path: /onboarding
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'DashboardBundle:Default:onboarding.html.twig'
