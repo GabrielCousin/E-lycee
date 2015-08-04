@@ -88,11 +88,10 @@ var MultipleActions = {
   },
 
   multipleAction: function(action) {
-    console.log(action+" des ids : " + this.ids);
     var ids = this.ids,
         app = this ;
     if (action === "DELETE") {
-      var lebelType = (type === 'post') ? "articles" : "fiches";
+      var labelType = (app.type === 'post') ? "articles" : "fiches";
       if (!confirm('Êtes-vous sûr de vouloir supprimer ces ' + labelType + ' ?')) return false;
     }
     var route = Routing.generate(this.routes[app.type].multipleAction,{'action':action,'ids': ids.join(',')});

@@ -1,52 +1,47 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>E-lycée{% if title is not null %} | {{ title }}{% endif %}</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('css/app-home.css') }}" />
-  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
-  <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body>
-  {% include "PublicBundle:includes:navbar.html.twig" %}
-  {% include "PublicBundle:includes:messages.html.twig" %}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>E-lycée{% if title is not null %} | {{ title }}{% endif %}</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/app-home.css') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body>
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            {% include "PublicBundle:includes:navbar.html.twig" %}
+            {% include "PublicBundle:includes:messages.html.twig" %}
 
-  <main class="mdl-layout__content mdl-color--grey-100">
-    {% block mainContent %}{% endblock %}
-    {% include "PublicBundle:includes:footer.html.twig" %}
-  </main>
+            <main class="mdl-layout__content mdl-color--grey-100">
+                {% block mainContent %}{% endblock %}
+                {% include "PublicBundle:includes:footer.html.twig" %}
+            </main>
 
-  {% include "PublicBundle:includes:modal.html.twig" %}
+            {% include "PublicBundle::includes/loader.html.twig" %}
+            {% include "PublicBundle::includes/modal.html.twig" %}
 
-  {% block javascripts %}
-    <script type='text/javascript' src="{{ asset('dev/js/material.js') }}"></script>
+            {% block javascripts %}
+                <script type='text/javascript' src="{{ asset('js/scripts.js') }}"></script>
 
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+                <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+                <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 
-    <script src="{{ asset('dev/js/signin.js') }}"></script>
-    <script src="{{ asset('dev/js/notification.js') }}"></script>
-    <script>
-      var signin = SignIn;
-      signin.init();
-    </script>
+                {% if app.environment == "dev" and browser_sync == true %}
+                    <script type='text/javascript' id="__bs_script__">//<![CDATA[
+                        document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.7.13.js'><\/script>".replace("HOST", location.hostname));
+                        //]]>
+                    </script>
+                {% endif %}
 
-    <script>
-      var notif = Notification;
-      notif.init();
-    </script>
-
-    {% if browser_sync == true %}
-      <script type='text/javascript' id="__bs_script__">//<![CDATA[
-        document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.7.13.js'><\/script>".replace("HOST", location.hostname));
-        //]]>
-      </script>
-    {% endif %}
-  {% endblock %}
-</body>
-
+                <script>
+                    SignIn.init();
+                    Notification.init();
+                </script>
+            {% endblock %}
+        </div>
+    </body>
 </html>

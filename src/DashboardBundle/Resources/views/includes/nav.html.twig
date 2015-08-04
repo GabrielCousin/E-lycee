@@ -1,6 +1,7 @@
 {% set route = app.request.attributes.get('_route') %}
 
 {% set articles = 'teacher.articles.view' %}
+
 {% set homeT = 'teacher.home' %}
 {% set fichesT = 'teacher.fiches.home' %}
 {% set classe = 'teacher.students.list' %}
@@ -8,38 +9,36 @@
 {% set homeS = 'student.home' %}
 {% set fichesS = 'student.fiches.home' %}
 
-
-
 {% if is_granted('ROLE_STUDENT') %}
-  {% set role = 'student' %}
+    {% set role = 'student' %}
 {% elseif is_granted('ROLE_TEACHER') %}
-  {% set role = 'teacher' %}
+    {% set role = 'teacher' %}
 {% else %}
-  {% set role = '' %}
+    {% set role = '' %}
 {% endif %}
 
 <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-  <header class="demo-drawer-header">
-    <div class="demo-avatar-dropdown">
-      <span>{{ app.user.firstname | title }}</span>
-      <div class="mdl-layout-spacer"></div>
-      <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons">arrow_drop_down</i>
-      </button>
-      <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-        <li><a href="{{ url('public.home.index') }}" class="mdl-menu__item">Retour au site</a></li>
-        <li><a href="{{ url('fos_user_security_logout') }}" class="mdl-menu__item">Déconnexion</a></li>
-      </ul>
-    </div>
-  </header>
-  <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-    {% if is_granted('ROLE_TEACHER') or is_granted('ROLE_STUDENT') %}
-      <a class="mdl-navigation__link {% if route == homeT or route == homeS %}is-active{% endif %}" href="{{ url(role ~ '.home')}}"><i class="mdl-color-text--blue-grey-400 material-icons">dashboard</i>Dashboard</a>
-      <a class="mdl-navigation__link  {% if route == fichesT or route == fichesS %}is-active{% endif %}" href="{{ url(role ~ '.fiches.home') }}"><i class="mdl-color-text--blue-grey-400 material-icons">folder_open</i>Fiches</a>
-    {% endif %}
-    {% if is_granted('ROLE_TEACHER') %}
-      <a class="mdl-navigation__link {% if route == articles %}is-active{% endif %}" href="{{ url(articles, {'id': app.user.id }) }}"><i class="mdl-color-text--blue-grey-400 material-icons">format_align_left</i>Articles</a>
-      <a class="mdl-navigation__link {% if route == classe %}is-active{% endif %}" href="{{ url(classe) }}"><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Élèves</a>
-    {% endif %}
-  </nav>
+    <header class="demo-drawer-header">
+        <div class="demo-avatar-dropdown">
+            <span>{{ app.user.firstname | title }}</span>
+            <div class="mdl-layout-spacer"></div>
+            <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+                <i class="material-icons">arrow_drop_down</i>
+            </button>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+                <li><a href="{{ url('public.home.index') }}" class="mdl-menu__item">Retour au site</a></li>
+                <li><a href="{{ url('fos_user_security_logout') }}" class="mdl-menu__item">Déconnexion</a></li>
+            </ul>
+        </div>
+    </header>
+    <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+        {% if is_granted('ROLE_TEACHER') or is_granted('ROLE_STUDENT') %}
+            <a class="mdl-navigation__link {% if route == homeT or route == homeS %}is-active{% endif %}" href="{{ url(role ~ '.home')}}"><i class="mdl-color-text--blue-grey-400 material-icons">dashboard</i>Dashboard</a>
+            <a class="mdl-navigation__link  {% if route == fichesT or route == fichesS %}is-active{% endif %}" href="{{ url(role ~ '.fiches.home') }}"><i class="mdl-color-text--blue-grey-400 material-icons">folder_open</i>Fiches</a>
+        {% endif %}
+        {% if is_granted('ROLE_TEACHER') %}
+            <a class="mdl-navigation__link {% if route == articles %}is-active{% endif %}" href="{{ url(articles, {'id': app.user.id }) }}"><i class="mdl-color-text--blue-grey-400 material-icons">format_align_left</i>Articles</a>
+            <a class="mdl-navigation__link {% if route == classe %}is-active{% endif %}" href="{{ url(classe) }}"><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Élèves</a>
+        {% endif %}
+    </nav>
 </div>

@@ -2,67 +2,65 @@
 {% extends "DashboardBundle:templates:base.html.twig" %}
 
 {% block NavEditMenu %}
-  {% include "DashboardBundle:includes:nav-editor.html.twig" with {'type':'fiche'}%}
+    {% include "DashboardBundle:includes:nav-editor.html.twig" with {'type':'fiche'}%}
 {% endblock %}
 
 {% block mainContent %}
+    <a id="add-article" class="article-adder mdl-button mdl-js-button mdl-button--fab mdl-button--colored" href="{{ url('teacher.fiches.new') }}"><i class="material-icons">add</i></a>
+    <div class="mdl-tooltip" for="add-article">Ajouter une fiche</div>
 
-  <a id="add-article" class="article-adder mdl-button mdl-js-button mdl-button--fab mdl-button--colored" href="{{ url('teacher.fiches.new') }}"><i class="material-icons">add</i></a>
-  <div class="mdl-tooltip" for="add-article">Ajouter une fiche</div>
-
-  <table class="article-list mdl-data-table mdl-data-table--selectable mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
-    <thead>
-      <tr>
-        <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
-        <th class="mdl-data-table__cell--non-numeric u-hide-mini">Question</th>
-        <th class="cell--xs u-hide-mini">Choix</th>
-        <th class="cell--xs u-hide-mini">Niveau</th>
-        <th class="cell--s">Réponses</th>
-        <th class="mdl-data-table__cell--non-numeric cell--xs">Status</th>
-        <th class="cell--xs">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for fiche in fiches %}
-        <tr data-id="{{ fiche.id }}">
-          <td class="mdl-data-table__cell--non-numeric cell--s">{{ fiche.title }}</td>
-          <td class="mdl-data-table__cell--non-numeric u-hide-mini">{{ fiche.content }}</td>
-          <td class="cell--xs u-hide-mini">{{ fiche.choices | length }}</td>
-          <td class="cell--xs u-hide-mini">{{ fiche.niveau.name }}</td>
-          <td class="cell--s">
-            {% set ficheDone = 0 %}
-            {% for score in fiche.scores %}
-              {% if score.status.name == 'DONE' %}
-                {% set ficheDone = ficheDone + 1 %}
-              {% endif %}
+    <table class="article-list mdl-data-table mdl-data-table--selectable mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
+                <th class="mdl-data-table__cell--non-numeric u-hide-mini">Question</th>
+                <th class="cell--xs u-hide-mini">Choix</th>
+                <th class="cell--xs u-hide-mini">Niveau</th>
+                <th class="cell--s">Réponses</th>
+                <th class="mdl-data-table__cell--non-numeric cell--xs">Status</th>
+                <th class="cell--xs">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fiche in fiches %}
+                <tr data-id="{{ fiche.id }}">
+                    <td class="mdl-data-table__cell--non-numeric cell--s">{{ fiche.title }}</td>
+                    <td class="mdl-data-table__cell--non-numeric u-hide-mini">{{ fiche.content }}</td>
+                    <td class="cell--xs u-hide-mini">{{ fiche.choices | length }}</td>
+                    <td class="cell--xs u-hide-mini">{{ fiche.niveau.name }}</td>
+                    <td class="cell--s">
+                        {% set ficheDone = 0 %}
+                        {% for score in fiche.scores %}
+                            {% if score.status.name == 'DONE' %}
+                                {% set ficheDone = ficheDone + 1 %}
+                            {% endif %}
+                        {% endfor %}
+                        {{ ficheDone }} / {{ fiche.scores | length }}
+                    </td>
+                    <td class="mdl-data-table__cell--non-numeric cell--xs">
+                        <button class="btn-editPublish" data-type="fiche" data-id="{{ fiche.id }}">{{ fiche.status.label }}</button>
+                    </td>
+                    <td class="cell--xs">
+                        <a class="material-icons" href="{{ url('teacher.fiches.update',{'id':fiche.id}) }}">mode_edit</a>
+                        <button class="material-icons btn-deleteItem" data-type="fiche" data-id="{{ fiche.id }}">delete</button>
+                    </td>
+                </tr>
             {% endfor %}
+        </tbody>
+    </table>
 
-            {{ ficheDone }} / {{ fiche.scores | length }}
-          </td>
-          <td class="mdl-data-table__cell--non-numeric cell--xs">
-            <button class="btn-editPublish" data-type="fiche" data-id="{{ fiche.id }}">{{ fiche.status.label }}</button>
-          </td>
-          <td class="cell--xs">
-            <a class="material-icons" href="{{ url('teacher.fiches.update',{'id':fiche.id}) }}">mode_edit</a>
-            <button class="material-icons btn-deleteItem" data-type="fiche" data-id="{{ fiche.id }}">delete</button>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% if maxPages > 1 %}
-    {% include "DashboardBundle:includes:pagination.html.twig" with {'maxPages': maxPages, 'route':'teacher.fiches.home'} %}
-  {% endif %}
+    {% if maxPages > 1 %}
+        {% include "DashboardBundle:includes:pagination.html.twig" with {'maxPages': maxPages, 'route':'teacher.fiches.home'} %}
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
-  {{ parent() }}
-  <script type='text/javascript' src="{{ asset('dev/js/publish-status.js') }}"></script>
-  <script>
-    publishStatus.init();
-    var multipleActions = MultipleActions;
-    (function init() {
-      setTimeout(function(){ multipleActions.init() }, 200);
-    })();
-  </script>
+    {{ parent() }}
+    <script>
+        publishStatus.init();
+        var multipleActions = MultipleActions;
+        (function init() {
+            setTimeout(function(){ multipleActions.init() }, 200);
+        })();
+    </script>
 {% endblock %}
