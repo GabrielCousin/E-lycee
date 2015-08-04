@@ -1,13 +1,12 @@
 {% set title = "Erreur" %}
 {% extends "PublicBundle:templates:base.html.twig" %}
+
 {% block mainContent %}
     <main class="page-content mdl-shadow--2dp">
 
-      <h1 class="mdl-typography--display-1">Oups! Une erreur est survenue</h1>
-
-      <p>Le serveur a retourné une erreur "{{ status_code }} {{ status_text }}".</p>
-
-      <p>&rarr; <a href="{{url('public.home.index')}}">Retour à l'accueil</a></p>
+        <h1 class="mdl-typography--display-1">Oups! Une erreur est survenue</h1>
+        <p>Le serveur a retourné une erreur "{{ status_code }} {{ status_text }}".</p>
+        <p>&rarr; <a href="{{url('public.home.index')}}">Retour à l'accueil</a></p>
 
     </main>
 {% endblock %}

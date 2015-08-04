@@ -5,53 +5,52 @@
 {% extends "DashboardBundle:templates:base.html.twig" %}
 
 {% block NavEditMenu %}
-  {% include "DashboardBundle:includes:nav-editor.html.twig" with {'type':'post'} %}
+    {% include "DashboardBundle:includes:nav-editor.html.twig" with {'type':'post'} %}
 {% endblock %}
 
 {% block mainContent %}
 
-  <a id="add-article" class="article-adder mdl-button mdl-js-button mdl-button--fab mdl-button--colored" href="{{ url(newArticle) }}"><i class="material-icons">add</i></a>
-  <div class="mdl-tooltip" for="add-article">Ajouter un article</div>
+    <a id="add-article" class="article-adder mdl-button mdl-js-button mdl-button--fab mdl-button--colored" href="{{ url(newArticle) }}"><i class="material-icons">add</i></a>
+    <div class="mdl-tooltip" for="add-article">Ajouter un article</div>
 
-  <table class="article-list mdl-data-table mdl-data-table--selectable mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
-    <thead>
-      <tr>
-        <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
-        <th class="mdl-data-table__cell--non-numeric extract">Extrait</th>
-        <th class="mdl-data-table__cell--non-numeric cell--s">Créé le</th>
-        <th class="mdl-data-table__cell--non-numeric cell--xs">Status</th>
-        <th class="cell--xs">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for post in posts %}
-        <tr data-id="{{ post.id }}">
-          <td class="mdl-data-table__cell--non-numeric cell--s"><a href="{{ url('public.news.article', {'id': post.id}) }}" target="_blank">{{ post.title }}</a></td>
-          <td class="mdl-data-table__cell--non-numeric extract">{{ post.extract }}</td>
-          <td class="mdl-data-table__cell--non-numeric cell--s">{{ post.createAt | date('d M Y')  }}</td>
-          <td class="mdl-data-table__cell--non-numeric cell--xs"><button class="btn-editPublish" data-type="post" data-id="{{ post.id }}">{{ post.label }}</button></td>
-          <td class="cell--xs">
-            <a class="material-icons" href="{{ url(editArticle, {'id':post.id}) }}">mode_edit</a>
-            <button class="material-icons btn-deleteItem" data-type="post" data-id="{{ post.id }}">delete</button>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    <table class="article-list mdl-data-table mdl-data-table--selectable mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
+                <th class="mdl-data-table__cell--non-numeric extract">Extrait</th>
+                <th class="mdl-data-table__cell--non-numeric cell--s">Créé le</th>
+                <th class="mdl-data-table__cell--non-numeric cell--xs">Status</th>
+                <th class="cell--xs">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr data-id="{{ post.id }}">
+                <td class="mdl-data-table__cell--non-numeric cell--s"><a href="{{ url('public.news.article', {'id': post.id}) }}" target="_blank">{{ post.title }}</a></td>
+                <td class="mdl-data-table__cell--non-numeric extract">{{ post.extract }}</td>
+                <td class="mdl-data-table__cell--non-numeric cell--s">{{ post.createAt | date('d M Y')  }}</td>
+                <td class="mdl-data-table__cell--non-numeric cell--xs"><button class="btn-editPublish" data-type="post" data-id="{{ post.id }}">{{ post.label }}</button></td>
+                <td class="cell--xs">
+                    <a class="material-icons" href="{{ url(editArticle, {'id':post.id}) }}">mode_edit</a>
+                    <button class="material-icons btn-deleteItem" data-type="post" data-id="{{ post.id }}">delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-  {% if maxPages > 1 %}
-    {% include "DashboardBundle:includes:pagination.html.twig" with {'maxPages': maxPages, 'route':'teacher.articles.view'} %}
-  {% endif %}
+    {% if maxPages > 1 %}
+        {% include "DashboardBundle:includes:pagination.html.twig" with {'maxPages': maxPages, 'route':'teacher.articles.view'} %}
+    {% endif %}
 
 {% endblock %}
 
 {% block javascripts %}
-  {{ parent() }}
-  <script src="{{ asset('dev/js/publish-status.js') }}"></script>
-  <script>
-    publishStatus.init();
-    (function init() {
-      setTimeout(function(){ MultipleActions.init() }, 500);
-    })();
-  </script>
+    {{ parent() }}
+    <script>
+        publishStatus.init();
+        (function init() {
+            setTimeout(function(){ MultipleActions.init() }, 500);
+        })();
+    </script>
 {% endblock %}

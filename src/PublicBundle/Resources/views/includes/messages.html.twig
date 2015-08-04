@@ -1,13 +1,11 @@
 <div class="notification" id="notification">
-  <button class="notification-closeBtn js-notificationCloseBtn mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-    <i class="material-icons">close</i>
-  </button>
+    <button class="notification-closeBtn js-notificationCloseBtn mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+        <i class="material-icons">close</i>
+    </button>
 
-{#{ dump(app.session.flashBag.get('notice'))}#}
-
-  <div id="notification-content">
-    {% for notice in app.session.flashBag.get('notice') %}
-      <p class="notification-text js-isNotice mdl-typography--title" role="alert">{{ notice }}</p>
-    {% endfor %}
-  </div>
+    <div id="notification-content">
+        {% for notice in app.session.flashBag.get('notice') %}
+            <p class="notification-text js-isNotice mdl-typography--title" role="alert">{{ notice }}</p>
+        {% endfor %}
+    </div>
 </div>

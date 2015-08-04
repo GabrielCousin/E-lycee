@@ -5,59 +5,54 @@
 {% set PointsMax = 0 %}
 
 {% for score in scores %}
-  {% if score.status.id == 4 %}
-    {% set QCMeffectués = QCMeffectués + 1 %}
-  {% endif %}
-  {% for choice in score.fiche.choices %}
-      {% set PointsMax = PointsMax + choice.note %}
-  {% endfor %}
-  {% set PointsTotal = PointsTotal + score.note %}
+    {% if score.status.id == 4 %}
+        {% set QCMeffectués = QCMeffectués + 1 %}
+    {% endif %}
+    {% for choice in score.fiche.choices %}
+        {% set PointsMax = PointsMax + choice.note %}
+    {% endfor %}
+    {% set PointsTotal = PointsTotal + score.note %}
 {% endfor %}
-{% set QCMpercent = (QCMeffectués / QCMtotal * 100) | round(1, 'floor') %}
 
-{# {% set PointsMax = 25 %} #}
-{% set PointsPercent = (PointsTotal / PointsMax * 100)  |round(2, 'floor') %}
+{% set QCMpercent = (QCMeffectués / QCMtotal * 100) | round(1, 'floor') %}
+{% set PointsPercent = (PointsTotal / PointsMax * 100) | round(2, 'floor') %}
 
 {% extends "DashboardBundle:templates:base.html.twig" %}
 
 {% block mainContent %}
-  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-    <div class="demo-chart mdl-cell mdl-cell--4-col">
+    <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+        <div class="demo-chart mdl-cell mdl-cell--4-col">
+            {% include "DashboardBundle:includes:graph.html.twig" with {'percent': QCMpercent, 'id': 0} %}
 
-      {% include "DashboardBundle:includes:graph.html.twig" with {'percent': QCMpercent, 'id': 0} %}
+            <h4 class="mdl-typography--title">{{ QCMeffectués }} QCM effectué{% if QCMeffectués > 1 %}s{% endif %}</h4>
+            <h4 class="mdl-typography--title">sur un total de {{ QCMtotal }} QCM</h4>
+        </div>
+        <div class="demo-chart mdl-cell mdl-cell--4-col">
+            <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
+                <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ (PointsPercent / 5) | round(2, 'floor') }}</text>
+            </svg>
+            <h4 class="mdl-typography--title">moyenne générale</h4>
+        </div>
+        <div class="demo-chart mdl-cell mdl-cell--4-col">
+            {% include "DashboardBundle:includes:graph.html.twig" with {'percent': PointsPercent, 'id': 1} %}
 
-      <h4 class="mdl-typography--title">{{ QCMeffectués }} QCM effectué{% if QCMeffectués > 1 %}s{% endif %}</h4>
-      <h4 class="mdl-typography--title">sur un total de {{ QCMtotal }} QCM</h4>
+            <h4 class="mdl-typography--title">{{ PointsTotal }} point{% if PointsTotal > 1 %}s{% endif %}</h4>
+            <h4 class="mdl-typography--title">sur un maximum de {{ PointsMax }} point{% if PointsMax > 1 %}s{% endif %}</h4>
+        </div>
     </div>
-    <div class="demo-chart mdl-cell mdl-cell--4-col">
-      <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
-        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ (PointsPercent / 5) | round(2, 'floor') }}</text>
-      </svg>
-      <h4 class="mdl-typography--title">moyenne générale</h4>
-    </div>
-    <div class="demo-chart mdl-cell mdl-cell--4-col">
-
-      {% include "DashboardBundle:includes:graph.html.twig" with {'percent': PointsPercent, 'id': 1} %}
-
-      <h4 class="mdl-typography--title">{{ PointsTotal }} point{% if PointsTotal > 1 %}s{% endif %}</h4>
-      <h4 class="mdl-typography--title">sur un maximum de {{ PointsMax }} point{% if PointsMax > 1 %}s{% endif %}</h4>
-    </div>
-  </div>
 {% endblock %}
 
 {% block javascripts %}
-  {{ parent() }}
-  <script src="{{ asset('dev/js/graph.js') }}"></script>
+    {{ parent() }}
+    <script>
+        var Graph0 = Graph;
+        Graph0.percent = {{QCMpercent}};
+        Graph0.id = 0;
+        Graph0.init();
 
-  <script>
-    var Graph0 = Graph;
-    Graph0.percent = {{QCMpercent}};
-    Graph0.id = 0;
-    Graph0.init();
-
-    var Graph1 = Graph;
-    Graph1.percent = {{PointsPercent}};
-    Graph1.id = 1;
-    Graph1.init();
-  </script>
+        var Graph1 = Graph;
+        Graph1.percent = {{PointsPercent}};
+        Graph1.id = 1;
+        Graph1.init();
+    </script>
 {% endblock %}
