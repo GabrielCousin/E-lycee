@@ -2,9 +2,12 @@
 {% extends "PublicBundle:templates:base.html.twig" %}
 
 {% block mainContent %}
-
+{% if nbTotalResults == 0 %}
+    <h2 class="mdl-typography--headline">Aucun résultat n'a été trouvé pour l'expression: {{ expression }}</h2>
+{% else %}
+{% set accord = ( nbTotalResults == 1 ) ? '' : 's' %}
 <div id="posts-wrapper">
-    <h2 class="mdl-typography--headline">{{ nbTotalResults}} résultats de recherches pour : {{ expression }}</h2>
+    <h2 class="mdl-typography--headline">{{ nbTotalResults }} résultat{{accord}} de recherche{{accord}} pour : {{ expression }}</h2>
 
     {% include "PublicBundle:includes:article-card.html.twig" %}
 </div>
@@ -13,6 +16,7 @@
     Plus d'articles
 </button>
 
+{% endif %}
 {% endblock %}
 
 {% block javascripts %}
@@ -21,6 +25,7 @@
         Pagination.current = {{ currentPage }};
         Pagination.max = {{ maxPostsPages }};
         Pagination.type = "search";
+        Pagination.expression = "{{ expression }}";
         Pagination.init();
     </script>
 {% endblock %}

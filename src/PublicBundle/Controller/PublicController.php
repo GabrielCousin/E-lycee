@@ -91,12 +91,20 @@ class PublicController extends Controller
     /**
      * @Route("/ajaxnews/{page}", name="public.news.ajax", options = {"expose" = true})
      */
-    public function ajaxnewsAction($page)
+    public function ajaxnewsAction(Request $request,$page)
     {
+
         $doctrine       = $this->getDoctrine();
         $rc             = $doctrine->getRepository('PublicBundle:Post') ;
         $postsPerPage   = $this->container->getParameter('home.posts_per_page');
-        $results        = $rc->getPostByPage($page, $postsPerPage);
+        if ( null !== $request->query->get('expression')) $expression = $request->query->get('expression');
+        if (isset($expression)){
+            // echo '<pre>'.DEBUG::dump($expression).'</pre>'; exit();
+            $results        = $rc->getPostsByContent($page,$postsPerPage,$expression);
+        }
+        else {
+            $results        = $rc->getPostByPage($page, $postsPerPage); 
+        }
         $articleSection = $this->renderView('PublicBundle:includes:article-card.html.twig', array('results' => $results));
         $response = array(
             'articleSection' => $articleSection,
@@ -190,43 +198,50 @@ class PublicController extends Controller
         return array('tweets' => $tweets);
     }
 
+
     /**
-     *
+     * @Route("/searching", name="public.search.index")
      * @Template("PublicBundle:includes:searchBar.html.twig")
      * @Method({"POST","GET"})
      */
     public function searchBarAction(Request $request){
         $form = $this->createForm(new SearchPostType());
         $request = $this->getRequest();
+        $form->handleRequest($this->getRequest());
+        if ($form->isSubmitted()){
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $expression = $data['expression'];
+                // echo '<pre>'.Debug::dump($expression).'</pre>'; exit();
+                return $this->redirect($this->generateUrl('public.showResults.index',array('page' => 1 , 'expression' => $expression)));
+            }else
+            {
+                throw $this->createNotFoundException('La recherche effectuée est invalide');
+            }
+        }
         return array('form' => $form->createView());
     }
 
+
     /**
-     * @Route("/results/{page}", name="public.showResults.index", options = {"expose" = true}, defaults={"page"=1})
-     * @Template("PublicBundle:includes:showResults.html.twig")
+     * @Route("/posts/results/{page}", name="public.showResults.index", options = {"expose" = true}, defaults={"page"= 1})
+     * @Template("PublicBundle:Public:showResults.html.twig")
      * @Method({"POST","GET"})
      */
     public function showResultsAction(Request $request,$page){
+        $expression = $request->query->get('expression');
         $doctrine   = $this->getDoctrine();
         $rc = $doctrine->getRepository('PublicBundle:Post') ;
-        $form = $this->createForm(new SearchPostType());
-        $form->handleRequest($this->getRequest());
-
-        if ($form->isValid()) {
-            $data = $form->getData();
-            $expression = $data['expression'];
-            $postsPerPage = $this->container->getParameter('home.posts_per_page');
-            $TotalResultsPages = $rc->getTotalResultsPages($postsPerPage,$expression);
-            $maxPostsPages = $TotalResultsPages['totalNewsPages'];
-            $results = $rc->getPostsByContent($page,$postsPerPage,$expression);
-            return $this->render('PublicBundle:Public:showResults.html.twig', array(
-                'results'        => $results,
-                'currentPage'    => $page,
-                'maxPostsPages'  => $maxPostsPages,
-                'expression'     => $expression,
-                'nbTotalResults' => $TotalResultsPages['totalPosts']
-            ));
-        }
-        throw $this->createNotFoundException('La recherche semble incorrecte');
+        $postsPerPage = $this->container->getParameter('home.posts_per_page');
+        $TotalResultsPages = $rc->getTotalResultsPages($postsPerPage,$expression);
+        $maxPostsPages = $TotalResultsPages['totalNewsPages'];
+        $results = $rc->getPostsByContent($page,$postsPerPage,$expression);
+        return array(
+            'results'        => $results,
+            'currentPage'    => $page,
+            'maxPostsPages'  => $maxPostsPages,
+            'expression'     => $expression,
+            'nbTotalResults' => $TotalResultsPages['totalPosts']
+        );
     }
 }
