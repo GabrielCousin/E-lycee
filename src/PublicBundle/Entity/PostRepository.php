@@ -114,4 +114,28 @@ class PostRepository extends EntityRepository
             ->getResult();
         return $results ;
     }
+
+    public function getPostsByContent($page, $itemsPerPage, $expression){
+        $offset = ($page - 1) * $itemsPerPage;
+        $results = $this
+            ->createQueryBuilder('p')
+            ->orderBy('p.createAt', 'DESC')
+            ->where ('p.content LIKE \'%' . $expression .'%\'')
+            ->setFirstResult($offset)
+            ->setMaxResults($itemsPerPage)
+            ->getQuery()
+            ->getResult();
+        return $results ;
+    }
+
+    public function getTotalResultsPages($postsPerPage,$expression) {
+        $totalPosts = $this
+            ->createQueryBuilder('p')
+            ->select('COUNT(p.title) AS total')
+            ->where ('p.content LIKE \'%' . $expression .'%\'')
+            ->getQuery()
+            ->getSingleScalarResult();
+        $totalNewsPages = ceil($totalPosts / $postsPerPage);
+        return array('totalNewsPages' => $totalNewsPages,'totalPosts' => $totalPosts );
+    }
 }
