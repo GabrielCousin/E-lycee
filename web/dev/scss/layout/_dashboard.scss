@@ -25,7 +25,9 @@
   }
 
   .extract {
-    max-width: 250px;
+    @media screen and (max-width: $bp-tablet) {
+      display: none;
+    }
   }
 
   a.material-icons {
