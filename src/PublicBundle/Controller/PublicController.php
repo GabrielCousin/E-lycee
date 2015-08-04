@@ -196,13 +196,13 @@ class PublicController extends Controller
      * @Method({"POST","GET"})
      */
     public function searchBarAction(Request $request){
-        $form = $this->createForm(new SearchPostType());        
+        $form = $this->createForm(new SearchPostType());
         $request = $this->getRequest();
         return array('form' => $form->createView());
     }
 
     /**
-     * @Route("/results/{page}", name="public.showResults.index", defaults={"page"=1})
+     * @Route("/results/{page}", name="public.showResults.index", options = {"expose" = true}, defaults={"page"=1})
      * @Template("PublicBundle:includes:showResults.html.twig")
      * @Method({"POST","GET"})
      */
@@ -215,18 +215,18 @@ class PublicController extends Controller
         if ($form->isValid()) {
             $data = $form->getData();
             $expression = $data['expression'];
-            $postsPerPage   = $this->container->getParameter('home.posts_per_page');
-            $TotalResultsPages  = $rc->getTotalResultsPages($postsPerPage,$expression);
+            $postsPerPage = $this->container->getParameter('home.posts_per_page');
+            $TotalResultsPages = $rc->getTotalResultsPages($postsPerPage,$expression);
             $maxPostsPages = $TotalResultsPages['totalNewsPages'];
             $results = $rc->getPostsByContent($page,$postsPerPage,$expression);
-            return $this->render('PublicBundle:Public:showResults.html.twig',array(
-            'results'=>$results,
-            'currentPage'   => $page,
-            'maxPostsPages' => $maxPostsPages,
-            'expression' => $expression,
-            'nbTotalResults' => $TotalResultsPages['totalPosts']
+            return $this->render('PublicBundle:Public:showResults.html.twig', array(
+                'results'        => $results,
+                'currentPage'    => $page,
+                'maxPostsPages'  => $maxPostsPages,
+                'expression'     => $expression,
+                'nbTotalResults' => $TotalResultsPages['totalPosts']
             ));
         }
-        throw $this->createNotFoundException('La recherche semble incorrecte');    
+        throw $this->createNotFoundException('La recherche semble incorrecte');
     }
 }

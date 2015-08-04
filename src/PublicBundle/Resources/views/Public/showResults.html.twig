@@ -1,26 +1,26 @@
-{% set title = "Actualités" %}
-
+{% set title = "Recherche" %}
 {% extends "PublicBundle:templates:base.html.twig" %}
-{% block mainContent %}
-{{ nbTotalResults}} Résultats de recherches pour : {{ expression }} 
-<div id="posts-wrapper">
-    {% include "PublicBundle:includes:article-card.html.twig" %}
-  </div>
 
-  <button id="load-more-btn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+{% block mainContent %}
+
+<div id="posts-wrapper">
+    <h2 class="mdl-typography--headline">{{ nbTotalResults}} résultats de recherches pour : {{ expression }}</h2>
+
+    {% include "PublicBundle:includes:article-card.html.twig" %}
+</div>
+
+<button id="load-more-btn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
     Plus d'articles
-  </button>
+</button>
 
 {% endblock %}
 
 {% block javascripts %}
-  {{ parent() }}
-  <script src="{{ asset('dev/js/pagination.js') }}"></script>
-  <script>
-    Pagination.current = {{ currentPage }};
-    Pagination.max = {{ maxPostsPages }};
-    console.log(Pagination.current + " - " + Pagination.max);
-    Pagination.init();
-  </script>
-
+    {{ parent() }}
+    <script>
+        Pagination.current = {{ currentPage }};
+        Pagination.max = {{ maxPostsPages }};
+        Pagination.type = "search";
+        Pagination.init();
+    </script>
 {% endblock %}

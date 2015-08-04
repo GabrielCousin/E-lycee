@@ -1,5 +1,11 @@
 <form action="{{ path('public.showResults.index')}}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable textfield-demo">
+        {{ form_label(form.expression, 'search', {'label_attr': {'class': 'mdl-button mdl-js-button mdl-button--icon material-icons searchBtn'} }) }}
+        <div class="mdl-textfield__expandable-holder">
+            {{ form_widget(form.expression, { 'attr': {'class': 'mdl-textfield__input'} }) }}
+            <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
+        </div>
+    </div>
+    {{ form_widget(form._token) }}
 
-    <input type="submit" />
 </form>
