@@ -103,6 +103,11 @@ class FichesController extends Controller
 
         $em = $doctrine->getManager();
         $fiche = $rp->findOneBy(array('id'=>$id));
+
+        if(empty($fiche)) {
+            throw $this->createNotFoundException('La fiche n\'existe pas');
+        }
+
         $niveauFiche = $fiche->getNiveau();
         $ficheType = new FicheType();
         $form = $this->createForm($ficheType, $fiche)
@@ -160,6 +165,11 @@ class FichesController extends Controller
         $em         = $doctrine->getManager();
         $repository = $doctrine->getRepository('DashboardBundle:Fiche');
         $fiche       = $repository->find($id);
+
+        if(empty($fiche)) {
+            throw $this->createNotFoundException('La fiche n\'existe pas');
+        }
+
         $em->remove($fiche);
         $em->flush();
         $message = "La fiche a bien été supprimée";

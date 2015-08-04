@@ -1,0 +1,18 @@
+{% set title = "Dashboard" %}
+{% extends "DashboardBundle:templates:base.html.twig" %}
+
+{% block mainContent %}
+    <div class="onboarding mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+        <h4 class="mdl-typography--headline">Désolé, vous n'avez pas encore de statistiques.</h4>
+        <p>Peut-être souhaitez-vous ?</p>
+        <ul class="dashboard-list">
+            {% if is_granted('ROLE_STUDENT') %}
+                <li><a href="{{ url('student.fiches.home') }}">Répondre à un QCM</a></li>
+            {% elseif is_granted('ROLE_TEACHER') %}
+                <li><a href="{{ url('teacher.fiches.new') }}">Ecrire un article</a></li>
+                <li><a href="{{ url('teacher.article.new') }}">Créer une fiche</a></li>
+            {% endif %}
+            <li><a href="{{ url('public.home.index') }}">Retourner sur le site</a></li>
+        </ul>
+    </div>
+{% endblock %}
