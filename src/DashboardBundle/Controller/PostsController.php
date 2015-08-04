@@ -60,6 +60,11 @@ class PostsController extends Controller
         }
         else { // route d'update d'article
             $post    = $repository->find($id);
+
+            if(empty($post)) {
+                throw $this->createNotFoundException('Le post n\'existe pas');
+            }
+
             $message   = "L'article a été mis à jour";
             $auteurId = $post->getAuteur()->getId();
             if ($auteurId != $user->getId() ) {
@@ -82,7 +87,7 @@ class PostsController extends Controller
                 if ($post->getPicture() == null){
                     $data->setPicture($pictureDefault);
        // echo '<pre>';Debug::dump($data);echo '</pre>';exit();
-                } 
+                }
                 else  $data->setPicture($post->getPicture());
             }
             $em->persist($data);
@@ -129,6 +134,11 @@ class PostsController extends Controller
         $em         = $doctrine->getManager();
         $repository = $doctrine->getRepository('PublicBundle:Post');
         $post       = $repository->find($id);
+
+        if(empty($post)) {
+            throw $this->createNotFoundException('Le post n\'existe pas');
+        }
+
         $em->remove($post);
         $em->flush();
         $message = "L'article a bien été supprimé";

@@ -23,12 +23,16 @@ class DefaultController extends Controller
         $totalCommentaires = $doctrine->getRepository('PublicBundle:Commentaire')->getTotalCommentaires();
         $nbrStudents = $doctrine->getRepository('UserBundle:User')->getNbrStudents();
 
-        return array(
-            'articles' => $articles,
-            'fiches' => $fiches,
-            'totalCommentaires' => $totalCommentaires,
-            'nbrStudents' => $nbrStudents
-        );
+        if (empty($articles) || empty($fiches)) {
+            return $this->redirect($this->generateUrl('dashboard.onboarding'));
+        } else {
+            return array(
+                'articles' => $articles,
+                'fiches' => $fiches,
+                'totalCommentaires' => $totalCommentaires,
+                'nbrStudents' => $nbrStudents
+            );
+        }
     }
     /**
      * @Route("professeur/classe", name="teacher.students.list")
@@ -51,6 +55,11 @@ class DefaultController extends Controller
         $doctrine   = $this->getDoctrine();
         $scoreRp = $doctrine->getRepository('DashboardBundle:Score');
         $scores = $scoreRp->getScoreSeenStudent($token->getUser()->getId());
-        return array('scores' => $scores);
+
+        if (empty($scores)) {
+            return $this->redirect($this->generateUrl('dashboard.onboarding'));
+        } else {
+            return array('scores' => $scores);
+        }
     }
 }

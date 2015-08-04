@@ -2,53 +2,48 @@
 {% extends "DashboardBundle:templates:base.html.twig" %}
 
 {% block mainContent %}
+    {{ form_start(form, {'method': 'POST', 'attr': {'class': 'mdl-grid u-fgrow'}}) }}
 
-  {{ form_start(form, {'method': 'POST', 'attr': {'class': 'mdl-grid u-fgrow'}}) }}
+        <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col dashboard-section clearfix">
+            <div class="mdl-grid mdl-grid--no-spacing">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                    <div class="form-errors">{{ form_errors(form.title) }}</div>
+                    {{ form_widget(form.title,{'attr' : {'class':'mdl-textfield__input'}}) }}
+                    {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+                </div>
+                <div class="mdl-cell mdl-cell--12-col">
+                    <div class="form-errors">{{ form_errors(form.niveau) }}</div>
+                    {{ form_widget(form.niveau,{'attr' : {'class':'u-push'}}) }}
+                    {{ form_label(form.niveau, 'Niveau', {'label_attr': {'class': 'select-label select-label--inline'} }) }}
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                    <div class="form-errors">{{ form_errors(form.content) }}</div>
+                    {{ form_widget(form.content, {'attr' : {'class':'mdl-textfield__input'}}) }}
+                    {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+                </div>
 
-    <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col dashboard-section clearfix">
-      <div class="mdl-grid mdl-grid--no-spacing">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-          <div class="form-errors">{{ form_errors(form.title) }}</div>
-          {{ form_widget(form.title,{'attr' : {'class':'mdl-textfield__input'}}) }}
-          {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
-        </div>
-        <div class="mdl-cell mdl-cell--12-col">
-          <div class="form-errors">{{ form_errors(form.niveau) }}</div>
-          {{ form_widget(form.niveau,{'attr' : {'class':'u-push'}}) }}
-          {{ form_label(form.niveau, 'Niveau', {'label_attr': {'class': 'select-label select-label--inline'} }) }}
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-          <div class="form-errors">{{ form_errors(form.content) }}</div>
-          {{ form_widget(form.content, {'attr' : {'class':'mdl-textfield__input'}}) }}
-          {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
-        </div>
+                <div class="form-errors">{{ form_errors(form) }}</div>
 
-        <div class="form-errors">{{ form_errors(form) }}</div>
+                <ul class="mdl-cell mdl-cell--12-col form-choices" data-prototype="
+                    {% filter escape %}
+                        {{ include('DashboardBundle:includes:choices-prototype.html.twig', { 'form': form.choices.vars.prototype }) }}
+                    {% endfilter %}
+                "></ul>
 
-        <ul class="mdl-cell mdl-cell--12-col form-choices" data-prototype="
-          {% filter escape %}
-            {{ include('DashboardBundle:includes:choices-prototype.html.twig', { 'form': form.choices.vars.prototype }) }}
-          {% endfilter %}
-        "></ul>
+                <button type="button" id="adder" class="fiche-question-adder add_tag_link mdl-button mdl-js-button mdl-js-ripple-effect">Ajouter une question</button>
 
-        <button type="button" id="adder" class="fiche-question-adder add_tag_link mdl-button mdl-js-button mdl-js-ripple-effect">Ajouter une question</button>
+            </div>
+            <input disabled type="submit" value="Créer la fiche" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push"/>
+            {{ form_widget(form._token) }}
+            {{ form_widget(form.choices) }}
+        </section>
 
-      </div>
-      <input disabled type="submit" value="Créer la fiche" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored u-push"/>
-      {{ form_widget(form._token) }}
-      {{ form_widget(form.choices) }}
-    </section>
-
-  {{ form_end(form) }}
-
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block javascripts %}
-  {{ parent() }}
-  <script src="{{ asset('dev/js/fiche-create.js') }}"></script>
-
-  <script>
-    FicheCreate.init();
-  </script>
-
+    {{ parent() }}
+    <script>
+        FicheCreate.init();
+    </script>
 {% endblock %}

@@ -14,7 +14,6 @@ var Graph = {
 
   updateSVG: function() {
     this.path = document.getElementById("path" + this.id);
-    console.log(this.path);
     if (this.percent > 50) {
       this.path.setAttribute("d", "M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 " + this.x + " " + this.y + " z")
     } else if (this.percent == 0) {

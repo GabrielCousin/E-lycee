@@ -1,32 +1,30 @@
 {% spaceless %}
-<div id="form__name__" class="mdl-grid mdl-grid--no-spacing">
+    <div id="form__name__" class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+            <div class="form-errors">{{ form_errors(form.content) }}</div>
+            {{ form_widget(form.content,{'attr' : {'class':'mdl-textfield__input'}}) }}
+            {{ form_label(form.content, 'Content', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+        </div>
 
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-    <div class="form-errors">{{ form_errors(form.content) }}</div>
-    {{ form_widget(form.content,{'attr' : {'class':'mdl-textfield__input'}}) }}
-    {{ form_label(form.content, 'Content', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
-  </div>
+        <div class="mdl-cell mdl-cell--12-col">
+            <div id="{{ form.reponse.vars.id }}">
+                <h6>{{ form_label(form.reponse) }}</h6>
+                {% for child in form.reponse.children %}
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="{{ child.vars.id }}">
+                        {{ form_widget(child, {'attr' : {'class':'mdl-radio__button', 'type': 'radio', 'name': child.vars.full_name, 'value': child.vars.value, 'id': child.vars.id}}) }}
+                        <span class="mdl-radio__label">{{ child.vars.label }}</span>
+                    </label>
+                {% endfor %}
+                <div class="form-errors">{{ form_errors(form.reponse) }}</div>
+            </div>
+        </div>
 
-  <div class="mdl-cell mdl-cell--12-col">
-    <div id="{{ form.reponse.vars.id }}">
-      <h6>{{ form_label(form.reponse) }}</h6>
-      {% for child in form.reponse.children %}
-        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mdl-cell mdl-cell--12-col" for="{{ child.vars.id }}">
-          {{ form_widget(child, {'attr' : {'class':'mdl-radio__button', 'type': 'radio', 'name': child.vars.full_name, 'value': child.vars.value, 'id': child.vars.id}}) }}
-          <span class="mdl-radio__label">{{ child.vars.label }}</span>
-        </label>
-      {% endfor %}
-      <div class="form-errors">{{ form_errors(form.reponse) }}</div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+            <div class="form-errors">{{ form_errors(form.note) }}</div>
+            {{ form_widget(form.note,{'attr' : {'class':'mdl-textfield__input', 'pattern': '([1-9]+[0-9]?)'}}) }}
+            {{ form_label(form.note, 'Note', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+        </div>
+
+        <button type="button" data-id="__name__" class="remover add_tag_link mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">Supprimer</button>
     </div>
-  </div>
-
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-    <div class="form-errors">{{ form_errors(form.note) }}</div>
-    {{ form_widget(form.note,{'attr' : {'class':'mdl-textfield__input', 'pattern': '-?[0-9]*(\.[0-9]+)?'}}) }}
-    {{ form_label(form.note, 'Note', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
-  </div>
-
-  <button type="button" data-id="__name__" class="remover add_tag_link mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">Supprimer</button>
-
-</div>
 {% endspaceless %}

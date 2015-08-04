@@ -1,14 +1,14 @@
 <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
-  <defs>
-    <mask id="piemask{{id}}" maskContentUnits="objectBoundingBox">
-      <circle cx=0.5 cy=0.5 r=0.49 fill="white" />
-      <circle cx=0.5 cy=0.5 r=0.40 fill="black" />
-    </mask>
-    <g id="piechart{{id}}">
-      <circle cx=0.5 cy=0.5 r=0.5 />
-      <path id="path{{id}}" d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
-    </g>
-  </defs>
-  <use xlink:href="#piechart{{id}}" mask="url(#piemask{{id}})" />
-  <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ percent }}<tspan font-size="0.2" dy="-0.07">%</tspan></text>
+    <defs>
+        <mask id="piemask{{id}}" maskContentUnits="objectBoundingBox">
+            <circle cx=0.5 cy=0.5 r=0.49 fill="white" />
+            <circle cx=0.5 cy=0.5 r=0.40 fill="black" />
+        </mask>
+        <g id="piechart{{id}}">
+            <circle cx=0.5 cy=0.5 r=0.5 />
+            <path id="path{{id}}" d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
+        </g>
+    </defs>
+    <use xlink:href="#piechart{{id}}" mask="url(#piemask{{id}})" />
+    <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ percent }}<tspan font-size="0.2" dy="-0.07">%</tspan></text>
 </svg>
