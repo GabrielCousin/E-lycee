@@ -25,10 +25,10 @@
         "endroid/twitter-bundle": "^1.1",
         "friendsofsymfony/jsrouting-bundle": "^1.5",
         "ornicar/akismet-bundle": "dev-master",
-        "iphp/filestore-bundle": "^0.2.3"
+        "iphp/filestore-bundle": "^0.2.3",
+        "sensio/generator-bundle": "^2.5"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
     },
     "scripts": {
         "post-root-package-install": [
