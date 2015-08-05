@@ -18,7 +18,7 @@ class ChoixType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content')
+            ->add('content','text',array('label' => 'Question :'))
             ->add('reponse','choice',array(
                 'choices' => array('oui' => 'oui', 'non' => 'non'),
                 'expanded'  => true,

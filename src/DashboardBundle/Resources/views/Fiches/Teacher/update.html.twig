@@ -10,7 +10,7 @@
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
                     <div class="form-errors">{{ form_errors(form.title) }}</div>
                     {{ form_widget(form.title,{'attr' : {'class':'mdl-textfield__input'}}) }}
-                    {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+                    {{ form_label(form.title, 'Son Intitulé', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
                 </div>
                 <div class="mdl-cell mdl-cell--12-col">
                     <div class="form-errors">{{ form_errors(form.niveau) }}</div>
@@ -20,7 +20,7 @@
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
                     <div class="form-errors">{{ form_errors(form.content) }}</div>
                     {{ form_widget(form.content, {'attr' : {'class':'mdl-textfield__input'}}) }}
-                    {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+                    {{ form_label(form.content, 'Description de la Fiche', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
                 </div>
                 <div class="form-errors">{{ form_errors(form) }}</div>
                 <ul class="mdl-cell mdl-cell--12-col form-choices">

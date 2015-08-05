@@ -3,8 +3,8 @@
 
 {% block mainContent %}
     <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col dashboard-section clearfix">
-        <h1 class="mdl-typography--display-1"><small>Titre  : </small>{{ score.fiche.title }}</h1>
-        <h3 class="mdl-typography--title"><small>Question : </small>{{ score.fiche.content }}</h3>
+        <h1 class="mdl-typography--display-1">{{ score.fiche.title }}</h1>
+        <h3 class="mdl-typography--title">{{ score.fiche.content }}</h3>
 
         {{ form_start(form, {'method': 'POST', 'attr': {'class': 'mdl-grid mdl-grid--no-spacing u-fgrow'}}) }}
             {% for key, formReponse in form.children %}
