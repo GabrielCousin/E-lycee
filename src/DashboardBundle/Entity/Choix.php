@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert ;
 /**
  * Choix
  *
- * @ORM\Table()
+ * @ORM\Table(name="choix")
  * @ORM\Entity(repositoryClass="DashboardBundle\Entity\ChoixRepository")
  */
 class Choix
@@ -34,14 +34,14 @@ class Choix
 
 
     /**
-     * @var string 
+     * @var string
      *
      * @ORM\Column(name="reponse", type="string")
      * @Assert\Choice(choices = {"non","oui"}, message = "Choisissez un réponse valide.")
      */
 
     private $reponse;
-    
+
     /**
      * @var string
      *
@@ -70,7 +70,7 @@ class Choix
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -93,7 +93,7 @@ class Choix
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -116,7 +116,7 @@ class Choix
     /**
      * Get fiche
      *
-     * @return \DashboardBundle\Entity\Fiche 
+     * @return \DashboardBundle\Entity\Fiche
      */
     public function getFiche()
     {
@@ -139,7 +139,7 @@ class Choix
     /**
      * Get note
      *
-     * @return integer 
+     * @return integer
      */
     public function getNote()
     {
@@ -162,7 +162,7 @@ class Choix
     /**
      * Get reponse
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getReponse()
     {

@@ -11,7 +11,7 @@ use Iphp\FileStoreBundle\Mapping\Annotation as FileStore;
 /**
  * Fiche
  *
- * @ORM\Table()
+ * @ORM\Table(name="fiche")
  * @ORM\Entity(repositoryClass="DashboardBundle\Entity\FicheRepository")
  */
 class Fiche
@@ -95,7 +95,7 @@ class Fiche
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -118,7 +118,7 @@ class Fiche
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -141,7 +141,7 @@ class Fiche
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -164,7 +164,7 @@ class Fiche
     /**
      * Get teacher
      *
-     * @return \UserBundle\Entity\User 
+     * @return \UserBundle\Entity\User
      */
     public function getTeacher()
     {
@@ -187,7 +187,7 @@ class Fiche
     /**
      * Get niveau
      *
-     * @return \DashboardBundle\Entity\Niveau 
+     * @return \DashboardBundle\Entity\Niveau
      */
     public function getNiveau()
     {
@@ -220,7 +220,7 @@ class Fiche
     /**
      * Get choices
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getChoices()
     {
@@ -253,7 +253,7 @@ class Fiche
     /**
      * Get status
      *
-     * @return \PublicBundle\Entity\Status 
+     * @return \PublicBundle\Entity\Status
      */
     public function getStatus()
     {
@@ -285,7 +285,7 @@ class Fiche
     /**
      * Get scores
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getScores()
     {

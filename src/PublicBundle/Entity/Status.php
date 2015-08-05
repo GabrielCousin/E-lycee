@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Status
  *
- * @ORM\Table()
+ * @ORM\Table(name="status")
  * @ORM\Entity(repositoryClass="PublicBundle\Entity\StatusRepository")
  */
 class Status
@@ -38,7 +38,7 @@ class Status
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -61,7 +61,7 @@ class Status
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -84,7 +84,7 @@ class Status
     /**
      * Get label
      *
-     * @return string 
+     * @return string
      */
     public function getLabel()
     {
