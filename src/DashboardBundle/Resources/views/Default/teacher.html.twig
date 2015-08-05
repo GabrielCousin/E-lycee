@@ -56,7 +56,7 @@
                 {% for article in articles | slice(0, 3) %}
                     {% if article.name == "PUBLISHED" %}
                     <li class="dashboard-index-card__list-item is-published">
-                        <i id="article-{{ article.id }}" class="prelabel__icon material-icons">label</i>{{ article.title | length > 50 ? article.title | slice(0, 100) ~ '…' : article.title }}</i>
+                        <i id="article-{{ article.id }}" class="prelabel__icon material-icons">label</i>{{ article.title | length > 40 ? article.title | slice(0, 40) ~ '…' : article.title }}</i>
                         <div class="mdl-tooltip" for="article-{{ article.id }}">Publié</div>
                     </li>
                     {% else %}
