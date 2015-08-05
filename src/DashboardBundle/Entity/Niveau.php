@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection ;
 /**
  * Niveau
  *
- * @ORM\Table()
+ * @ORM\Table(name="niveau")
  * @ORM\Entity(repositoryClass="DashboardBundle\Entity\NiveauRepository")
  */
 class Niveau
@@ -47,7 +47,7 @@ class Niveau
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -70,7 +70,7 @@ class Niveau
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -103,7 +103,7 @@ class Niveau
     /**
      * Get fiches
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFiches()
     {
@@ -136,7 +136,7 @@ class Niveau
     /**
      * Get students
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getStudents()
     {

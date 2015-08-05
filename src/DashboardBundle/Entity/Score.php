@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Score
  *
- * @ORM\Table()
+ * @ORM\Table(name="score")
  * @ORM\Entity(repositoryClass="DashboardBundle\Entity\ScoreRepository")
  */
 class Score
@@ -52,7 +52,7 @@ class Score
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
 
     public function getId()
@@ -76,7 +76,7 @@ class Score
     /**
      * Get note
      *
-     * @return float 
+     * @return float
      */
     public function getNote()
     {
@@ -99,7 +99,7 @@ class Score
     /**
      * Get fiche
      *
-     * @return \DashboardBundle\Entity\Fiche 
+     * @return \DashboardBundle\Entity\Fiche
      */
     public function getFiche()
     {
@@ -145,7 +145,7 @@ class Score
     /**
      * Get status
      *
-     * @return \PublicBundle\Entity\Status 
+     * @return \PublicBundle\Entity\Status
      */
     public function getStatus()
     {
