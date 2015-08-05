@@ -15,7 +15,7 @@
 {% endfor %}
 
 {% set QCMpercent = (QCMeffectués / QCMtotal * 100) | round(1, 'floor') %}
-{% set PointsPercent = (PointsTotal / PointsMax * 100) | round(2, 'floor') %}
+{% set PointsPercent = (PointsTotal / PointsMax * 100) | round(1, 'floor') %}
 
 {% extends "DashboardBundle:templates:base.html.twig" %}
 
@@ -29,7 +29,7 @@
         </div>
         <div class="demo-chart mdl-cell mdl-cell--4-col">
             <svg fill="currentColor" width="150px" height="150px" viewBox="0 0 1 1" class="">
-                <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ (PointsPercent / 5) | round(2, 'floor') }}</text>
+                <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">{{ (PointsPercent / 5) | round(1, 'floor') }}</text>
             </svg>
             <h4 class="mdl-typography--title">moyenne générale</h4>
         </div>
