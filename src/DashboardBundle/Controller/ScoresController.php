@@ -48,6 +48,19 @@ class  ScoresController extends Controller
         if(empty($score)) {
             throw $this->createNotFoundException('La fiche n\'existe pas');
         }
+        if($token->getUser()->getId() !== $score->getStudent()->getId()){
+            throw $this->createNotFoundException('La fiche n\'existe pas');
+        }
+        if($score->getStatus()->getName() == "DONE"){
+            $message = "Vous avez déjà fait cette fiche. Vous ne pouvez donc pas retourner dessus";
+            $request->getSession()->getFlashBag()->set('notice', $message);
+            return $this->redirect($this->generateUrl('student.fiches.home'));
+        }
+        if ($score->getFiche()->getStatus()->getName() == "UNPUBLISHED"){
+            $message = "Cette fiche n'est plus active";
+            $request->getSession()->getFlashBag()->set('notice', $message);
+            return $this->redirect($this->generateUrl('student.fiches.home'));       
+        }
 
         $fiche = $score->getFiche();
         // faire une vérification si la fiche n'est pas publiée ou déja faire ....

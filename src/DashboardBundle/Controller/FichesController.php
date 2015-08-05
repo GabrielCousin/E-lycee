@@ -67,7 +67,6 @@ class FichesController extends Controller
 
                 // on crée des entités scores pour le niveau donné.
                 $niveau = $data->getNiveau();
-
                 $students = $studentRp->findBy(array('niveau' => $niveau->getId() ));
                 $undone = $statusRp->findOneBy(array('name'=>'UNDONE'));
                 foreach ($students as $key=>$student){
