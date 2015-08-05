@@ -1,9 +1,15 @@
 {% spaceless %}
     <div id="form__name__" class="mdl-grid mdl-grid--no-spacing">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--9-col">
             <div class="form-errors">{{ form_errors(form.content) }}</div>
             {{ form_widget(form.content,{'attr' : {'class':'mdl-textfield__input'}}) }}
             {{ form_label(form.content, 'Question :' , {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--3-col">
+            <div class="form-errors">{{ form_errors(form.note) }}</div>
+            {{ form_widget(form.note,{'attr' : {'class':'mdl-textfield__input', 'pattern': '([1-9]+[0-9]?)'}}) }}
+            {{ form_label(form.note, 'Points donnés à la question : ', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
         </div>
 
         <div class="mdl-cell mdl-cell--12-col">
@@ -17,12 +23,6 @@
                 {% endfor %}
                 <div class="form-errors">{{ form_errors(form.reponse) }}</div>
             </div>
-        </div>
-
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
-            <div class="form-errors">{{ form_errors(form.note) }}</div>
-            {{ form_widget(form.note,{'attr' : {'class':'mdl-textfield__input', 'pattern': '([1-9]+[0-9]?)'}}) }}
-            {{ form_label(form.note, 'Points donnés à la question : ', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
         </div>
 
         <button type="button" data-id="__name__" class="remover add_tag_link mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">Supprimer</button>

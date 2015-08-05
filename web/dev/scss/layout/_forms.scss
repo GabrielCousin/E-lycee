@@ -22,3 +22,18 @@
 .form-alert {
   color: #de3226;
 }
+
+.level-select {
+  text-align: right;
+}
+
+.level-select--label {
+  padding-right: 10px;
+  display: inline-block;
+}
+
+.form-choices--edit {
+  .remover {
+    display: none;
+  }
+}

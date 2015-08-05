@@ -8365,13 +8365,15 @@ a[disabled] {
   line-height: 32px !important; }
 
 .form-choices {
-  padding: 0; }
+  margin-top: 40px !important;
+  padding: 0;
+  border-top: 3px double #CCC; }
   .form-choices li {
     list-style: none;
     border-top: 3px double #CCC;
     display: block;
-    margin-top: 10px;
-    padding-top: 10px; }
+    margin-top: 40px;
+    padding-top: 40px; }
     .form-choices li:first-child {
       border-top: 0; }
 
@@ -8569,6 +8571,16 @@ select {
 
 .form-alert {
   color: #de3226; }
+
+.level-select {
+  text-align: right; }
+
+.level-select--label {
+  padding-right: 10px;
+  display: inline-block; }
+
+.form-choices--edit .remover {
+  display: none; }
 
 .loading-indicator {
   position: absolute;

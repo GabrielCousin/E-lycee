@@ -7,15 +7,15 @@
 
         <section class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col dashboard-section clearfix">
             <div class="mdl-grid mdl-grid--no-spacing">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
                     <div class="form-errors">{{ form_errors(form.title) }}</div>
                     {{ form_widget(form.title,{'attr' : {'class':'mdl-textfield__input'}}) }}
-                    {{ form_label(form.title, 'Son Intitulé', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
+                    {{ form_label(form.title, 'Intitulé', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
                 </div>
-                <div class="mdl-cell mdl-cell--12-col">
+                <div class="mdl-cell mdl-cell--6-col level-select">
                     <div class="form-errors">{{ form_errors(form.niveau) }}</div>
-                    {{ form_widget(form.niveau,{'attr' : {'class':'u-push'}}) }}
-                    {{ form_label(form.niveau, 'Niveau', {'label_attr': {'class': 'select-label select-label--inline'} }) }}
+                    {{ form_label(form.niveau, 'Niveau', {'label_attr': {'class': 'select-label select-label--inline level-select--label'} }) }}
+                    {{ form_widget(form.niveau,{'attr' : {'class':''}}) }}
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
                     <div class="form-errors">{{ form_errors(form.content) }}</div>
@@ -23,7 +23,7 @@
                     {{ form_label(form.content, 'Description de la Fiche', {'label_attr': {'class': 'mdl-textfield__label'} }) }}
                 </div>
                 <div class="form-errors">{{ form_errors(form) }}</div>
-                <ul class="mdl-cell mdl-cell--12-col form-choices">
+                <ul class="mdl-cell mdl-cell--12-col form-choices form-choices--edit">
                     {% for choice in form.choices %}
                         <li>{{ include('DashboardBundle:includes:choices-prototype.html.twig', { 'form': choice }) }}</li>
                     {% endfor %}
