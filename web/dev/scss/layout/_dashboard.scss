@@ -62,7 +62,6 @@
   margin-bottom: 40px;
 }
 
-
 .demo-chart {
   text-align: center;
   align-self: flex-start;
@@ -76,6 +75,10 @@
   }
 }
 
+.demo-charts {
+  justify-content: space-around;
+}
+
 .dashboard-index-card {
   min-height: 0;
   height: 80px;
@@ -85,6 +88,10 @@
   }
   h5 {
     margin-top: 0;
+  }
+
+  @media screen and (max-width: $bp-tablet) {
+    width: 100%;
   }
 }
 
@@ -118,23 +125,6 @@
   }
 }
 
-.dashboard-pagination {
-  list-style: none;
-  padding: 10px;
-
-  li {
-    display: inline-block;
-
-    &:not(:first-child):before {
-      content: " | ";
-    }
-
-    a {
-      text-decoration: none;
-    }
-  }
-}
-
 .onboarding {
   padding: 20px;
   flex-direction: column;
@@ -142,4 +132,10 @@
 
 .dashboard-list a {
   color: #00BCD4;
+}
+
+.mdl-layout-title {
+  @media screen and (max-width: $bp-desktop) {
+    padding-left: 20px;
+  }
 }

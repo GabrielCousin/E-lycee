@@ -1,0 +1,16 @@
+.dashboard-pagination {
+  list-style: none;
+  padding: 10px;
+
+  li {
+    display: inline-block;
+
+    &:not(:first-child):before {
+      content: " | ";
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
