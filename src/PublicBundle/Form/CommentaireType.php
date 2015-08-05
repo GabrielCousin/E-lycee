@@ -17,8 +17,6 @@ class CommentaireType extends AbstractType
         $builder
             ->add('username')
             ->add('contenu')
-//            ->add('createAt', 'date')
-//            ->add('post','hidden')
             ->add('envoyer', 'submit')
         ;
     }

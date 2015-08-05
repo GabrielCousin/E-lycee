@@ -12,7 +12,7 @@ use Iphp\FileStoreBundle\Mapping\Annotation as FileStore;
 /**
  * Post
  *
- * @ORM\Table()
+ * @ORM\Table(name="post")
  * @ORM\Entity(
  *      repositoryClass="PostRepository"
  * )

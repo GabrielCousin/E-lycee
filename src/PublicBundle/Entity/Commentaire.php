@@ -10,7 +10,7 @@ use Iphp\FileStoreBundle\Mapping\Annotation as FileStore;
 /**
  * Commentaire
  *
- * @ORM\Table()
+ * @ORM\Table(name="commentaire")
  * @ORM\Entity(repositoryClass="PublicBundle\Entity\CommentaireRepository")
  */
 class Commentaire
