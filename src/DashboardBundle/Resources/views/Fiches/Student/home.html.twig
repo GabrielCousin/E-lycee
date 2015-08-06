@@ -5,8 +5,8 @@
     <table class="article-list mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--12-col">
         <thead>
             <tr>
-                <th class="mdl-data-table__cell--non-numeric cell--s">Titre</th>
-                <th class="mdl-data-table__cell--non-numeric u-hide-mini">Question</th>
+                <th class="mdl-data-table__cell--non-numeric cell--s">Intitulé</th>
+                <th class="mdl-data-table__cell--non-numeric u-hide-mini">Description</th>
                 <th class="cell--xs">Note</th>
                 <th class="cell--s">Statut</th>
                 <th class="cell--xs">Répondre</th>
@@ -17,7 +17,13 @@
                 <tr>
                     <td class="mdl-data-table__cell--non-numeric cell--s">{{ QCM.fiche.title }}</td>
                     <td class="mdl-data-table__cell--non-numeric u-hide-mini">{{  QCM.fiche.content }}</td>
-                    <td class="cell--xs">{% if (QCM.status.name == "UNDONE") %}-{% else %}{{ QCM.note }}{% endif %}</td>
+                    <td class="cell--xs">{% if (QCM.status.name == "UNDONE") %}-{% else %}
+                        {% set noteMax = 0 %}
+                            {% for choice in QCM.fiche.choices %}
+                            {% set noteMax = noteMax + choice.note %}
+                            {% endfor %}
+                        {{ QCM.note }} / {{noteMax}}
+                    {% endif %}</td>
                     <td class="cell--s">{{ QCM.status.label }}</td>
                     <td class="cell--xs">
                         {% if (QCM.status.name == "DONE") %}

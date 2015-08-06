@@ -5,17 +5,6 @@ parameters:
     public.commentaire.model.class: PublicBundle\Entity\Commentaire
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-#    public.commentaire.form.type:
-#         class: %public.commentaire.type.class%
-#         arguments: ["%public.commentaire.model.class%"]
-#    commentaires:
-#          class: PublicBundle\Service\Commentaires
-#          arguments: ["@request"]
-#          scope: request
-
     redirect.after.login:
         class: UserBundle\Service\AfterLoginRedirection
         arguments: [@router]

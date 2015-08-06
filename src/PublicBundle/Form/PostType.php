@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+
 class PostType extends AbstractType
 {
     /**
@@ -27,6 +30,11 @@ class PostType extends AbstractType
                 'property' => 'label'
             ))
         ;
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
+            $post = $event->getData();
+            $form = $event->getForm();
+
+        });
     }
 
     /**
@@ -38,6 +46,7 @@ class PostType extends AbstractType
             'data_class' => 'PublicBundle\Entity\Post'
         ));
     }
+
 
     /**
      * @return string

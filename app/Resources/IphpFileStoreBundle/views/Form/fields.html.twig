@@ -3,9 +3,11 @@
 	{% set fileData = value %}
 
 		<div {{ block('widget_container_attributes') }}>
-
-			{{ form_widget(form.file ,{'attr' : {'class':'' }}) }}
-
+			{% if fileData %}
+				{{ form_widget(form.file ,{'attr' : {'class':''}}) }}
+			{% else %}
+				{{ form_widget(form.file ,{'attr' : {'class':'', 'required':true}}) }}
+			{% endif %}
 			{% if fileData and fileData.originalName is defined %}
 					{% set fileUrl =  upload_dir ~ fileData.fileName  %}
 

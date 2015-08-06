@@ -26,7 +26,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=50)
+     * @ORM\Column(name="firstname", type="string", length=50, nullable=true)
      * @Assert\NotBlank(message="Vous devez renseigner un prénom à l'utilisateur")
      * @Assert\Length(
      *      min = "2",
@@ -40,7 +40,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="lastname", type="string", length=75)
+     * @ORM\Column(name="lastname", type="string", length=75, nullable=true)
      * @Assert\NotBlank(message="Vous devez renseigner un prénom à l'utilisateur")
      * @Assert\Length(
      *      min = "2",

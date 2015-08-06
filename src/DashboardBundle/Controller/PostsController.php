@@ -49,18 +49,15 @@ class PostsController extends Controller
         $token = $this->get('security.context')->getToken();
         $doctrine   = $this->getDoctrine();
         $repository = $doctrine->getRepository('PublicBundle:Post');
-        $pictureDefault = $repository->find(1)->getPicture();
         $user = $token->getUser();
         $em = $doctrine->getManager();
 
         if (!$id){ //route de création d'article
             $post = new Post();
-            $post->setPicture($pictureDefault);
             $message = "L'article a été ajouté";
         }
         else { // route d'update d'article
             $post    = $repository->find($id);
-
             if(empty($post)) {
                 throw $this->createNotFoundException('Le post n\'existe pas');
             }
@@ -82,12 +79,8 @@ class PostsController extends Controller
         if ($form->isValid() && $form->isSubmitted()){
             $data = $form->getData();
             $data->setAuteur($user);
-            if ($data->getPicture() == null){
-
-                if ($post->getPicture() == null){
-                    $data->setPicture($pictureDefault);
-                }
-                else  $data->setPicture($post->getPicture());
+            if ($data->getPicture() == null && $id){
+                $data->setPicture($post->getPicture());
             }
             $em->persist($data);
             $em->flush();

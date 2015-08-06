@@ -104,7 +104,7 @@ class Post
     private $auteur;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="post")
+     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="post",cascade={"persist","remove"})
      */
     protected $commentaires;
 
@@ -260,6 +260,7 @@ class Post
      */
     public function removeCommentaire(\PublicBundle\Entity\Commentaire $commentaires)
     {
+
         $this->commentaires->removeElement($commentaires);
     }
 

@@ -30,7 +30,19 @@
                     <td class="mdl-data-table__cell--non-numeric">{{ student.firstname }}</td>
                     <td class="mdl-data-table__cell--non-numeric">{{ student.lastname }}</td>
                     <td>{{ (total * 20 / totauxFiche)|number_format(2,',')}}/20</td>
-                    <td>{{ student.scores|length }}</td>
+                    <td>
+
+                        {% set effectues = 0 %}
+                        {% set nbPublies = 0 %}
+                            {% for score in student.scores %}
+                                {% if score.fiche.status.name == "PUBLISHED" %}
+                                    {% set nbPublies = nbPublies + 1 %}
+                                    {% if score.status.name == 'DONE' %}
+                                        {% set effectues = effectues + 1 %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {{ effectues }} / {{ nbPublies }}</td>
                     <td>{{ total }}/{{ totauxFiche }}</td>
                 </tr>
             {% endfor %}
