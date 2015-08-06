@@ -12,17 +12,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class CommentaireRepository extends EntityRepository
 {
-/*    public function getNbCommentByPost($id){
-        $result = $this
-            ->createQueryBuilder('c')
-            ->select('COUNT(c.id) AS total')
-            ->join('c.post','p')
-            ->where('p.id = :id')
-            ->setParameter(':id',$id)
-            ->getQuery()
-            ->getSingleScalarResult();
-        return $result;
-    }*/
 
     public function getTotalCommentaires() {
         $result = $this

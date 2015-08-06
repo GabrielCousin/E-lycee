@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ScoreRepository extends EntityRepository
 {
-    // retourne les score/fiches qui sont publiées ou fermées
+    // retourne les score/fiches qui sont publiées 
     public function getScoreSeenStudent($id_student){
         $results = $this
             ->createQueryBuilder('s')

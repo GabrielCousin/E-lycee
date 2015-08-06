@@ -99,7 +99,6 @@ class PublicController extends Controller
         $postsPerPage   = $this->container->getParameter('home.posts_per_page');
         if ( null !== $request->query->get('expression')) $expression = $request->query->get('expression');
         if (isset($expression)){
-            // echo '<pre>'.DEBUG::dump($expression).'</pre>'; exit();
             $results        = $rc->getPostsByContent($page,$postsPerPage,$expression);
         }
         else {
@@ -212,7 +211,6 @@ class PublicController extends Controller
             if ($form->isValid()) {
                 $data = $form->getData();
                 $expression = $data['expression'];
-                // echo '<pre>'.Debug::dump($expression).'</pre>'; exit();
                 return $this->redirect($this->generateUrl('public.showResults.index',array('page' => 1 , 'expression' => $expression)));
             }else
             {

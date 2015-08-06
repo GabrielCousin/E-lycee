@@ -63,8 +63,6 @@ class  ScoresController extends Controller
         }
 
         $fiche = $score->getFiche();
-        // faire une vérification si la fiche n'est pas publiée ou déja faire ....
-
         $form = $this->createFormBuilder($score) ;
         foreach ($fiche->getChoices() as $choice ){
             $form->add('reponse_'.$choice->getId(),'choice',array(
@@ -86,7 +84,6 @@ class  ScoresController extends Controller
                 foreach ($data as $key => $reponse){
                     $id_choix = explode('_',$key)[1];
                     $choix = $choixRp->find($id_choix);
-                                    // echo '<pre>';Debug::dump($reponse->getData(), $choix->getReponse() );echo '</pre>';exit();
                     if ($reponse->getData() == $choix->getReponse()){
                        $note += $choix->getNote() ;
                     }
