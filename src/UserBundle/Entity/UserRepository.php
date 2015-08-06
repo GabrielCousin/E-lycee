@@ -17,6 +17,7 @@ class UserRepository extends EntityRepository
         $results = $this
             ->createQueryBuilder('u')
             ->where('u.roles LIKE :student')
+            ->orderBy('u.lastname','ASC')
             ->setParameter('student','%'.$student.'%')
             ->getQuery()
             ->getResult();

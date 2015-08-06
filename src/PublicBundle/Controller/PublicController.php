@@ -155,7 +155,7 @@ class PublicController extends Controller
 
             }
             else {
-                $message = "Vous avez envoyé trop de commentaire sur ce post";
+                $message = "Votre commentaire a été considéré comme Spam.";
             }
             $request->getSession()->getFlashBag()->set('notice', $message);
             return $this->redirect($this->generateUrl('public.news.article', array('id' => $id)));

@@ -113,7 +113,7 @@ class FichesController extends Controller
             ->add('status','entity',array(
                 'class' => 'PublicBundle:Status',
                 'property' => 'label'
-            ));
+            )); 
         $statusActuel = $fiche->getStatus() ;
         $form->handleRequest($request);
         if ($request->isMethod('POST')){
@@ -121,14 +121,13 @@ class FichesController extends Controller
                 $data = $form->getData();
                 $data->setStatus($statusActuel);
                 $dataNiveau = $data->getNiveau();
-                if ($dataNiveau != $niveauFiche ){
+                if ($dataNiveau != $niveauFiche){
                     $scores = $data->getScores();
                     foreach($scores as $score){
                         $score->remove();
                     }
                     if (count($scores) == 0){
                         $undone = $statusRp->findOneBy(array('name'=>'UNDONE'));
-
                         $students = $studentRp->findBy(array('niveau' => $dataNiveau->getId() ));
                         foreach ($students as $key=>$student){
                             $score = new Score();
@@ -142,7 +141,7 @@ class FichesController extends Controller
                 }
                 $em->persist($data);
                 $em->flush();
-                $message = "Votre fiche a été créée";
+                $message = "Votre fiche a été modifiée";
                 $request->getSession()->getFlashBag()->set('notice', $message);
                 $urlRedirect = $this->generateUrl('teacher.fiches.home');
                 return $this->redirect($urlRedirect);
